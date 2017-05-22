@@ -25,7 +25,9 @@ SECRET_KEY = 'o&rlad@n6%*=#+clc2sc7$zt+)h0)jq1m*(uy^*!x=f4s3bm-l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost',
+                 'dizwe.pythonanywhere.com',
+                 ]
 
 
 # Application definition
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Fitter',
 ]
 
 MIDDLEWARE = [
