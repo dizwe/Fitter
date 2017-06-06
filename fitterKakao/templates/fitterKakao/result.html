@@ -1,0 +1,50 @@
+{% extends "fitterKakao/layout.html"%}
+<title>{% block title %}Result{% endblock %}</title>
+
+{%block content%}
+    {% load staticfiles %}
+    <script src="{% static 'd3/d3.v3.min.js' %}"></script>
+    <script>
+        // 신체 사이즈
+        {% for one in person|slice:":1" %}
+            var real_tall = {{ one.height }};
+        {% endfor %}
+        var suggest_body = {};
+        {% for body_part, survey in suggest_size.items %}
+            suggest_body['{{body_part}}'] = {{survey}};
+        {% endfor %}
+        //옷 사이즈
+        {% for one_clothes in top_clothes %}
+            var test_shirt = {"len":{{one_clothes.length}},
+                         "shoulder":{{one_clothes.shoulder}},
+                         "chest":{{one_clothes.chest}},
+                         "sleeve":{{one_clothes.sleeve}},
+                         };
+        {% endfor %}
+
+    </script>
+    <script src="{% static 'd3_js/top_front.js' %}"></script>
+    <script src="{% static 'd3_js/top_side.js' %}"></script>
+    <ul>
+        {% for one in person %}
+            <li>{{ one.height }}</li>
+            <li>{{ one.weight }}</li>
+            <li>{{ one.shoulder_a }}</li>
+            <h>hi</h>
+        {% endfor %}
+    </ul>
+    <ul>
+        {% for one_clothes in top_clothes %}
+            <li>{{ one_clothes.shoulder }}</li>
+            <a href = "{% url 'fitterKakao:suppose_size' %}">hi</a>
+        {% endfor %}
+    </ul>
+    <ul>
+        {% for each_part in suggest_size %}
+            <li>{{ each_part }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+

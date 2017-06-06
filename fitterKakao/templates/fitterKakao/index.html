@@ -3,5 +3,25 @@
 TEST
 {% endblock %}
 {%block content%}
-<h>HELLO!!!5</h>
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+</head>
+<div class="container">
+    <div class="page-header">
+        <a href="{% url 'fitterKakao:post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+    </div>
+    <form action = "{% url 'fitterKakao:suppose_size' %}" method = "post">
+        {% csrf_token %}
+        <input type="text" name = "height" value="">
+        <input type="text" name = "weight" value="">
+        <input type="radio" name = "shoulder_a" id = "shoulder_a0" value="0">
+        <label for="Small">Small</label>
+        <input type="radio" name = "shoulder_a" id = "shoulder_a1" value="1">
+        <label for="Big">Big</label>
+        <input type = "submit" value="추측!"/>
+    </form>
+</div>
 {% endblock %}

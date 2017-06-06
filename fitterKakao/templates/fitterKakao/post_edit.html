@@ -1,0 +1,13 @@
+{% extends "fitterKakao/layout.html"%}
+{% block title %}
+TEST
+{% endblock %}
+{%block content%}
+    <form method="POST">
+        {% csrf_token %}
+        {{ person_form.as_p }}
+        <h>hi</h>
+        {{ top_clothes_form.as_p }}
+        <button type="submit">save</button>
+    </form>
+{% endblock %}

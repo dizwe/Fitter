@@ -17,6 +17,6 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^kakao/', include('fitterKakao.urls')),
+    url(r'^', include('fitterKakao.urls')),
     url(r'^admin/', admin.site.urls),
 ]
