@@ -15,7 +15,7 @@
         {% endfor %}
         //옷 사이즈
         {% for one_clothes in top_clothes %}
-            var test_shirt = {"len":{{one_clothes.length}},
+            var test_shirt = {"len":{{one_clothes.top_length}},
                          "shoulder":{{one_clothes.shoulder}},
                          "chest":{{one_clothes.chest}},
                          "sleeve":{{one_clothes.sleeve}},
@@ -25,6 +25,7 @@
     </script>
     <script src="{% static 'd3_js/top_front.js' %}"></script>
     <script src="{% static 'd3_js/top_side.js' %}"></script>
+    <script src="{% static 'd3_js/bottom_side.js' %}"></script>
     <ul>
         {% for one in person %}
             <li>{{ one.height }}</li>

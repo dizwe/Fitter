@@ -8,6 +8,6 @@ urlpatterns = [
     url(r'^$', views.index, name = 'index'),
     url(r'^result/', views.suppose_size, name = 'suppose_size'),
     url(r'^new/$', views.post_new, name='post_new'),
-    url(r'^keyboard/', views.keyboard), # 카톡
-    url(r'^message', views.answer), # 카톡
+    # url(r'^keyboard/', views.keyboard), # 카톡
+    # url(r'^message', views.answer), # 카톡
 ]

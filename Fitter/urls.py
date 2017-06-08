@@ -15,8 +15,30 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
+from django.conf import settings
+from . import views as fitter_views
 
 urlpatterns = [
     url(r'^', include('fitterKakao.urls')),
     url(r'^admin/', admin.site.urls),
+    url(
+        r'^accounts/login/',
+        auth_views.login,
+        name='login',
+        kwargs={
+            'template_name': 'login.html'
+        }
+    ),
+    url(
+        r'^accounts/logout/',
+        auth_views.logout,
+        name='logout',
+        kwargs={
+            'next_page': settings.LOGIN_URL,
+        }
+    ),
+    url(r'^accounts/signup$', fitter_views.CreateUser.as_view(), name='signup'),
+    url(r'^accounts/login/done$', fitter_views.Registered.as_view(), name='create_user_done'),
+
 ]

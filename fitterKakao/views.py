@@ -1,15 +1,14 @@
-from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from django.http import Http404, JsonResponse, HttpResponseRedirect
 from .models import Person, TopClothes
 import os
-from django.conf import settings
 
-from django.urls import reverse
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
+
 import readAndSave
-from .forms import PersonForm, TopClothesForm
+from .forms import PersonForm, TopClothesForm, BottomClothesForm
 from .anticipate_size import find_good_data, guess_size_by_question
-import json
 
 
 def index(request):
@@ -17,17 +16,19 @@ def index(request):
     return render(request, 'fitterKakao/index.html')
 
 
+@login_required
 def suppose_size(request):
     try:
         """개인의 데이터"""
         person = Person.objects.filter(name=request.user)  # 나중에 로그인으로 바꿔야지
-        top_clothes = TopClothes.objects.filter(pk=1)  # POST 한 정보만 보게?(일단 그냥 하나만 보게 하자)
+        top_clothes = TopClothes.objects.filter(name=request.user)  # POST 한 정보만 보게?(일단 그냥 하나만 보게 하자)
 
         """# readAndSave 파일 없는거니까 조심 - 데이터도 나중에 DB로 넣는걸로 해보자"""
         # 데이터 파일 읽어오기
         file_path = os.path.join(settings.STATIC_ROOT, 'json/hw_filtered_dict_every_1cm.json')
         hw_filtered_sizes = readAndSave.read_json(file_path, 'utf8')
 
+        # 나중에 바꿔야지
         person_info_dict = person.values('height','weight','shoulder_a','chest_a','sleeve_a')[0] # queryset
         # 키는 1770 이런 형식으로 되어있으므로 10 곱해야함
         user_height, user_weight = person_info_dict['height']*10, person_info_dict['weight']
@@ -44,7 +45,6 @@ def suppose_size(request):
         """예상 사이즈 추천하고 실측 데이터로 바꾸기"""
         suggest_size = guess_size_by_question(question, size_each_parameter, data_error=0.1)
         suggest_size_real = size_to_real(suggest_size)
-
 
     except KeyError:
         return render(request, 'fitterKakao/index.html',
@@ -77,65 +77,32 @@ def size_to_real(size_list):
     return each_par_real
 
 
+@login_required
 def post_new(request):
     if request.method == "POST": #이미 보낸거라면
         person_form = PersonForm(request.POST)
         top_clothes_form = TopClothesForm(request.POST)
+        bottom_clothes_form = BottomClothesForm(request.POST)
         if person_form.is_valid() and top_clothes_form.is_valid(): # 저장된 form 형식이 잘 맞는지
             person = person_form.save(commit=False) # False 바로 저장하지는 마
-            person.name = request.user # self.name 처럼 되는거지.
+            person.name = request.user
             person.save()
-            clothes = top_clothes_form.save(commit=False)
-            clothes.save()
-            print(request.user)
+            TopClothes = top_clothes_form.save(commit=False)
+            TopClothes.name = request.user
+            TopClothes.save()
+            BottomClothes = bottom_clothes_form.save(commit=False)
+            BottomClothes.name = request.user
+            BottomClothes.save()
             return redirect('fitterKakao:suppose_size')
     else:
         person_form = PersonForm()
         top_clothes_form = TopClothesForm()
+        bottom_clothes_form = BottomClothesForm()
     return render(request, 'fitterKakao/post_edit.html', {'person_form': person_form,
-                                                          'top_clothes_form':top_clothes_form})
+                                                          'top_clothes_form':top_clothes_form,
+                                                          'bottom_clothes_form':bottom_clothes_form,})
 
 
-
-def keyboard(request):
-    return JsonResponse({
-        'type' : 'buttons',
-        'buttons': ['남자', '여자'],
-    })
-
-
-@csrf_exempt
-def answer(request):
-    # 이게 더 간단할거라 생각했는데 ㅅㅂ 더 힘들듯.
-    json_str = (request.body.decode('utf-8'))
-    recieved_json_data = json.loads(json_str)
-    user = recieved_json_data
-    content = recieved_json_data['content']
-    # recieved_json_data에는 user_key, type, content가 들어 있을거다
-
-    if content == "남" or content == "여자":
-        return JsonResponse({
-            'message': {
-                '키 몸무게를 띄어서 적어주세욥(예를 들어, 177 70)'
-            },
-            'keyboard': {
-                'type': 'text',
-            }
-        })
-
-    elif content == "170 70":
-        return JsonResponse({
-            'message': {
-                '보통 옷을 입으면 어깨가 ( )'
-            },
-            'keyboard': {
-                'type': 'button',
-                'buttons': ['남는다', '별일없다', '낀다'],
-            }
-        })
-        # 자료를 어떻게 저장힐건데
-    elif content == "70 47 58 62": # 없으면 0
-        pass
 
 
 
