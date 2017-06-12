@@ -3,8 +3,9 @@ var one_body = {"312": "352", "313": "278", "233": "597", "116": "467", "235": "
 var shirt = {"len":640,"shoulder":428,"chest":497,"sleeve":198};
 var overshirt = {"len":650,"shoulder":580,"chest":600,"sleeve":500};
 
-var suggest_bottom = {'bottom_waist':827, 'crotch':210, 'thigh':569, 'length':876, 'hem':221, 'hip':952,
+var suggest_bottom = {'bottom_waist':827, 'crotch':210, 'thigh':569, 'length':906, 'hem':221, 'hip':952,
                        'crotch_height':815, 'middle_thigh':524, 'knee':375, 'calf':385};
+
 var pant = {"bottom_waist":380,"length":910,"crotch":200,"thigh":270,"hem":160};
 
 //cm를 mm로 바꾸기
