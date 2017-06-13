@@ -27,6 +27,8 @@ class Person(models.Model):
 
 class TopClothes(models.Model):
     name = models.ForeignKey(settings.AUTH_USER_MODEL)
+    nick = models.CharField(max_length=10, default='Untitled')
+    size = models.CharField(max_length=4, default='FREE')
     top_length = models.FloatField(default=0)
     shoulder = models.FloatField(default=0)
     chest = models.FloatField(default=0)
@@ -35,6 +37,8 @@ class TopClothes(models.Model):
 
 class BottomClothes(models.Model):
     name = models.ForeignKey(settings.AUTH_USER_MODEL)
+    nick = models.CharField(max_length=10, default='Untitled')
+    size = models.CharField(max_length=4, default='FREE')
     waist = models.FloatField(default=0)
     bot_length = models.FloatField(default=0)
     crotch = models.FloatField(default=0)

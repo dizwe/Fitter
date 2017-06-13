@@ -1,0 +1,9 @@
+{% extends "fitterKakao/layout.html"%}
+{% block title %}
+사이즈 업데이트
+{% endblock %}
+{%block content%}
+    <h>업데이트 할뢔?</h>
+    <a href = "{% url 'fitterKakao:post_new' %}">응</a>
+    <a href = "{% url 'fitterKakao:choose_clothes' %}">아니</a>
+{% endblock %}

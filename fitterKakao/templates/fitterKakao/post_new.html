@@ -1,15 +1,12 @@
 {% extends "fitterKakao/layout.html"%}
 {% block title %}
-TEST
+나의 사이즈 정보 입력
 {% endblock %}
 {%block content%}
+
     <form method="POST">
         {% csrf_token %}
         {{ person_form.as_p }}
-        <h>hi</h>
-        {{ top_clothes_form.as_p }}
-        <h>hoi</h>
-        {{ bottom_clothes_form.as_p }}
         <button type="submit">save</button>
     </form>
 {% endblock %}

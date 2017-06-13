@@ -27,7 +27,7 @@ urlpatterns = [
         auth_views.login,
         name='login',
         kwargs={
-            'template_name': 'login.html'
+            'template_name': 'login.html',
         }
     ),
     url(

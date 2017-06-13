@@ -1,0 +1,14 @@
+{% extends "fitterKakao/layout.html"%}
+{% block title %}
+사이즈 업데이트
+{% endblock %}
+{%block content%}
+    <h>상의</h>
+    {% for one_top in top_clothes %}
+    <li><a href ="{% url 'fitterKakao:suppose_size' type='top' tag_num=one_top.id %}">{{one_top.nick}}</a></li>
+    {% endfor %}
+    <h>하의</h>
+    {% for one_bot in bottom_clothes %}
+    <li><a href ="/result/bot/{{one_bot.id}} type='bot' tag_num=one_bot.id ">{{one_bot.nick}}</a></li>
+    {% endfor %}
+{% endblock %}

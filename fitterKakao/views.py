@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import Http404, JsonResponse, HttpResponseRedirect
-from .models import Person, TopClothes
+from .models import Person, TopClothes, BottomClothes
 import os
 
 from django.conf import settings
@@ -17,11 +17,11 @@ def index(request):
 
 
 @login_required
-def suppose_size(request):
+def suppose_size(request, type, tag_num):
     try:
         """개인의 데이터"""
         person = Person.objects.filter(name=request.user)  # 나중에 로그인으로 바꿔야지
-        top_clothes = TopClothes.objects.filter(name=request.user)  # POST 한 정보만 보게?(일단 그냥 하나만 보게 하자)
+        top_clothes = TopClothes.objects.filter(pk=tag_num)  # POST 한 정보만 보게?(일단 그냥 하나만 보게 하자)
 
         """# readAndSave 파일 없는거니까 조심 - 데이터도 나중에 DB로 넣는걸로 해보자"""
         # 데이터 파일 읽어오기
@@ -78,31 +78,57 @@ def size_to_real(size_list):
 
 
 @login_required
+def check_data(request):
+    if Person.objects.filter(name=request.user).exists():
+        # 아예 연결하는 허브를 하나 만들어야 하나..
+        return render(request, 'fitterKakao/update_p.html')
+    else:
+        return redirect('fitterKakao:post_new')
+
+
+@login_required
 def post_new(request):
     if request.method == "POST": #이미 보낸거라면
         person_form = PersonForm(request.POST)
-        top_clothes_form = TopClothesForm(request.POST)
-        bottom_clothes_form = BottomClothesForm(request.POST)
-        if person_form.is_valid() and top_clothes_form.is_valid(): # 저장된 form 형식이 잘 맞는지
+        if person_form.is_valid(): # 저장된 form 형식이 잘 맞는지
             person = person_form.save(commit=False) # False 바로 저장하지는 마
             person.name = request.user
             person.save()
+            return redirect('fitterKakao:suppose_size')
+    else:
+        person_form = PersonForm()
+
+    return render(request, 'fitterKakao/post_new.html', {'person_form': person_form,})
+
+
+@login_required
+def add_clothes(request):
+    pass
+    if request.method == "POST":
+        top_clothes_form = TopClothesForm(request.POST)
+        bottom_clothes_form = BottomClothesForm(request.POST)
+        if bottom_clothes_form.is_valid() and top_clothes_form.is_valid():
             TopClothes = top_clothes_form.save(commit=False)
             TopClothes.name = request.user
             TopClothes.save()
             BottomClothes = bottom_clothes_form.save(commit=False)
             BottomClothes.name = request.user
             BottomClothes.save()
-            return redirect('fitterKakao:suppose_size')
     else:
-        person_form = PersonForm()
         top_clothes_form = TopClothesForm()
         bottom_clothes_form = BottomClothesForm()
-    return render(request, 'fitterKakao/post_edit.html', {'person_form': person_form,
-                                                          'top_clothes_form':top_clothes_form,
-                                                          'bottom_clothes_form':bottom_clothes_form,})
+
+    return render(request, 'fitterKakao/post_new.html', {'top_clothes_form': top_clothes_form,
+                                                          'bottom_clothes_form': bottom_clothes_form, })
 
 
+@login_required
+def choose_clothes(request):
+    top_clothes = TopClothes.objects.filter(name=request.user)
+    bottom_clothes = BottomClothes.objects.filter(name=request.user)
+
+    return render(request, 'fitterKakao/clothes.html', {'top_clothes': top_clothes,
+                                                        'bottom_clothes': bottom_clothes, })
 
 
 
