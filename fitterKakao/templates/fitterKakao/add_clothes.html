@@ -1,0 +1,12 @@
+{% extends "fitterKakao/layout.html"%}
+{% block title %}
+옷 추가하기
+{% endblock %}
+{%block content%}
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ clothes_form.as_p }}
+        <button type="submit">save</button>
+    </form>
+{% endblock %}

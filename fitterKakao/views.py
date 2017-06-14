@@ -17,34 +17,59 @@ def index(request):
 
 
 @login_required
-def suppose_size(request, type, tag_num):
+def suppose_size(request, kinds, tag_num):
     try:
         """개인의 데이터"""
         person = Person.objects.filter(name=request.user)  # 나중에 로그인으로 바꿔야지
-        top_clothes = TopClothes.objects.filter(pk=tag_num)  # POST 한 정보만 보게?(일단 그냥 하나만 보게 하자)
+        if kinds == 'top':
+            top_clothes = TopClothes.objects.filter(pk=tag_num)  # POST 한 정보만 보게?(일단 그냥 하나만 보게 하자)
+            """# readAndSave 파일 없는거니까 조심 - 데이터도 나중에 DB로 넣는걸로 해보자"""
+            # 데이터 파일 읽어오기
+            file_path = os.path.join(settings.STATIC_ROOT, 'json/hw_filtered_dict_every_1cm.json')
+            hw_filtered_sizes = readAndSave.read_json(file_path, 'utf8')
 
-        """# readAndSave 파일 없는거니까 조심 - 데이터도 나중에 DB로 넣는걸로 해보자"""
-        # 데이터 파일 읽어오기
-        file_path = os.path.join(settings.STATIC_ROOT, 'json/hw_filtered_dict_every_1cm.json')
-        hw_filtered_sizes = readAndSave.read_json(file_path, 'utf8')
+            # 나중에 바꿔야지
+            person_info_dict = person.values('height','weight','shoulder_a','chest_a','sleeve_a')[0] # queryset
+            # 키는 1770 이런 형식으로 되어있으므로 10 곱해야함
+            user_height, user_weight = person_info_dict['height']*10, person_info_dict['weight']
+            # ['height', 'shoulder', 'chest', 'arm', 'waist'] 순서
+            question = [1, person_info_dict['shoulder_a'], person_info_dict['chest_a'], person_info_dict['sleeve_a'], 1]  # ~하면 가 남는 편이다
 
-        # 나중에 바꿔야지
-        person_info_dict = person.values('height','weight','shoulder_a','chest_a','sleeve_a')[0] # queryset
-        # 키는 1770 이런 형식으로 되어있으므로 10 곱해야함
-        user_height, user_weight = person_info_dict['height']*10, person_info_dict['weight']
-        # ['height', 'shoulder', 'chest', 'arm', 'waist'] 순서
-        question = [1, person_info_dict['shoulder_a'], person_info_dict['chest_a'], person_info_dict['sleeve_a'], 1]  # ~하면 가 남는 편이다
+            # 괜찮은 사이즈를 찾고 글자 데이터를 숫자로 바꾸기
+            hw_filtered_size_nums = find_good_data(user_height, user_weight, hw_filtered_sizes)
 
-        # 괜찮은 사이즈를 찾고 글자 데이터를 숫자로 바꾸기
-        hw_filtered_size_nums = find_good_data(user_height, user_weight, hw_filtered_sizes)
+            # 몸 부위별로 모으기 ['height', 'shoulder', 'chest', 'arm', 'waist'] 순서
+            size_each_parameter = [[one_person[parameter]
+                                    for one_person in hw_filtered_size_nums] for parameter in range(5)]
 
-        # 몸 부위별로 모으기 ['height', 'shoulder', 'chest', 'arm', 'waist'] 순서
-        size_each_parameter = [[one_person[parameter]
-                                for one_person in hw_filtered_size_nums] for parameter in range(5)]
+            """예상 사이즈 추천하고 실측 데이터로 바꾸기"""
+            suggest_size = guess_size_by_question(question, size_each_parameter, data_error=0.1)
+            suggest_size_real = size_to_real(suggest_size)
+        elif kinds == 'bot':
+            bottom_clothes = TopClothes.objects.filter(pk=tag_num)  # POST 한 정보만 보게?(일단 그냥 하나만 보게 하자)
+            """# readAndSave 파일 없는거니까 조심 - 데이터도 나중에 DB로 넣는걸로 해보자"""
+            # 데이터 파일 읽어오기
+            file_path = os.path.join(settings.STATIC_ROOT, 'json/hw_filtered_dict_every_1cm.json')
+            hw_filtered_sizes = readAndSave.read_json(file_path, 'utf8')
 
-        """예상 사이즈 추천하고 실측 데이터로 바꾸기"""
-        suggest_size = guess_size_by_question(question, size_each_parameter, data_error=0.1)
-        suggest_size_real = size_to_real(suggest_size)
+            # 나중에 바꿔야지
+            person_info_dict = person.values('height', 'weight', 'shoulder_a', 'chest_a', 'sleeve_a')[0]  # queryset
+            # 키는 1770 이런 형식으로 되어있으므로 10 곱해야함
+            user_height, user_weight = person_info_dict['height'] * 10, person_info_dict['weight']
+            # ['height', 'shoulder', 'chest', 'arm', 'waist'] 순서
+            question = [1, person_info_dict['shoulder_a'], person_info_dict['chest_a'], person_info_dict['sleeve_a'],
+                        1]  # ~하면 가 남는 편이다
+
+            # 괜찮은 사이즈를 찾고 글자 데이터를 숫자로 바꾸기
+            hw_filtered_size_nums = find_good_data(user_height, user_weight, hw_filtered_sizes)
+
+            # 몸 부위별로 모으기 ['height', 'shoulder', 'chest', 'arm', 'waist'] 순서
+            size_each_parameter = [[one_person[parameter]
+                                    for one_person in hw_filtered_size_nums] for parameter in range(5)]
+
+            """예상 사이즈 추천하고 실측 데이터로 바꾸기"""
+            suggest_size = guess_size_by_question(question, size_each_parameter, data_error=0.1)
+            suggest_size_real = size_to_real(suggest_size)
 
     except KeyError:
         return render(request, 'fitterKakao/index.html',
@@ -102,24 +127,27 @@ def post_new(request):
 
 
 @login_required
-def add_clothes(request):
-    pass
+def add_clothes(request, kinds):
     if request.method == "POST":
-        top_clothes_form = TopClothesForm(request.POST)
-        bottom_clothes_form = BottomClothesForm(request.POST)
-        if bottom_clothes_form.is_valid() and top_clothes_form.is_valid():
-            TopClothes = top_clothes_form.save(commit=False)
-            TopClothes.name = request.user
-            TopClothes.save()
-            BottomClothes = bottom_clothes_form.save(commit=False)
-            BottomClothes.name = request.user
-            BottomClothes.save()
-    else:
-        top_clothes_form = TopClothesForm()
-        bottom_clothes_form = BottomClothesForm()
+        if kinds == 'top':
+            clothes_form = TopClothesForm(request.POST)
+        elif kinds == 'bot':
+            clothes_form = BottomClothesForm(request.POST)
 
-    return render(request, 'fitterKakao/post_new.html', {'top_clothes_form': top_clothes_form,
-                                                          'bottom_clothes_form': bottom_clothes_form, })
+        if clothes_form.is_valid():
+            clothes = clothes_form.save(commit=False)
+            clothes.name = request.user
+            clothes.save()
+
+    else:
+
+        if kinds == 'top':
+            clothes_form = TopClothesForm()
+        elif kinds == 'bot':
+            clothes_form = BottomClothesForm()
+
+    return render(request, 'fitterKakao/add_clothes.html', {'clothes_form': clothes_form,
+                                                         })
 
 
 @login_required

@@ -5,10 +5,13 @@
 {%block content%}
     <h>상의</h>
     {% for one_top in top_clothes %}
-    <li><a href ="{% url 'fitterKakao:suppose_size' type='top' tag_num=one_top.id %}">{{one_top.nick}}</a></li>
+    <li><a href ="{% url 'fitterKakao:suppose_size' kinds='top' tag_num=one_top.id %}">{{one_top.nick}}</a></li>
     {% endfor %}
+    <a href = "{% url 'fitterKakao:add_clothes' kinds='top' %}">상의 추가</a>
+
     <h>하의</h>
     {% for one_bot in bottom_clothes %}
-    <li><a href ="/result/bot/{{one_bot.id}} type='bot' tag_num=one_bot.id ">{{one_bot.nick}}</a></li>
+    <li><a href ="/result/bot/{{one_bot.id}} kinds='bot' tag_num=one_bot.id ">{{one_bot.nick}}</a></li>
     {% endfor %}
+    <a href = "{% url 'fitterKakao:add_clothes' kinds='bot' %}">하의 추가</a>
 {% endblock %}
