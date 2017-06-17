@@ -11,7 +11,7 @@
 
     <h>하의</h>
     {% for one_bot in bottom_clothes %}
-    <li><a href ="/result/bot/{{one_bot.id}} kinds='bot' tag_num=one_bot.id ">{{one_bot.nick}}</a></li>
+    <li><a href ="{% url 'fitterKakao:suppose_size' kinds='bot' tag_num=one_bot.id %}">{{one_bot.nick}}</a></li>
     {% endfor %}
     <a href = "{% url 'fitterKakao:add_clothes' kinds='bot' %}">하의 추가</a>
 {% endblock %}

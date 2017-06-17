@@ -13,19 +13,37 @@
         {% for body_part, survey in suggest_size.items %}
             suggest_body['{{body_part}}'] = {{survey}};
         {% endfor %}
+        //document.write(suggest_body);
         //옷 사이즈
-        {% for one_clothes in top_clothes %}
-            var test_shirt = {"len":{{one_clothes.top_length}},
-                         "shoulder":{{one_clothes.shoulder}},
-                         "chest":{{one_clothes.chest}},
-                         "sleeve":{{one_clothes.sleeve}},
-                         };
-        {% endfor %}
-
+        var clothes_type = '{{types}}';
+        if (clothes_type ==='top'){
+            {% for one_clothes in clothes %}
+                var test_shirt = {"len":{{one_clothes.top_length|default:0}},
+                             "shoulder":{{one_clothes.shoulder|default:0}},
+                             "chest":{{one_clothes.chest|default:0}},
+                             "sleeve":{{one_clothes.sleeve|default:0}},
+                             };
+            {% empty %}
+                var a = 0;
+            {% endfor %}
+        }else if(clothes_type ==='bot'){
+            {% for one_clothes in clothes %}
+                var test_pants = {"waist":{{one_clothes.waist|default:0}},
+                             "length":{{one_clothes.bot_length|default:0}},
+                             "crotch":{{one_clothes.crotch|default:0}},
+                             "thigh":{{one_clothes.thigh|default:0}},
+                             "hem":{{one_clothes.hem|default:0}},
+                             };
+            {% endfor %}
+       };
     </script>
+
     <script src="{% static 'd3_js/top_front.js' %}"></script>
+    {% if types == 'top' %}
     <script src="{% static 'd3_js/top_side.js' %}"></script>
+    {% elif types == 'bot' %}
     <script src="{% static 'd3_js/bottom_side.js' %}"></script>
+    {% endif %}
     <ul>
         {% for one in person %}
             <li>{{ one.height }}</li>
@@ -45,6 +63,5 @@
         {% endfor %}
     </ul>
 {% endblock %}
-
 
 

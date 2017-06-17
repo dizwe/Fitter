@@ -5,6 +5,14 @@ var overshirt = {"len":650,"shoulder":580,"chest":600,"sleeve":500};
 
 var pant = {"bottom_waist":380,"length":910,"crotch":200,"thigh":270,"hem":160};
 
+//cm를 mm로 바꾸기
+for (var key in test_shirt){
+    test_shirt[key] *= 10;
+}
+var shirt = test_shirt;
+var pant = test_pant;
+
+document.write(suggest_body['height']);
 var tall = 1000; //키기준
 var broad = 700; //어깨기준
 var real_tall = real_tall*10;
@@ -241,31 +249,24 @@ shape.selectAll(".line")
 
 
 ////////////////////////////////// 상체 옷////////////////////////////////////////////
-if (clothes_type==='top'){
-    var shirt = test_shirt;
-    //cm를 mm로 바꾸기
-    for (var key in shirt){
-        shirt[key] *= 10;
-    }
-
-    myTop = {'remain_shoulder' : shirt['shoulder']-my['shoulder']};
-    //어깨는 상황에 따라 위치가 달라져야함
-    if (myTop['remain_shoulder']<=0){
+myTop = {'remain_shoulder' : shirt['shoulder']-my['shoulder']};
+//어깨는 상황에 따라 위치가 달라져야함
+if (myTop['remain_shoulder']<=0){
     var shoulder_data = [{x: broad/2-realBroadToRatio(my['shoulder']/2+myTop['remain_shoulder']/2),
                           y: realTallToRatio(my['trunk_leg'])},//어깨왼쪽
                           {x: broad/2+realBroadToRatio(my['shoulder']/2+myTop['remain_shoulder']/2),
                           y: realTallToRatio(my['trunk_leg'])},//어깨오른쪽
                          ]
-    }else{
+}else{
     var shoulder_data = [{x: broad/2-realBroadToRatio(my['shoulder']/2),
                           y: realTallToRatio(my['trunk_leg']-myTop['remain_shoulder']/2)},//어깨왼쪽
                           {x: broad/2+realBroadToRatio(my['shoulder']/2),
                           y: realTallToRatio(my['trunk_leg']-myTop['remain_shoulder']/2)},//어깨오른쪽
                          ]
-    };
+};
 
 
-    var topDot = [
+var topDot = [
               //어깨0 - 짧을때는 어깨에, 길때는 팔에 있어야 하는데... 흠  ㅜㅜ
               shoulder_data[0],//어깨왼쪽
               shoulder_data[1],//어깨오른쪽
@@ -286,7 +287,7 @@ if (clothes_type==='top'){
               y: realTallToRatio(my['trunk_leg']-(myTop['remain_shoulder']/2+shirt['sleeve']))},//어깨왼쪽
             ];
 
-    var topClothesLinks = [
+var topClothesLinks = [
                       //왼쪽팔
                       {source : dotData[2], target : topDot[0]},//실제 어깨- 옷 어깨
                       {source : topDot[0], target : topDot[4]}, //옷 어깨- 팔
@@ -306,81 +307,80 @@ if (clothes_type==='top'){
                     ];
 
 
-    shape.selectAll("circle.shirt")
-        .data(topDot)
-        .enter()
-        .append("circle")
-        .attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; })
-        .attr("r", "5px")
-        .attr("fill", "red");
+shape.selectAll("circle.shirt")
+    .data(topDot)
+    .enter()
+    .append("circle")
+    .attr("cx", function(d) { return d.x; })
+    .attr("cy", function(d) { return d.y; })
+    .attr("r", "5px")
+    .attr("fill", "red");
 
 
-    shape.selectAll(".line")
-         .data(topClothesLinks)
-         .enter()
-         .append("line")
-         .attr("x1", function(d) { return d.source.x })
-         .attr("y1", function(d) { return d.source.y })
-         .attr("x2", function(d) { return d.target.x })
-         .attr("y2", function(d) { return d.target.y })
-         .style("stroke", "rgb(200,29,155)");
-}else if(clothes_type==='bot'){
-    var pant = test_pants;
-    for (var key in pant){
-        pant[key] *= 10;
-    };
-    console.log(pant);
-
-    myBottom = {'bottom_waist' : suggest_body};
-    var bottomClothesDot = [
-                  //기장 0
-                  {x: broad/2-realBroadToRatio(my['chest']/2),
-                   y: realTallToRatio(my['total_leg']-pant['length'])},//왼쪽
-                  {x: broad/2+realBroadToRatio(my['chest']/2),
-                   y: realTallToRatio(my['total_leg']-pant['length'])},//오른쪽
-                  //기장 안쪽 2
-                  {x: broad/2-realBroadToRatio(my['chest']/10),
-                   y: realTallToRatio(my['total_leg']-pant['length'])},//왼쪽
-                  {x: broad/2+realBroadToRatio(my['chest']/10),
-                   y: realTallToRatio(my['total_leg']-pant['length'])},//오른쪽
-                  //밑위 4
-                  {x: broad/2-realBroadToRatio(my['chest']/10),
-                   y: realTallToRatio(my['total_leg']-pant['crotch'])},//밑위 왼쪽
-                  {x: broad/2+realBroadToRatio(my['chest']/10),
-                   y: realTallToRatio(my['total_leg']-pant['crotch'])},//밑위 왼쪽
-                ];
-
-    var bottomClothesLinks = [
-                        {source : bottomDotData[0], target : bottomClothesDot[0]}, // 다리시작점- 밑단끝점
-                        {source : bottomClothesDot[0], target : bottomClothesDot[2]}, // 밑단끝점 - 밑단안점
-                        {source : bottomClothesDot[2], target : bottomClothesDot[4]}, // 밑단안점 - 밑위
-                        {source : bottomClothesDot[4], target : bottomClothesDot[5]}, // 밑위 왼쪽- 오른쪽
-                        {source : bottomClothesDot[5], target : bottomClothesDot[3]}, //밑위- 기장안쪽
-                        {source : bottomClothesDot[3], target : bottomClothesDot[1]}, //기장안쪽-기장
-                        {source : bottomClothesDot[1], target : bottomDotData[1]}, //기장- 다리시작점
-                        //실제 어깨- 옷 어깨
-                          //왼쪽
-                        ];
+shape.selectAll(".line")
+     .data(topClothesLinks)
+     .enter()
+     .append("line")
+     .attr("x1", function(d) { return d.source.x })
+     .attr("y1", function(d) { return d.source.y })
+     .attr("x2", function(d) { return d.target.x })
+     .attr("y2", function(d) { return d.target.y })
+     .style("stroke", "rgb(200,29,155)");
 
 
-    shape.selectAll("circle.pant")
-        .data(bottomClothesDot)
-        .enter()
-        .append("circle")
-        .attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; })
-        .attr("r", "5px")
-        .attr("fill", "red");
-
-
-    shape.selectAll(".line")
-         .data(bottomClothesLinks)
-         .enter()
-         .append("line")
-         .attr("x1", function(d) { return d.source.x })
-         .attr("y1", function(d) { return d.source.y })
-         .attr("x2", function(d) { return d.target.x })
-         .attr("y2", function(d) { return d.target.y })
-         .style("stroke", "rgb(200,29,155)");
+////////////////////////////////////////하체 옷 ////////////////////////////////////////////////////////
+myBottom = {'bottom_waist' : suggest_body
 };
+
+document.write(my['total_leg']-pant['length']);
+var bottomClothesDot = [
+              //기장 0
+              {x: broad/2-realBroadToRatio(my['chest']/2),
+               y: realTallToRatio(my['total_leg']-pant['length'])},//왼쪽
+              {x: broad/2+realBroadToRatio(my['chest']/2),
+               y: realTallToRatio(my['total_leg']-pant['length'])},//오른쪽
+              //기장 안쪽 2
+              {x: broad/2-realBroadToRatio(my['chest']/10),
+               y: realTallToRatio(my['total_leg']-pant['length'])},//왼쪽
+              {x: broad/2+realBroadToRatio(my['chest']/10),
+               y: realTallToRatio(my['total_leg']-pant['length'])},//오른쪽
+              //밑위 4
+              {x: broad/2-realBroadToRatio(my['chest']/10),
+               y: realTallToRatio(my['total_leg']-pant['crotch'])},//밑위 왼쪽
+              {x: broad/2+realBroadToRatio(my['chest']/10),
+               y: realTallToRatio(my['total_leg']-pant['crotch'])},//밑위 왼쪽
+            ];
+
+var bottomClothesLinks = [
+                    {source : bottomDotData[0], target : bottomClothesDot[0]}, // 다리시작점- 밑단끝점
+                    {source : bottomClothesDot[0], target : bottomClothesDot[2]}, // 밑단끝점 - 밑단안점
+                    {source : bottomClothesDot[2], target : bottomClothesDot[4]}, // 밑단안점 - 밑위
+                    {source : bottomClothesDot[4], target : bottomClothesDot[5]}, // 밑위 왼쪽- 오른쪽
+                    {source : bottomClothesDot[5], target : bottomClothesDot[3]}, //밑위- 기장안쪽
+                    {source : bottomClothesDot[3], target : bottomClothesDot[1]}, //기장안쪽-기장
+                    {source : bottomClothesDot[1], target : bottomDotData[1]}, //기장- 다리시작점
+                    //실제 어깨- 옷 어깨
+                      //왼쪽
+                    ];
+
+
+shape.selectAll("circle.pant")
+    .data(bottomClothesDot)
+    .enter()
+    .append("circle")
+    .attr("cx", function(d) { return d.x; })
+    .attr("cy", function(d) { return d.y; })
+    .attr("r", "5px")
+    .attr("fill", "red");
+
+
+shape.selectAll(".line")
+     .data(bottomClothesLinks)
+     .enter()
+     .append("line")
+     .attr("x1", function(d) { return d.source.x })
+     .attr("y1", function(d) { return d.source.y })
+     .attr("x2", function(d) { return d.target.x })
+     .attr("y2", function(d) { return d.target.y })
+     .style("stroke", "rgb(200,29,155)");
+

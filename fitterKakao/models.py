@@ -14,6 +14,7 @@ class Person(models.Model):
     shoulder_a = models.IntegerField(choices=CHOICES, default=AVG)
     chest_a = models.IntegerField(choices=CHOICES, default=AVG)
     sleeve_a = models.IntegerField(choices=CHOICES, default=AVG)
+    waist_a = models.IntegerField(choices=CHOICES, default=AVG)
     # 하의
     hip_a = models.IntegerField(choices=CHOICES, default=AVG)
     crotch_a = models.IntegerField(choices=CHOICES, default=AVG)
@@ -27,7 +28,7 @@ class Person(models.Model):
 
 class TopClothes(models.Model):
     name = models.ForeignKey(settings.AUTH_USER_MODEL)
-    nick = models.CharField(max_length=10, default='Untitled')
+    nick = models.CharField(max_length=20, default='Untitled')
     size = models.CharField(max_length=4, default='FREE')
     top_length = models.FloatField(default=0)
     shoulder = models.FloatField(default=0)
@@ -37,7 +38,7 @@ class TopClothes(models.Model):
 
 class BottomClothes(models.Model):
     name = models.ForeignKey(settings.AUTH_USER_MODEL)
-    nick = models.CharField(max_length=10, default='Untitled')
+    nick = models.CharField(max_length=20, default='Untitled')
     size = models.CharField(max_length=4, default='FREE')
     waist = models.FloatField(default=0)
     bot_length = models.FloatField(default=0)
