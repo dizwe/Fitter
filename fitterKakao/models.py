@@ -7,10 +7,13 @@ from django.conf import settings
 class Person(models.Model):
     SMALL =0; AVG = 1; BIG = 2
     CHOICES = [(SMALL, '많이 남는다'), (AVG, '별로 불편한 것이 없다'), (BIG, '낀다')]
-
+    MAN = 'man'; WOMAN = 'woman'
+    SEX_CHOICES = [(MAN, '남자'), (WOMAN, '여자')]
     name = models.ForeignKey(settings.AUTH_USER_MODEL)
+    sex = models.CharField(max_length=5, choices=SEX_CHOICES, default=WOMAN)
     weight = models.IntegerField(default=0)
     height = models.IntegerField(default=0)
+    # 상의
     shoulder_a = models.IntegerField(choices=CHOICES, default=AVG)
     chest_a = models.IntegerField(choices=CHOICES, default=AVG)
     sleeve_a = models.IntegerField(choices=CHOICES, default=AVG)

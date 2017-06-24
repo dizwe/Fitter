@@ -11,7 +11,7 @@ var shape = d3.select("body")
 
 var myBottomSide = {'visual_waist':my['bottom_waist']/3*2, // thigh랑 길이가 비슷해지면 되는데 thigh랑 비슷하게 만들면 됨
                     'visual_hip':my['hip']/17*11,
-                    'visual_pant_waist':pant['bottom_waist']/3*2};
+                    'visual_pant_waist':pant['waist']/3*2};
 
 
 //////////////////////////////////////// 상체 옆 /////////////////////////////////////////////////

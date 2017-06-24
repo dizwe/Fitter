@@ -19,7 +19,7 @@ def index(request):
 def size_list_to_dict(suggested_size):
     param_list = ['shoulder', 'chest', 'arm', 'waist',
                   'bottom_waist', 'crotch', 'thigh', 'length', 'hem', 'hip',
-                  'crotch_height', 'middle_thigh', 'knee', 'calf']
+                  'crotch_height', 'middle_thigh', 'knee', 'calf', 'nipple']
 
     each_par_dict = {}
     for i, size in enumerate(suggested_size):
@@ -33,9 +33,10 @@ def suppose_size(request, kinds, tag_num):
         """개인의 데이터"""
         person = Person.objects.filter(name=request.user)
         # 나중에 이거 [0]하는 부분 바꿔야함!
-        person_info_dict = person.values('height', 'weight', 'shoulder_a', 'chest_a', 'sleeve_a', 'waist_a',
+        person_info_dict = person.values('sex', 'height', 'weight', 'shoulder_a', 'chest_a', 'sleeve_a', 'waist_a',
                                          'hip_a', 'crotch_a', 'length_a', 'thigh_a', 'hem_a')[0]  # queryset
         # 키는 1770 이런 형식으로 되어있으므로 10 곱해야함
+        user_sex = person_info_dict['sex']
         user_height, user_weight = person_info_dict['height'] * 10, person_info_dict['weight']
 
         # ['shoulder', 'chest', 'arm', 'waist'
@@ -44,7 +45,7 @@ def suppose_size(request, kinds, tag_num):
         question = []
         for answer in ['shoulder_a', 'chest_a', 'sleeve_a', 'waist_a',
                        'waist_a', 'crotch_a', 'thigh_a', 'length_a', 'hem_a', 'hip_a',
-                       'length_a', 'thigh_a', '', '']:
+                       'length_a', 'thigh_a', '', '', 'chest_a']:
             if len(answer) == 0:
                 question.append(1)
             else:
@@ -55,8 +56,10 @@ def suppose_size(request, kinds, tag_num):
         file_path = os.path.join(settings.STATIC_ROOT, 'json/whole_hw_filtered_survey.json')
         hw_filtered_sizes = readAndSave.read_json(file_path, 'utf8')
 
+        # 성별로 꺼내기
+        shw_filtered_sizes = hw_filtered_sizes[str(user_sex)]
         # 괜찮은 사이즈를 찾고 글자 데이터를 숫자로 바꾸기
-        hw_filtered_size_nums = int_find_good_data(user_height, user_weight, hw_filtered_sizes)
+        hw_filtered_size_nums = int_find_good_data(user_height, user_weight, shw_filtered_sizes)
 
         # 몸 부위별로 모으기
         size_each_parameter = [[one_person[parameter]
@@ -72,10 +75,6 @@ def suppose_size(request, kinds, tag_num):
 
         elif kinds == 'bot':
             clothes = BottomClothes.objects.filter(pk=tag_num)  # POST 한 정보만 보게?(일단 그냥 하나만 보게 하자)
-
-    except KeyError:
-        return render(request, 'fitterKakao/index.html',
-                      {'error_message' : "다 안채웠어"})
 
     except TopClothes.DoesNotExist or BottomClothes.DoesNotExist:
         raise Http404("Data does not exist")
@@ -103,7 +102,7 @@ def post_new(request):
             person = person_form.save(commit=False) # False 바로 저장하지는 마
             person.name = request.user
             person.save()
-            return redirect('fitterKakao:suppose_size')
+            return redirect('fitterKakao:choose_clothes')
     else:
         person_form = PersonForm()
 

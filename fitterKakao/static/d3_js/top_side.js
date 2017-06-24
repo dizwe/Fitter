@@ -1,18 +1,25 @@
-var tall = 500; //키기준
-var broad = 300; //어깨기준
-var real_tall = real_tall/2*10;
-var real_broad = suggest_body['chest']*2;
+var sideTall = 500; //키기준
+var sideBroad = 300; //어깨기준
+var real_sideTall = real_tall/2*10;
+var real_sideBroad = suggest_body['chest']*2;
 
 var shape = d3.select("body")
             .append("svg")
-            .attr("width", broad)
-            .attr("height", tall);
+            .attr("width", sideBroad)
+            .attr("height", sideTall);
 
 
-var myTopSide = {'base_up' : [10, 10],
-                 'base_down' : [10, realTallToRatio(tall)]};
+var myTopSide = {'base_up' : [10, realSideTallToRatio(real_sideTall)],
+                 'base_middle' : [10, realSideTallToRatio(real_sideTall/5*4)],
+                 'base_down' : [10, realSideTallToRatio(10)]};
 
+function realSideTallToRatio(real_value){
+  return sideTall- sideTall*real_value/real_sideTall;
+}
 
+function realSideBroadToRatio(real_value){
+  return sideBroad * real_value/real_sideBroad;
+}
 //////////////////////////////////////// 상체 옆 /////////////////////////////////////////////////
 var topSide = [
               //기본  base
@@ -21,15 +28,20 @@ var topSide = [
               {x : myTopSide['base_down'][0],
               y : myTopSide['base_down'][1]},
               // 가슴 윗부분
-              {x: myTopSide['base_up'][0] + realBroadToRatio(suggest_body['chest']/2),
+              {x: myTopSide['base_up'][0] + realSideBroadToRatio(suggest_body['chest']/2),
               y: myTopSide['base_up'][1]},//기장 오른쪽
-              {x: myTopSide['base_down'][0] + realBroadToRatio(suggest_body['waist']/2),
+              //배 윗부분
+              {x: myTopSide['base_down'][0] + realSideBroadToRatio(suggest_body['waist']/2),
               y: myTopSide['base_down'][1]},//기장 오른쪽
+              // 젖가슴 윗부분
+              {x: myTopSide['base_middle'][0] + realSideBroadToRatio(suggest_body['nipple']/2),
+              y: myTopSide['base_middle'][1]},
             ];
-
+console.log(suggest_body['nipple']);
 var topSideLinks = [
               {source : topSide[0], target : topSide[1]},
-              {source : topSide[2], target : topSide[3]},
+              {source : topSide[2], target : topSide[4]},
+              {source : topSide[4], target : topSide[3]},
             ];
 
 shape.selectAll("circle.bodySide")
@@ -60,9 +72,9 @@ var topSideClo = [
               {x : myTopSide['base_down'][0],
               y : myTopSide['base_down'][1]},
               // 가슴 윗부분
-              {x: myTopSide['base_up'][0] + realBroadToRatio(shirt['chest']),
+              {x: myTopSide['base_up'][0] + realSideBroadToRatio(shirt['chest']),
               y: myTopSide['base_up'][1]},//기장 오른쪽
-              {x: myTopSide['base_down'][0] + realBroadToRatio(shirt['chest']),
+              {x: myTopSide['base_down'][0] + realSideBroadToRatio(shirt['chest']),
               y: myTopSide['base_down'][1]},//기장 오른쪽
             ];
 

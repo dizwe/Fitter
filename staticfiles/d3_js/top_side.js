@@ -9,9 +9,12 @@ var shape = d3.select("body")
             .attr("height", tall);
 
 
+
 var myTopSide = {'base_up' : [10, 10],
+                 'base_middle' : [10, realTallToRatio(tall/5)],
                  'base_down' : [10, realTallToRatio(tall)]};
 
+//메롱ㅇ롱
 
 //////////////////////////////////////// 상체 옆 /////////////////////////////////////////////////
 var topSide = [
@@ -23,13 +26,18 @@ var topSide = [
               // 가슴 윗부분
               {x: myTopSide['base_up'][0] + realBroadToRatio(suggest_body['chest']/2),
               y: myTopSide['base_up'][1]},//기장 오른쪽
+              //배 윗부분
               {x: myTopSide['base_down'][0] + realBroadToRatio(suggest_body['waist']/2),
               y: myTopSide['base_down'][1]},//기장 오른쪽
+              // 젖가슴 윗부분
+              {x: myTopSide['base_middle'][0] + realBroadToRatio(suggest_body['nipple']/2),
+              y: myTopSide['base_middle'][1]},
             ];
-
+console.log(suggest_body['nipple']);
 var topSideLinks = [
               {source : topSide[0], target : topSide[1]},
-              {source : topSide[2], target : topSide[3]},
+              {source : topSide[2], target : topSide[4]},
+              {source : topSide[4], target : topSide[3]},
             ];
 
 shape.selectAll("circle.bodySide")

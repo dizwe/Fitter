@@ -73,7 +73,7 @@ def int_find_good_data(height, weight, hw_filtered_sizes):
                                  for a_person in hw_filtered_sizes[str(height)][str(weight)]]
 
         def find_another_data():
-            """2개 이하의 데이터가 있을 때 가까운     값에서 하나 더 찾아오기"""
+            """2개 이하의 데이터가 있을 때 가까운 값에서 하나 더 찾아오기"""
             """# 큰 데이터가 너무 왔다갔다 하는거 아닌가... 싶다 문제문제~~~"""
             another_height, another_weight = find_close_distance(height, weight, hw_filtered_sizes)
 
