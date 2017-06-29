@@ -87,10 +87,10 @@ def suppose_size(request, kinds, tag_num):
 
 @login_required
 def check_data(request):
-    if Person.objects.filter(name=request.user).exists():
-        # 아예 연결하는 허브를 하나 만들어야 하나..
-        return render(request, 'fitterKakao/update_p.html')
-    else:
+    try:
+        person = Person.objects.get(name=request.user)
+        return render(request, 'fitterKakao/update_p.html', {'person': person, })
+    except Person.DoesNotExist:
         return redirect('fitterKakao:post_new')
 
 
@@ -107,6 +107,22 @@ def post_new(request):
         person_form = PersonForm()
 
     return render(request, 'fitterKakao/post_new.html', {'person_form': person_form,})
+
+
+@login_required
+def post_edit(request, pk):
+    existing_data = Person.objects.get(pk=pk)
+    if request.method == "POST":  # 이미 보낸거라면
+        person_form = PersonForm(request.POST, instance=existing_data)
+        if person_form.is_valid(): # 저장된 form 형식이 잘 맞는지
+            person = person_form.save(commit=False) # False 바로 저장하지는 마
+            person.name = request.user
+            person.save()
+            return redirect('fitterKakao:choose_clothes')
+    else:
+        person_form = PersonForm(instance=existing_data)
+
+    return render(request, 'fitterKakao/post_new.html', {'person_form': person_form, })
 
 
 @login_required
