@@ -3,10 +3,29 @@
 나의 사이즈 정보 입력
 {% endblock %}
 {%block content%}
-
     <form method="POST">
         {% csrf_token %}
         {{ person_form.as_p }}
         <button type="submit">save</button>
     </form>
+
+    <form method="POST">
+        {% csrf_token %}
+    <div class="form-group">
+    <label for="fun" class="col-sm-4 col-md-4 control-label text-right">어깨는 ?</label>
+    <div class="col-sm-7 col-md-7">
+    <div class="input-group">
+        <div id="radioBtn" class="btn-group">
+            <a class="btn btn-primary btn-sm active" data-toggle="fun" data-title="L">낀다</a>
+            <a class="btn btn-primary btn-sm notActive" data-toggle="fun" data-title="M">별일없다</a>
+            <a class="btn btn-primary btn-sm notActive" data-toggle="fun" data-title="S">헐렁하다</a>
+        </div>
+        <input type="hidden" name="fun" id="fun">
+    </div>
+    </div>
+    </div>
+        <button type="submit">save</button>
+    </form>
+
+
 {% endblock %}

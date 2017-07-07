@@ -1,0 +1,29 @@
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+     <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+{% if form.errors %}
+<p>ID나 비밀번호가 일치하지 않습니다.</p>
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+<input type="hidden" name="next" value="{{ next }}" />
+    {{ form.as_p }}
+
+<div class="checkbox">
+    <label>
+        <input type="checkbox" value="remember-me"> 자동로그인
+    </label>
+</div>
+<button class="btn btn-lg btn-primary btn-block" type="submit" formtarget="_parent">로그인</button>
+</form>
+
+<a href = "{% url 'signup' %}">계정이 없나요?</a>
+
+
+</body>

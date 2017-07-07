@@ -4,9 +4,21 @@
 {% endblock %}
 {%block content%}
 
-    <form method="POST">
-        {% csrf_token %}
+<script src="{% static 'web_js/add_forms.js' %}"></script>
+<form method="POST">
+    {% csrf_token %}
+    <div class = "section">
         {{ clothes_form.as_p }}
-        <button type="submit">save</button>
-    </form>
+    </div>
+    {{ clothes_formset.management_form }}
+    {% for form in clothes_formset.forms %}
+    <div class="item">
+        {{ form.as_p }}
+        <p><a class="delete" href="#">DELETE</a></p>
+    </div>
+    {% endfor %}
+    <p><a id="add" href="#">Add another item</a></p>
+    <button type="submit">save</button>
+</form>
+
 {% endblock %}

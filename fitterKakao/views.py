@@ -5,7 +5,7 @@ import os
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-
+from django.forms.formsets import formset_factory, BaseFormSet
 import readAndSave
 from .forms import PersonForm, TopClothesForm, BottomClothesForm
 from .anticipate_size import int_find_good_data, guess_int_by_question
@@ -127,25 +127,46 @@ def post_edit(request, pk):
 
 @login_required
 def add_clothes(request, kinds):
+    class RequiredFormSet(BaseFormSet):
+        def __init__(self, *args, **kwargs):
+            super(RequiredFormSet, self).__init__(*args, **kwargs)
+            for form in self.forms:
+                form.empty_permitted = False
+    top_clothes_formset = formset_factory(TopClothesForm, max_num=3,
+                                     formset=RequiredFormSet)
+    bottom_clothes_formset = formset_factory(TopClothesForm, max_num=3,
+                                        formset=RequiredFormSet)
+
     if request.method == "POST":
         if kinds == 'top':
             clothes_form = TopClothesForm(request.POST)
+            clothes_formset = top_clothes_formset(request.POST)
+
         elif kinds == 'bot':
             clothes_form = BottomClothesForm(request.POST)
+            clothes_formset = bottom_clothes_formset(request.POST)
 
-        if clothes_form.is_valid():
+        if clothes_form.is_valid() and clothes_formset.is_valid():
+            # 하나라면
             clothes = clothes_form.save(commit=False)
             clothes.name = request.user
             clothes.save()
+            for form in clothes_formset.forms:
+                clothes = form.save(commit=False)
+                clothes.name = request.user
+                clothes.save()
+
             return redirect('fitterKakao:choose_clothes')
     else:
         if kinds == 'top':
             clothes_form = TopClothesForm()
+            clothes_formset = top_clothes_formset()
         elif kinds == 'bot':
             clothes_form = BottomClothesForm()
+            clothes_formset = top_clothes_formset()
 
     return render(request, 'fitterKakao/add_clothes.html', {'clothes_form': clothes_form,
-                                                            })
+                                                            'clothes_formset': clothes_formset, })
 
 
 @login_required
