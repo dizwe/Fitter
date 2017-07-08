@@ -3,28 +3,144 @@
 나의 사이즈 정보 입력
 {% endblock %}
 {%block content%}
-    <form method="POST">
-        {% csrf_token %}
-        {{ person_form.as_p }}
-        <button type="submit">save</button>
-    </form>
+
 
     <form method="POST">
-        {% csrf_token %}
-    <div class="form-group">
-    <label for="fun" class="col-sm-4 col-md-4 control-label text-right">어깨는 ?</label>
-    <div class="col-sm-7 col-md-7">
+    {% csrf_token %}
+    <h2 class="bodyCategory"> 기본 정보 </h2>
+    <div class="fieldWrapper">
+        <label for="{{ person_form.sex.id_for_label }}">성별</label>
+        <div class="input-group">
+        <div id="radioBtn" class="btn-group">
+            <a class="btn btn-primary btn-sm notActive" data-toggle="sex" data-title="man">남자</a>
+            <a class="btn btn-primary btn-sm notActive" data-toggle="sex" data-title="woman">여자</a>
+        </div>
+        <input type="hidden" name="shoulder_a" id="sex" value = "{{ person_form.sex.value }}">
+        </div>
+    </div>
+    <div class="fieldWrapper">
+        {{ person_form.height.errors }}
+        <label for="{{ person_form.height.id_for_label }}">키</label>
+        {{ person_form.height }}<h>cm</h>
+    </div>
+    <div class="fieldWrapper">
+        {{ person_form.weight.errors }}
+        <label for="{{ person_form.weight.id_for_label }}">몸무게</label>
+        {{ person_form.weight }}<h>kg</h>
+    </div>
+
+    <h2 class="bodyCategory"> 상체 정보 </h2>
+
+    <div class="fieldWrapper">
+        <label for="{{ person_form.shoulder_a.id_for_label }}">어깨는 ?</label>
+        <div class="input-group">
+        <div id="radioBtn" class="btn-group">
+            <a class="btn btn-primary btn-sm notActive" data-toggle="shoulder_a" data-title="0">헐렁하다</a>
+            <a class="btn btn-primary btn-sm active" data-toggle="shoulder_a" data-title="1">별일없다</a>
+            <a class="btn btn-primary btn-sm notActive" data-toggle="shoulder_a" data-title="2">낀다</a>
+        </div>
+        <input type="hidden" name="shoulder_a" id="shoulder_a" value = "{{ person_form.shoulder_a.value }}">
+        </div>
+    </div>
+
+    <div class="fieldWrapper">
+        <label for="{{ person_form.chest_a.id_for_label }}">가슴은 ?</label>
+        <div class="input-group">
+        <div id="radioBtn" class="btn-group">
+            <a class="btn btn-primary btn-sm notActive" data-toggle="chest_a" data-title="0">헐렁하다</a>
+            <a class="btn btn-primary btn-sm active" data-toggle="chest_a" data-title="1">별일없다</a>
+            <a class="btn btn-primary btn-sm notActive" data-toggle="chest_a" data-title="2">낀다</a>
+        </div>
+        <input type="hidden" name="chest_a" id="chest_a" value ="{{ person_form.chest_a.value }}">
+        </div>
+    </div>
+
+    <div class="fieldWrapper">
+        <label for="{{ person_form.shoulder_a.id_for_label }}">긴 옷을 입으면, 소매 길이가</label>
+        <div class="input-group">
+        <div id="radioBtn" class="btn-group">
+            <a class="btn btn-primary btn-sm notActive" data-toggle="sleeve_a" data-title="0">남는다</a>
+            <a class="btn btn-primary btn-sm notActive" data-toggle="sleeve_a" data-title="1">별일없다</a>
+            <a class="btn btn-primary btn-sm active" data-toggle="sleeve_a" data-title="2">짧다</a>
+        </div>
+        <input type="hidden" name="sleeve_a" id="sleeve_a"  value ="{{ person_form.sleeve_a.value }}">
+        </div>
+    </div>
+
+    <div class="fieldWrapper">
+        <label for="{{ person_form.shoulder_a.id_for_label }}">배는 ?</label>
+        <div class="input-group">
+        <div id="radioBtn" class="btn-group">
+            <a class="btn btn-primary btn-sm notActive" data-toggle="waist_a" data-title="0">헐렁하다</a>
+            <a class="btn btn-primary btn-sm notActive" data-toggle="waist_a" data-title="1">별일없다</a>
+            <a class="btn btn-primary btn-sm active" data-toggle="waist_a" data-title="2">낀다</a>
+        </div>
+        <input type="hidden" name="waist_a" id="waist_a"  value ="{{ person_form.waist_a.value }}">
+        </div>
+    </div>
+
+    <h2 class="bodyCategory"> 하체 정보 </h2>
+
+    <div class="fieldWrapper">
+    <label for="{{ person_form.hip_a.id_for_label }}">엉덩이는 ?</label>
     <div class="input-group">
         <div id="radioBtn" class="btn-group">
-            <a class="btn btn-primary btn-sm active" data-toggle="fun" data-title="L">낀다</a>
-            <a class="btn btn-primary btn-sm notActive" data-toggle="fun" data-title="M">별일없다</a>
-            <a class="btn btn-primary btn-sm notActive" data-toggle="fun" data-title="S">헐렁하다</a>
-        </div>
-        <input type="hidden" name="fun" id="fun">
+        <a class="btn btn-primary btn-sm notActive" data-toggle="hip_a" data-title="0">헐렁하다</a>
+        <a class="btn btn-primary btn-sm active" data-toggle="hip_a" data-title="1">별일없다</a>
+        <a class="btn btn-primary btn-sm notActive" data-toggle="hip_a" data-title="2">낀다</a>
+    </div>
+    <input type="hidden" name="hip_a" id="hip_a"  value ="{{ person_form.hip_a.value }}">
     </div>
     </div>
+
+    <div class="fieldWrapper">
+    <label for="{{ person_form.crotch_a.id_for_label }}">가랑이는 ?</label>
+    <div class="input-group">
+        <div id="radioBtn" class="btn-group">
+        <a class="btn btn-primary btn-sm notActive" data-toggle="crotch_a" data-title="0">헐렁하다</a>
+        <a class="btn btn-primary btn-sm active" data-toggle="crotch_a" data-title="1">별일없다</a>
+        <a class="btn btn-primary btn-sm notActive" data-toggle="crotch_a" data-title="2">낀다</a>
     </div>
-        <button type="submit">save</button>
+    <input type="hidden" name="crotch_a" id="crotch_a"  value ="{{ person_form.crotch_a.value }}">
+    </div>
+    </div>
+
+    <div class="fieldWrapper">
+    <label for="{{ person_form.thigh_a.id_for_label }}">허벅지는 ?</label>
+    <div class="input-group">
+        <div id="radioBtn" class="btn-group">
+        <a class="btn btn-primary btn-sm notActive" data-toggle="thigh_a" data-title="0">헐렁하다</a>
+        <a class="btn btn-primary btn-sm active" data-toggle="thigh_a" data-title="1">별일없다</a>
+        <a class="btn btn-primary btn-sm notActive" data-toggle="thigh_a" data-title="2">낀다</a>
+    </div>
+    <input type="hidden" name="thigh_a" id="thigh_a"  value ="{{ person_form.thigh_a.value }}">
+    </div>
+    </div>
+
+    <div class="fieldWrapper">
+    <label for="{{ person_form.hem_a.id_for_label }}">발목이</label>
+    <div class="input-group">
+        <div id="radioBtn" class="btn-group">
+        <a class="btn btn-primary btn-sm notActive" data-toggle="hem_a" data-title="0">굵다</a>
+        <a class="btn btn-primary btn-sm active" data-toggle="hem_a" data-title="1">보통이다</a>
+        <a class="btn btn-primary btn-sm notActive" data-toggle="hem_a" data-title="2">얇다</a>
+    </div>
+    <input type="hidden" name="hem_a" id="hem_a"  value ="{{ person_form.hem_a.value }}">
+    </div>
+    </div>
+
+    <div class="fieldWrapper">
+    <label for="{{ person_form.length_a.id_for_label }}">바지길이가 ?</label>
+    <div class="input-group">
+        <div id="radioBtn" class="btn-group">
+        <a class="btn btn-primary btn-sm notActive" data-toggle="length_a" data-title="0">남는다</a>
+        <a class="btn btn-primary btn-sm active" data-toggle="length_a" data-title="1">딱맞다</a>
+        <a class="btn btn-primary btn-sm notActive" data-toggle="length_a" data-title="2">짧다</a>
+    </div>
+    <input type="hidden" name="length_a" id="length_a"  value ="{{ person_form.length_a.value }}">
+    </div>
+    </div>
+    <input type="submit" class="save btn btn-success" value="보내기">
     </form>
 
 
