@@ -29,9 +29,13 @@ class Person(models.Model):
     #     return self.height
 
 
+class ClothesNick(models.Model):
+    nick = models.CharField(max_length=20, default='Untitled')
+
+
 class TopClothes(models.Model):
     name = models.ForeignKey(settings.AUTH_USER_MODEL)
-    nick = models.CharField(max_length=20, default='Untitled')
+    nick = models.ForeignKey(ClothesNick)# CharField(max_length=50, default='Untitled')
     size = models.CharField(max_length=4, default='FREE')
     top_length = models.FloatField(default=0)
     shoulder = models.FloatField(default=0)

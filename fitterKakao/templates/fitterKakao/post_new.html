@@ -5,7 +5,7 @@
 {%block content%}
 
 
-    <form method="POST">
+    <form action = "{% url 'fitterKakao:choose_clothes' %}"method="POST">
     {% csrf_token %}
     <h2 class="bodyCategory"> 기본 정보 </h2>
     <div class="fieldWrapper">
@@ -15,7 +15,7 @@
             <a class="btn btn-primary btn-sm notActive" data-toggle="sex" data-title="man">남자</a>
             <a class="btn btn-primary btn-sm notActive" data-toggle="sex" data-title="woman">여자</a>
         </div>
-        <input type="hidden" name="shoulder_a" id="sex" value = "{{ person_form.sex.value }}">
+        <input type="hidden" name="sex" id="sex" value = "{{ person_form.sex.value }}">
         </div>
     </div>
     <div class="fieldWrapper">
@@ -140,7 +140,7 @@
     <input type="hidden" name="length_a" id="length_a"  value ="{{ person_form.length_a.value }}">
     </div>
     </div>
-    <input type="submit" class="save btn btn-success" value="보내기">
+    <button type="submit" >save</button>
     </form>
 
 

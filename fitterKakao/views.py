@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import Http404, JsonResponse, HttpResponseRedirect
-from .models import Person, TopClothes, BottomClothes
+from .models import Person, TopClothes, BottomClothes, ClothesNick
 import os
 
 from django.conf import settings
@@ -150,9 +150,12 @@ def add_clothes(request, kinds):
             # 하나라면
             clothes = clothes_form.save(commit=False)
             clothes.name = request.user
+            clothes.nick = request.POST['clothes_name']
             clothes.save()
+            #ClothesNick.objects.create(nick=request.POST['clothes_name'])
             for form in clothes_formset.forms:
                 clothes = form.save(commit=False)
+                print(clothes)
                 clothes.name = request.user
                 clothes.save()
 

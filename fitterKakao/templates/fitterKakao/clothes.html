@@ -3,15 +3,81 @@
 사이즈 업데이트
 {% endblock %}
 {%block content%}
-    <h>상의</h>
-    {% for one_top in top_clothes %}
-    <li><a href ="{% url 'fitterKakao:suppose_size' kinds='top' tag_num=one_top.id %}">{{one_top.nick}}</a></li>
-    {% endfor %}
+
     <a href = "{% url 'fitterKakao:add_clothes' kinds='top' %}">상의 추가</a>
 
-    <h>하의</h>
-    {% for one_bot in bottom_clothes %}
-    <li><a href ="{% url 'fitterKakao:suppose_size' kinds='bot' tag_num=one_bot.id %}">{{one_bot.nick}}</a></li>
-    {% endfor %}
     <a href = "{% url 'fitterKakao:add_clothes' kinds='bot' %}">하의 추가</a>
+
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#top-clothes" data-toggle="tab">상의</a>
+        </li>
+        <li>
+            <a href="#bot-clothes" data-toggle="tab">하의</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="top-clothes">
+            {% for one_top in top_clothes %}
+            <div class="col-md-4">
+					<div class="thumbnail">
+						<img alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg">
+						<div class="caption">
+							<h3>
+								{{one_top.nick}}
+							</h3>
+							<p>
+								<table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>길이</th>
+                                    <th>어깨</th>
+                                    <th>가슴</th>
+                                    <th>소매</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>{{one_top.size}}</td>
+                                    <td>{{one_top.top_length}}</td>
+                                    <td>{{one_top.shoulder}}</td>
+                                    <td>{{one_top.chest}}</td>
+                                    <td>{{one_top.sleeve}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+							</p>
+							<p>
+								<a class="btn btn-primary" href="{% url 'fitterKakao:suppose_size' kinds='top' tag_num=one_top.id %}">확인하기</a>
+                                <a class="btn" href="#">지우기</a>
+							</p>
+						</div>
+					</div>
+				</div>
+            {% endfor %}
+        </div>
+        <div class="tab-pane" id="bot-clothes">
+            {% for one_bot in bottom_clothes %}
+            <div class="col-md-4">
+					<div class="thumbnail">
+						<img alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg">
+						<div class="caption">
+							<h3>
+								{{one_bot.nick}}
+							</h3>
+							<p>
+								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+							</p>
+							<p>
+								<a class="btn btn-primary" href="{% url 'fitterKakao:suppose_size' kinds='bot' tag_num=one_bot.id %}">확인하기</a>
+                                <a class="btn" href="#">지우기</a>
+							</p>
+						</div>
+					</div>
+				</div>
+            {% endfor %}
+        </div>
+    </div>
+
 {% endblock %}
