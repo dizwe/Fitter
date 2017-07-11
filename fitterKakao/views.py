@@ -134,25 +134,15 @@ def add_clothes(request, kinds):
                 form.empty_permitted = False
     top_clothes_formset = formset_factory(TopClothesForm, max_num=3,
                                      formset=RequiredFormSet)
-    bottom_clothes_formset = formset_factory(TopClothesForm, max_num=3,
+    bottom_clothes_formset = formset_factory(BottomClothesForm, max_num=3,
                                         formset=RequiredFormSet)
 
     if request.method == "POST":
         if kinds == 'top':
-            clothes_form = TopClothesForm(request.POST)
             clothes_formset = top_clothes_formset(request.POST)
-
         elif kinds == 'bot':
-            clothes_form = BottomClothesForm(request.POST)
             clothes_formset = bottom_clothes_formset(request.POST)
-
-        if clothes_form.is_valid() and clothes_formset.is_valid():
-            # 하나라면
-            clothes = clothes_form.save(commit=False)
-            clothes.name = request.user
-            clothes.nick = request.POST['clothes_name']
-            clothes.save()
-            #ClothesNick.objects.create(nick=request.POST['clothes_name'])
+        if clothes_formset.is_valid():
             for form in clothes_formset.forms:
                 clothes = form.save(commit=False)
                 print(clothes)
@@ -162,14 +152,11 @@ def add_clothes(request, kinds):
             return redirect('fitterKakao:choose_clothes')
     else:
         if kinds == 'top':
-            clothes_form = TopClothesForm()
             clothes_formset = top_clothes_formset()
         elif kinds == 'bot':
-            clothes_form = BottomClothesForm()
-            clothes_formset = top_clothes_formset()
+            clothes_formset = bottom_clothes_formset()
 
-    return render(request, 'fitterKakao/add_clothes.html', {'clothes_form': clothes_form,
-                                                            'clothes_formset': clothes_formset, })
+    return render(request, 'fitterKakao/add_clothes.html', {'clothes_formset': clothes_formset, })
 
 
 @login_required

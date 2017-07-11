@@ -11,19 +11,7 @@
     {{ clothes_formset.management_form }}
     {% for form in clothes_formset.forms %}
     <div class="item">
-        {% for field in clothes_form %}
-            <div class="fieldWrapper">
-                {% if forloop.counter0 == 0 %}
-                    <p></p>
-                {% else %}
-                    {{ field.errors }}
-                    {{ field.label_tag }} {{ field }}
-                    {% if field.help_text %}
-                    <p class="help">{{ field.help_text|safe }}</p>
-                    {% endif %}
-                {% endif %}
-            </div>
-        {% endfor %}
+        {{form.as_p}}
         <p><a class="delete" href="#">DELETE</a></p>
     </div>
     {% endfor %}

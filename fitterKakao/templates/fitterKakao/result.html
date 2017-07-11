@@ -1,9 +1,10 @@
 {% extends "fitterKakao/layout.html"%}
-<title>{% block title %}Result{% endblock %}</title>
+{% block title %}Result{% endblock %}
 
 {%block content%}
     {% load staticfiles %}
     <script src="{% static 'd3/d3.v3.min.js' %}"></script>
+    <svg class="chart"></svg>
     <script>
         // 신체 사이즈
         {% for one in person|slice:":1" %}
@@ -38,30 +39,23 @@
        };
     </script>
 
-    <script src="{% static 'd3_js/top_front.js' %}"></script>
+    <script src="{% static 'd3_js/visual_base.js' %}"></script>
+
+
+
     {% if types == 'top' %}
+    <script src="{% static 'd3_js/top_front.js' %}"></script>
     <script src="{% static 'd3_js/top_side.js' %}"></script>
+    <script src="{% static 'd3_js/top_bar.js' %}"></script>
     {% elif types == 'bot' %}
+    <script src="{% static 'd3_js/bottom_front.js' %}"></script>
     <script src="{% static 'd3_js/bottom_side.js' %}"></script>
+    <script src="{% static 'd3_js/bottom_bar.js' %}"></script>
     {% endif %}
-    <ul>
-        {% for one in person %}
-            <li>{{ one.height }}</li>
-            <li>{{ one.weight }}</li>
-            <li>{{ one.shoulder_a }}</li>
-            <h>hi</h>
-        {% endfor %}
-    </ul>
-    <ul>
-        {% for one_clothes in top_clothes %}
-            <li>{{ one_clothes.shoulder }}</li>
-        {% endfor %}
-    </ul>
-    <ul>
-        {% for each_part in suggest_size %}
-            <li>{{ each_part }}</li>
-        {% endfor %}
-    </ul>
+
+    <script src="{% static 'd3_js/bar_draw.js' %}"></script>
+
+
 {% endblock %}
 
 

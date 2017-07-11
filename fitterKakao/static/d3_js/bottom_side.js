@@ -54,10 +54,6 @@ var bottomSide = [
               y: realTallToRatio(my['total_leg']/11)},
             ];
 
-//var topSideLinks = [
-//              {source : topSide[0], target : topSide[1]},
-//              {source : topSide[2], target : topSide[3]},
-//            ];
 
 shape.selectAll("circle.bottomSide")
      .data(bottomSide)
@@ -68,15 +64,6 @@ shape.selectAll("circle.bottomSide")
      .attr("r", "5px")
      .attr("fill", "grey");
 
-//shape.selectAll(".line")
-//     .data(topSideLinks)
-//     .enter()
-//     .append("line")
-//     .attr("x1", function(d) { return d.source.x })
-//     .attr("y1", function(d) { return d.source.y })
-//     .attr("x2", function(d) { return d.target.x })
-//     .attr("y2", function(d) { return d.target.y })
-//     .style("stroke", "rgb(6,120,155)");
 
 
 ///////////////////////////////////////////////////옷 상체 옆 /////////////////////////////////////////

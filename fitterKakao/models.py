@@ -35,7 +35,7 @@ class ClothesNick(models.Model):
 
 class TopClothes(models.Model):
     name = models.ForeignKey(settings.AUTH_USER_MODEL)
-    nick = models.ForeignKey(ClothesNick)# CharField(max_length=50, default='Untitled')
+    nick = models.CharField(max_length=50, default='Untitled')
     size = models.CharField(max_length=4, default='FREE')
     top_length = models.FloatField(default=0)
     shoulder = models.FloatField(default=0)
