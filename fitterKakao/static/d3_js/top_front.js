@@ -138,6 +138,7 @@ shape.selectAll(".line")
      .attr("y1", function(d) { return d.source.y })
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
+     .attr("stroke-width", "3px")
      .style("stroke", "rgb(6,120,155)");
 
 
@@ -227,5 +228,6 @@ shape.selectAll(".line")
      .attr("y1", function(d) { return d.source.y })
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
+     .attr("stroke-width", "3px")
      .style("stroke", "rgb(200,29,155)");
 

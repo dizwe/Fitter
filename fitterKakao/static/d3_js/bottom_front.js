@@ -52,14 +52,12 @@ var bottomLinks = [
               //어깨
               {source : bottomDotData[0], target : bottomDotData[2]},
               {source : bottomDotData[2], target : bottomDotData[4]},
-//              {source : bottomDotData[4], target : bottomDotData[6]}, 발목끝
               {source : bottomDotData[6], target : bottomDotData[8]},
               {source : bottomDotData[6], target : bottomDotData[8]},
               {source : bottomDotData[8], target : bottomDotData[10]},
               {source : bottomDotData[10], target : bottomDotData[11]},
               {source : bottomDotData[11], target : bottomDotData[9]},
               {source : bottomDotData[9], target : bottomDotData[7]},
-//              {source : bottomDotData[7], target : bottomDotData[5]}, 발목 끝
               {source : bottomDotData[5], target : bottomDotData[3]},
               {source : bottomDotData[3], target : bottomDotData[1]},
               //발모양
@@ -95,6 +93,7 @@ shape.selectAll(".line")
      .attr("y1", function(d) { return d.source.y })
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
+     .attr("stroke-width", "3px")
      .style("stroke", "rgb(6,120,155)");
 
 
