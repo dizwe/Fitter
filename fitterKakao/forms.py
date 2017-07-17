@@ -18,7 +18,7 @@ class TopClothesForm(forms.ModelForm):
 class BottomClothesForm(forms.ModelForm):
     class Meta:
         model = BottomClothes
-        fields = ('nick', 'size', 'waist', 'bot_length', 'crotch', 'thigh', 'hem')
+        fields = ('nick', 'size', 'waist', 'bot_length', 'hip', 'crotch', 'thigh', 'hem')
 
 
 

@@ -12,6 +12,7 @@ var shape = d3.select("body")
 var myBottomSide = {'visual_waist':my['bottom_waist']/3*2, // thigh랑 길이가 비슷해지면 되는데 thigh랑 비슷하게 만들면 됨
                     'visual_hip':my['hip']/17*11,
                     'visual_pant_waist':pant['waist']/3*2,
+                    'visual_pant_hip':pant['hip']/17*11,
                     'above_knee_x':my['knee']/5,
                     'invisible_line' : broad/4*3,
                     };
@@ -19,7 +20,9 @@ var myBottomSide = {'visual_waist':my['bottom_waist']/3*2, // thigh랑 길이가
 // 옷이 얼마나 남는가
 var botCal = {'waist':(myBottomSide['visual_pant_waist']-myBottomSide['visual_waist'])/2,
               'thigh':(pant['thigh']-my['thigh'])/2,
-              'hem' : pant['hem']-dynamic_hem(pant['length'])};
+              'hem' : pant['hem']-dynamic_hem(pant['length']),
+              'hip' :(pant['hip']!=0)?(myBottomSide['visual_pant_hip']-myBottomSide['visual_hip']):0};
+
 
 
 //////////////////////////////////////// 상체 옆 /////////////////////////////////////////////////
@@ -116,9 +119,9 @@ var bottomSideClo = [
                   {x : myBottomSide['invisible_line'] + realBroadToRatio(myBottomSide['above_knee_x']+botCal['waist']),
                   y : realTallToRatio(my['total_leg'])},
                   //// 엉덩이 2
-                  {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_hip']*2-myBottomSide['above_knee_x']), //앞부분에서 엉덩이 빼기
+                  {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_hip']*2+botCal['hip']-myBottomSide['above_knee_x']), //앞부분에서 엉덩이 빼기
                   y: realTallToRatio((my['total_leg']+my['crotch_height'])/2)},
-                  {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_hip']*2-myBottomSide['above_knee_x']), //앞부분에서 엉덩이 빼기
+                  {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_hip']*2+botCal['hip']-myBottomSide['above_knee_x']), //앞부분에서 엉덩이 빼기
                   y: realTallToRatio((my['total_leg']+my['crotch_height'])/2)},
                   // 허벅지 4
                   {x: myBottomSide['invisible_line'] - realBroadToRatio(my['thigh']*2+botCal['thigh']-myBottomSide['above_knee_x']/5*9),

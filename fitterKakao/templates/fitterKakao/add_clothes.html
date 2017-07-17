@@ -9,12 +9,50 @@
     {% csrf_token %}
 
     {{ clothes_formset.management_form }}
+    {% if types == "top" %}
     {% for form in clothes_formset.forms %}
     <div class="item">
-        {{form.as_p}}
+        <p><label for="id_form-0-nick">이름:</label>
+            <input id="id_form-0-nick" maxlength="50" name="form-0-nick" type="text" value="Untitled" /></p>
+        <p><label for="id_form-0-size">사이즈:</label>
+            <input id="id_form-0-size" maxlength="4" name="form-0-size" type="text" value="FREE" /></p>
+        <p><label for="id_form-0-top_length">길이:</label>
+            <input id="id_form-0-top_length" name="form-0-top_length" step="any" type="number" value="0" /></p>
+        <p><label for="id_form-0-shoulder">어깨:</label>
+            <input id="id_form-0-shoulder" name="form-0-shoulder" step="any" type="number" value="0" /></p>
+        <p><label for="id_form-0-chest">가슴:</label>
+            <input id="id_form-0-chest" name="form-0-chest" step="any" type="number" value="0" /></p>
+        <p><label for="id_form-0-sleeve">소매:</label>
+            <input id="id_form-0-sleeve" name="form-0-sleeve" step="any" type="number" value="0" /></p>
         <p><a class="delete" href="#">DELETE</a></p>
     </div>
     {% endfor %}
+    {% elif types == "bot" %}
+    {% for form in clothes_formset.forms %}
+    <div class="item">
+        <p><label for="id_form-0-nick">이름:</label>
+            <input id="id_form-0-nick" maxlength="20" name="form-0-nick" type="text" value="Untitled" /></p>
+        <p><label for="id_form-0-size">사이즈:</label>
+            <input id="id_form-0-size" maxlength="4" name="form-0-size" type="text" value="FREE" /></p>
+        <p><label for="id_form-0-waist">허리:</label>
+            <input id="id_form-0-waist" name="form-0-waist" step="any" type="number" value="0" /></p>
+        <p><label for="id_form-0-bot_length">기장:</label>
+            <input id="id_form-0-bot_length" name="form-0-bot_length" step="any" type="number" value="0" />
+            </p>
+
+        <p><label for="id_form-0-crotch">밑위:</label>
+            <input id="id_form-0-crotch" name="form-0-crotch" step="any" type="number" value="0" /></p>
+        <p><label for="id_form-0-thigh">허벅지:</label>
+            <input id="id_form-0-thigh" name="form-0-thigh" step="any" type="number" value="0" /></p>
+        <p><label for="id_form-0-hem">밑단:</label>
+            <input id="id_form-0-hem" name="form-0-hem" step="any" type="number" value="0" /></p>
+        <input type="checkbox" id= "hip_check" name="hip_exist" value="no" onclick="hide_b(this);"> 이 자료가 없는디 <br>
+        <p><label for="id_form-0-hip" id = "hip">엉덩이:</label>
+            <input id="id_form-0-hip" name="form-0-hip" step="any" type="number" value="0" />
+        </p>
+    </div>
+        {% endfor %}
+    {% endif %}
     <p><a id="add" href="#">Add another item</a></p>
 
     <button type="submit">save</button>

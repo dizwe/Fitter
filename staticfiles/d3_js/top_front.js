@@ -1,11 +1,11 @@
 //상체만
 var dotData = [
               //가랑이0 - 이건 중요해
-              {x: broad/2,
-              y: realTallToRatio(my['crotch_height'])},//가랑이
+              {x: 0,
+              y: 0},//가랑이
               //배꼽1 - y는 그냥 어깨기준(근데 너무 크면 어떡하지)V
-              {x: broad/2,
-              y: realTallToRatio(my['trunk_leg']-my['shoulder']/4*5)},//배꼽
+              {x: 0,
+              y: 0},//배꼽
               //어깨2V
               {x: broad/2-realBroadToRatio(my['shoulder']/2),
                y: realTallToRatio(my['trunk_leg'])},//어깨왼쪽
@@ -51,16 +51,25 @@ var dotData = [
               y: realTallToRatio(my['trunk_leg']-my['arm_len']-(my['shoulder']/4))},//손 바깥쪽
               {x: broad/2+realBroadToRatio(my['chest']/2),
               y: realTallToRatio(my['trunk_leg']-my['arm_len']-(my['shoulder']/4))},//손 안쪽
-              //가랑이 선
-              {x: broad/2,
-              y: realTallToRatio(my['crotch_height']-my['shoulder']/10)},//가랑이
+              //밑위 가랑이 20
+               {x: broad/2-realBroadToRatio(my['between_leg']/2),
+               y: realTallToRatio(my['total_leg']-suggest_body['crotch'])},//밑위 왼쪽
+               {x: broad/2+realBroadToRatio(my['between_leg']/2),
+               y: realTallToRatio(my['total_leg']-suggest_body['crotch'])},//밑위 오른쪽
+               //밑위 가랑이 아래 22
+               {x: broad/2-realBroadToRatio(my['between_leg']/2),
+               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-20)},//밑위 왼쪽
+               {x: broad/2+realBroadToRatio(my['between_leg']/2),
+               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-20)},//밑위 오른쪽
+               //가랑이 양옆 점 24
+               {x: broad/2-realBroadToRatio(my['chest']/2),
+               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-20)},//밑위 왼쪽
+               {x: broad/2+realBroadToRatio(my['chest']/2),
+               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-20)},//밑위 오른쪽
+//              //가랑이 12 - 이건 중요해
+//              {x: broad/2,
+//              y: realTallToRatio(my['crotch_height']-20)},//가랑이
             ];
-
-var poppedDot = [
-                //배꼽1 - y는 그냥 어깨기준(근데 너무 크면 어떡하지)V
-              {x: broad/2,
-              y: realTallToRatio(my['trunk_leg']-my['shoulder']/4*5)},//배꼽
-                ]
 
 
 var topLinks = [
@@ -87,6 +96,12 @@ var topLinks = [
               {source : dotData[7], target : dotData[17]}, // 손 바깥쪽
               {source : dotData[17], target : dotData[19]}, //손 아래쪽
               {source : dotData[7], target : dotData[11]}, // 손 위쪽
+              //가랑이
+              {source : dotData[22], target : dotData[20]}, // 가랑이 왼쪽 세로
+              {source : dotData[20], target : dotData[21]}, // 가랑이 가로
+              {source : dotData[21], target : dotData[23]}, // 가랑이 오른쪽 세로
+              {source : dotData[14], target : dotData[24]}, // 가랑이 양옆 왼쪽
+              {source : dotData[15], target : dotData[25]}, // 가랑이 양옆 왼쪽
             ];
 
 
@@ -99,16 +114,22 @@ shape.selectAll("circle.body")
      .attr("r", "2px")
      .attr("fill", "grey");
 
-
-shape.selectAll("circle.body")
-     .data(poppedDot)
+// 배꼽
+shape.selectAll("text.belly")
+     .data(dotData)
      .enter()
-     .append("circle")
-     .attr("cx", function(d) { return d.x; })
-     .attr("cy", function(d) { return d.y; })
-     .attr("r", "3px");
+     .append("text")
+     .attr("x", broad/2)
+     .attr("y", realTallToRatio(my['trunk_leg']-my['shoulder']/4*5))
+     .text("X")
+     .attr("font-family", "sans-serif")
+     .attr("font-size", "15px")
+     .attr("fill", "rgb(6,120,155)")
+     .attr("text-anchor", "middle");
 
 
+//     .attr("x", function(d){20})//broad/2;})
+//     .attr("y", function(d){30})//realTallToRatio(my['trunk_leg']-my['shoulder']/4*5);})
 shape.selectAll(".line")
      .data(topLinks)
      .enter()
@@ -117,6 +138,7 @@ shape.selectAll(".line")
      .attr("y1", function(d) { return d.source.y })
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
+     .attr("stroke-width", "3px")
      .style("stroke", "rgb(6,120,155)");
 
 
@@ -206,5 +228,6 @@ shape.selectAll(".line")
      .attr("y1", function(d) { return d.source.y })
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
+     .attr("stroke-width", "3px")
      .style("stroke", "rgb(200,29,155)");
 

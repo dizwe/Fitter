@@ -129,4 +129,5 @@ STATICFILES_DIRS = (
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #C:\Django\Fitter\staticfiles 이런식으로 만들어짐
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
+LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/check'

@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
-from django.http import Http404, JsonResponse, HttpResponseRedirect
-from .models import Person, TopClothes, BottomClothes, ClothesNick
+from django.http import Http404, JsonResponse, HttpResponseRedirect, HttpResponse
+from .models import Person, TopClothes, BottomClothes, SizeInfo
 import os
 
 from django.conf import settings
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.forms.formsets import formset_factory, BaseFormSet
 import readAndSave
 from .forms import PersonForm, TopClothesForm, BottomClothesForm
@@ -14,6 +14,40 @@ from .anticipate_size import int_find_good_data, guess_int_by_question
 def index(request):
     # reverse 는 url 하드코딩 피할수 있도록 해줌
     return render(request, 'fitterKakao/index.html')
+
+
+def make_question_generator(whole_d):
+    # data 과부하 줄이기
+    for sex in ['man', 'woman']:
+        shw_filtered_sizes = whole_d[sex]
+        height_key = list(shw_filtered_sizes.keys())
+        height_key = list(map(int, height_key))  # 원래 문자니까
+        for height in range(min(height_key), max(height_key)+10, 10):
+            for weight in range(15, 152):  # 해보니 그렇던데?
+                yield sex, height, weight
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def data_add(request):
+    file_path = os.path.join(settings.STATIC_ROOT, 'json/question_tree.json')
+    question_tree = readAndSave.read_json(file_path, 'utf8')
+    for sex, height, weight in make_question_generator(question_tree):
+        print(sex, height, weight)
+        parameters_data = question_tree[sex][str(height)][str(weight)]  # 자료가 있어야함
+        try:
+            if parameters_data:  # 데이터가 있다면
+                size_info = SizeInfo(sex=sex, height=int(height), weight=int(weight))
+                parameter_list = ['shoulder', 'chest', 'arm', 'waist',
+                                  'bottom_waist', 'crotch', 'thigh', 'length', 'hem', 'hip',
+                                  'crotch_height', 'middle_thigh', 'knee', 'calf', 'nipple']
+                for parameter in parameter_list:
+                    setattr(size_info, parameter, parameters_data[parameter])  # get attr
+
+                size_info.save()
+        except KeyError as e:
+            continue
+
+    return HttpResponse("DONE")
 
 
 def size_list_to_dict(suggested_size):
@@ -156,7 +190,8 @@ def add_clothes(request, kinds):
         elif kinds == 'bot':
             clothes_formset = bottom_clothes_formset()
 
-    return render(request, 'fitterKakao/add_clothes.html', {'clothes_formset': clothes_formset, })
+    return render(request, 'fitterKakao/add_clothes.html', {'types' : kinds,
+                                                            'clothes_formset': clothes_formset, })
 
 
 @login_required

@@ -3,7 +3,33 @@ from django.db import models
 from django.conf import settings
 
 
-# Create your models here.
+class SizeInfo(models.Model):
+    MAN = 'man'; WOMAN = 'woman'
+    SEX_CHOICES = [(MAN, '남자'), (WOMAN, '여자')]
+    sex = models.CharField(max_length=5, choices=SEX_CHOICES, default=WOMAN)
+    weight = models.IntegerField(default=0)
+    height = models.IntegerField(default=0)
+    shoulder = models.CharField(max_length=30, default=None)
+    chest = models.CharField(max_length=30, default=None)
+    arm = models.CharField(max_length=30, default=None)
+    waist = models.CharField(max_length=30, default=None)
+    bottom_waist = models.CharField(max_length=30, default=None)
+    crotch = models.CharField(max_length=30, default=None)
+    thigh = models.CharField(max_length=30, default=None)
+    length = models.CharField(max_length=30, default=None)
+    hem = models.CharField(max_length=30, default=None)
+    hip = models.CharField(max_length=30, default=None)
+    crotch_height = models.CharField(max_length=30, default=None)
+    middle_thigh = models.CharField(max_length=30, default=None)
+    knee = models.CharField(max_length=30, default=None)
+    calf = models.CharField(max_length=30, default=None)
+    nipple = models.CharField(max_length=30, default=None)
+
+    def __str__(self):  # Change title as name(메소드처럼)
+        return r"%s %s %s" % (self.sex, str(self.height), str(self.weight))
+
+
+
 class Person(models.Model):
     SMALL =0; AVG = 1; BIG = 2
     CHOICES = [(SMALL, '많이 남는다'), (AVG, '별로 불편한 것이 없다'), (BIG, '낀다')]
@@ -25,8 +51,8 @@ class Person(models.Model):
     thigh_a = models.IntegerField(choices=CHOICES, default=AVG)
     hem_a = models.IntegerField(choices=CHOICES, default=AVG)
 
-    # def __str__(self):  # Change title as name(메소드처럼)
-    #     return self.height
+    def __str__(self):  # Change title as name(메소드처럼)
+        return self.name
 
 
 class ClothesNick(models.Model):
@@ -42,16 +68,21 @@ class TopClothes(models.Model):
     chest = models.FloatField(default=0)
     sleeve = models.FloatField(default=0)
 
+    def __str__(self):  # Change title as name(메소드처럼)
+        return self.nick
 
 class BottomClothes(models.Model):
     name = models.ForeignKey(settings.AUTH_USER_MODEL)
     nick = models.CharField(max_length=20, default='Untitled')
     size = models.CharField(max_length=4, default='FREE')
-    waist = models.FloatField(default=0)
     bot_length = models.FloatField(default=0)
+    waist = models.FloatField(default=0)
+    hip = models.FloatField(default=0)
     crotch = models.FloatField(default=0)
     thigh = models.FloatField(default=0)
     hem = models.FloatField(default=0)
 
+    def __str__(self):  # Change title as name(메소드처럼)
+        return self.nick
 
 # Create your models here.

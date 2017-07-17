@@ -22,3 +22,27 @@ $(document).ready(function(){
     }
 
 })
+
+//add_clothes
+function hide_b(btn){
+    if($(btn).attr('checked') ==="checked"){
+        $('#hip').parent().show();
+        $(btn).removeAttr('checked');
+    }else{
+        $(btn).attr('checked',"checked");
+        console.log(btn);
+        $('#hip').parent().hide();
+    }
+
+
+}
+
+//$(document).ready(function(){
+//    $('#hip_check').change(function(){
+//        if(this.checked)
+//            $('#hip').parent().show();
+//        else
+//            $('#hip').parent().hide();
+//
+//    });
+//});

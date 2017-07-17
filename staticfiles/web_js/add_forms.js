@@ -19,7 +19,6 @@ $(document).ready(function(){
             var forms = $('.item'); // GET All the forms.
             $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
             var i = 0;
-
             for (formCount = forms.length; i < formCount; i++){
                 $(forms.get(i)).children().children().each(function () { // 한 필드 접근
                     if ($(this).attr('type') === 'text'){updateElementIndex(this, prefix, i);}
@@ -32,16 +31,16 @@ $(document).ready(function(){
     }
 
     function addForm(btn, prefix) {
-        var formCount = parseInt($('#id_'+ prefix + '-TOTAL_FORMS').val());
-        console.log(formCount);
+        var formCount = parseInt($('#id_'+ prefix + '-TOTAL_FORMS').val()); // total_form id의 value 값 구함
+
         if (formCount < 4){
             //첫번째 formset에서 복사ㅏ
-            var row = $(".item:first").clone(false).get(0) //처음거
+            var row = $(".item:first").clone(false).get(0) //처음거 가져오기
             $(row).removeAttr('id').hide().insertAfter(".item:last").slideDown(300);
 
             //필요없는거 지우기
-            $(".errorlist", row).remove();
-            $(row).children().removeClass("error");
+//            $(".errorlist", row).remove();
+//            $(row).children().removeClass("error");
 
             $(row).children().children().each(function(){
                 updateElementIndex(this, prefix, formCount);

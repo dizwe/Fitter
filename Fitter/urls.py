@@ -35,7 +35,7 @@ urlpatterns = [
         auth_views.logout,
         name='logout',
         kwargs={
-            'next_page': settings.LOGIN_URL,
+            'next_page': settings.LOGOUT_REDIRECT_URL,
         }
     ),
     url(r'^accounts/signup$', fitter_views.CreateUser.as_view(), name='signup'),
