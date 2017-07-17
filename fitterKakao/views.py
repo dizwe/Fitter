@@ -7,6 +7,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.forms.formsets import formset_factory, BaseFormSet
 import readAndSave
+import json
 from .forms import PersonForm, TopClothesForm, BottomClothesForm
 from .anticipate_size import int_find_good_data, guess_int_by_question
 
@@ -75,7 +76,7 @@ def suppose_size(request, kinds, tag_num):
 
         # ['shoulder', 'chest', 'arm', 'waist'
         # 'bottom_waist', 'crotch', 'thigh', 'length', 'hem', 'hip',
-        # 'crotch_height', 'middle_thigh', 'knee', 'calf'] 순서
+        # 'crotch_height', 'middle_thigh', 'knee', 'calf', 'nipple'] 순서
         question = []
         for answer in ['shoulder_a', 'chest_a', 'sleeve_a', 'waist_a',
                        'waist_a', 'crotch_a', 'thigh_a', 'length_a', 'hem_a', 'hip_a',
@@ -85,23 +86,22 @@ def suppose_size(request, kinds, tag_num):
             else:
                 question.append(person_info_dict[answer])
 
-        # readAndSave 파일 없는거니까 조심 - 데이터도 나중에 DB로 넣는걸로 해보자
-        # 데이터 파일 읽어오기
-        file_path = os.path.join(settings.STATIC_ROOT, 'json/whole_hw_filtered_survey.json')
-        hw_filtered_sizes = readAndSave.read_json(file_path, 'utf8')
+        """데이터 찾기"""
+        suggested_size_filter = \
+            SizeInfo.objects.filter(sex=user_sex).filter(height=user_height).filter(weight=user_weight)
 
-        # 성별로 꺼내기
-        shw_filtered_sizes = hw_filtered_sizes[str(user_sex)]
-        # 괜찮은 사이즈를 찾고 글자 데이터를 숫자로 바꾸기
-        hw_filtered_size_nums = int_find_good_data(user_height, user_weight, shw_filtered_sizes)
-
-        # 몸 부위별로 모으기
-        size_each_parameter = [[one_person[parameter]
-                                for one_person in hw_filtered_size_nums]
-                               for parameter in range(len(hw_filtered_size_nums[0]))]  # 변수개수만큼 돌리기
+        parameter_list = ['shoulder', 'chest', 'arm', 'waist',
+                          'bottom_waist', 'crotch', 'thigh', 'length', 'hem', 'hip',
+                          'crotch_height', 'middle_thigh', 'knee', 'calf', 'nipple']
 
         """예상 사이즈 추천하고 실측 데이터로 바꾸기"""
-        suggested_size = guess_int_by_question(question, size_each_parameter)
+
+        suggested_size = []
+        for parameter, q in zip(parameter_list, question):
+            parameter_dict = suggested_size_filter.values(parameter).first()[parameter]
+            parameter_dict = json.loads(parameter_dict.replace("'", '"'))
+            suggested_size.append(parameter_dict[str(q)])
+        print(suggested_size)
         suggested_size = size_list_to_dict(suggested_size)
 
         if kinds == 'top':
