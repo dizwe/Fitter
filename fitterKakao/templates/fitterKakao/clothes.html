@@ -4,10 +4,6 @@
 {% endblock %}
 {%block content%}
 
-    <a href = "{% url 'fitterKakao:add_clothes' kinds='top' %}">상의 추가</a>
-
-    <a href = "{% url 'fitterKakao:add_clothes' kinds='bot' %}">하의 추가</a>
-
     <ul class="nav nav-tabs">
         <li class="active">
             <a href="#top-clothes" data-toggle="tab">상의</a>
@@ -18,10 +14,12 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane active" id="top-clothes">
+            <div class="col-md-12">
+            <a href = "{% url 'fitterKakao:add_clothes' kinds='top' %}"><h3>상의 추가하기</h3></a>
+            </div>
             {% for one_top in top_clothes %}
             <div class="col-md-4">
 					<div class="thumbnail">
-						<img alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg">
 						<div class="caption">
 							<h3>
 								{{one_top.nick}}
@@ -50,7 +48,8 @@
 							</p>
 							<p>
 								<a class="btn btn-primary" href="{% url 'fitterKakao:suppose_size' kinds='top' tag_num=one_top.id %}">확인하기</a>
-                                <a class="btn" href="#">지우기</a>
+                                <a class="btn" href="{% url 'fitterKakao:edit_clothes' kinds='top' tag_num=one_top.id %}">수정하기</a>
+                                <a class="btn deleteClothes"  href="{% url 'fitterKakao:delete_clothes' kinds='top' tag_num=one_top.id %}">지우기</a>
 							</p>
 						</div>
 					</div>
@@ -58,20 +57,45 @@
             {% endfor %}
         </div>
         <div class="tab-pane" id="bot-clothes">
+            <div class="col-md-12">
+            <a href = "{% url 'fitterKakao:add_clothes' kinds='bot' %}"><h3>하의 추가하기</h3></a>
+            </div>
             {% for one_bot in bottom_clothes %}
             <div class="col-md-4">
 					<div class="thumbnail">
-						<img alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg">
 						<div class="caption">
-							<h3>
+                            <h3>
 								{{one_bot.nick}}
 							</h3>
 							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+								<table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>기장</th>
+                                    <th>허리</th>
+                                    <th>허벅지</th>
+                                    <th>밑단</th>
+                                      <th>밑위</th>
+
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>{{one_bot.size}}</td>
+                                    <td>{{one_bot.bot_length}}</td>
+                                    <td>{{one_bot.waist}}</td>
+                                    <td>{{one_bot.thigh}}</td>
+                                    <td>{{one_bot.crotch}}</td>
+                                      <td>{{one_bot.hem}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
 							</p>
 							<p>
 								<a class="btn btn-primary" href="{% url 'fitterKakao:suppose_size' kinds='bot' tag_num=one_bot.id %}">확인하기</a>
-                                <a class="btn" href="#">지우기</a>
+                                <a class="btn" href="{% url 'fitterKakao:edit_clothes' kinds='bot' tag_num=one_bot.id %}">수정하기</a>
+                                <a class="btn deleteClothes"  href="{% url 'fitterKakao:delete_clothes' kinds='bot' tag_num=one_bot.id %}">지우기</a>
 							</p>
 						</div>
 					</div>

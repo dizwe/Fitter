@@ -195,12 +195,48 @@ def add_clothes(request, kinds):
 
 
 @login_required
+def edit_clothes(request, kinds, tag_num):
+    if request.method == "POST":
+        if kinds == 'top':
+            clothes_form = TopClothesForm(request.POST)
+        elif kinds == 'bot':
+            clothes_form = BottomClothesForm(request.POST)
+        if clothes_form.is_valid():
+            clothes = clothes_form.save(commit=False)
+            print(clothes)
+            clothes.name = request.user
+            clothes.save()
+
+            return redirect('fitterKakao:choose_clothes')
+    else:
+        if kinds == 'top':
+            existing_clothes = TopClothes.objects.get(pk=tag_num)
+            clothes_form = TopClothesForm(instance=existing_clothes)
+        elif kinds == 'bot':
+            existing_clothes = BottomClothes.objects.get(pk=tag_num)
+            clothes_form = BottomClothesForm(instance=existing_clothes)
+
+    return render(request, 'fitterKakao/edit_clothes.html', {'types' : kinds,
+                                                             'clothes_form': clothes_form, })
+
+
+@login_required
 def choose_clothes(request):
     top_clothes = TopClothes.objects.filter(name=request.user)
     bottom_clothes = BottomClothes.objects.filter(name=request.user)
 
     return render(request, 'fitterKakao/clothes.html', {'top_clothes': top_clothes,
                                                         'bottom_clothes': bottom_clothes, })
+
+
+def delete_clothes(request, kinds, tag_num):
+    if kinds == 'top':
+        clothes = TopClothes.objects.filter(pk=tag_num)  # POST 한 정보만 보게?(일단 그냥 하나만 보게 하자)
+    elif kinds == 'bot':
+        clothes = BottomClothes.objects.filter(pk=tag_num)  # POST 한 정보만 보게?(일단 그냥 하나만 보게 하자)
+
+    clothes.delete()
+    return redirect('fitterKakao:choose_clothes')
 
 
 

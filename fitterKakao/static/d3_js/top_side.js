@@ -3,7 +3,7 @@ var sideBroad = 300; //어깨기준
 var real_sideTall = real_tall/2*10;
 var real_sideBroad = suggest_body['chest'];
 
-var shape = d3.select("body")
+var shape = d3.select("div.visual")
             .append("svg")
             .attr("width", sideBroad)
             .attr("height", sideTall);

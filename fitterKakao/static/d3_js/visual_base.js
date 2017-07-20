@@ -10,11 +10,6 @@ var broad = 700; //어깨기준
 var real_tall = real_tall*10;
 var real_broad = suggest_body['shoulder']*2;
 
-var shape = d3.select("body")
-            .append("svg")
-            .attr("width", broad)
-            .attr("height", tall);
-
 function mmToCm(mm){
     cm = Math.round(mm/10);
     return cm
@@ -29,7 +24,7 @@ function valueToNumber(data){
 valueToNumber(one_body); //물음: 여기서는 클로저가 되어서 one_body 자료가 바뀌는건가?
 
 function realTallToRatio(real_value){
-  return tall- tall*real_value/real_tall;
+  return tall- tall*(real_value-real_tall)/real_tall*2;
 }
 
 function realBroadToRatio(real_value){
@@ -57,8 +52,7 @@ var my = {
   'hem' : suggest_body['hem']/2,
   'between_leg' : suggest_body['chest']/3.14/10,
   'foot_len' : suggest_body['chest']/3.14/1.8,
-}
-
+};
 
 
 // 바지길이가 달라질때마다 달라지는 hem 길이 반영
@@ -80,3 +74,4 @@ function dynamic_hem(pant){
                 return (noPantLen - b)/a }//x 구하기
             else {continue;}
             }};
+

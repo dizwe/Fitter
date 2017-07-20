@@ -1,3 +1,22 @@
+var tall = 500; //키기준
+var broad = window.innerWidth/2; //어깨기준
+var real_tall = real_tall/2
+var real_broad = suggest_body['shoulder']*2;
+
+var shape = d3.select("div.visual")
+            .append("svg")
+            .attr("width", broad)
+            .attr("height", tall);
+
+function realTallToRatio(real_value){
+    return tall- tall*real_value/real_tall;
+}
+
+function realBroadToRatio(real_value){
+  return broad * real_value/real_broad;
+}
+
+
 /////////////////////////////////////////////////하체////////////////////////////////////////////////
 var bottomDotData = [
               //다리시작점 0
@@ -159,4 +178,5 @@ shape.selectAll(".line")
      .attr("y1", function(d) { return d.source.y })
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
+     .attr("stroke-width", "3px")
      .style("stroke", "rgb(200,29,155)");

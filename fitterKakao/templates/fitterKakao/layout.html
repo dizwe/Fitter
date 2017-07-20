@@ -44,11 +44,11 @@
 
   <!-- MAIN -->
   <nav class="navbar navbar-default navbar-static-top" role="navigation">
-
+    <div class='col-lg-offset-1 col-lg-10 navbar-padding'>
   	<div class="navbar-header">
   		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
   			 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-  		</button> <a class="navbar-brand" href="#">Fitter</a>
+  		</button> <a class="navbar-brand" href="/">Fitter</a>
   	</div>
 
   	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -65,9 +65,14 @@
   			</li>
   		</ul>
   	</div>
+    </div>
+
   </nav>
 
+
+<div class="col-lg-offset-1 col-lg-10">
 {% block content %}{% endblock %}
+</div>
 <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 </html>

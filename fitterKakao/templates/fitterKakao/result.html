@@ -4,7 +4,7 @@
 {%block content%}
     {% load staticfiles %}
     <script src="{% static 'd3/d3.v3.min.js' %}"></script>
-    <svg class="chart"></svg>
+
     <script>
         // 신체 사이즈
         {% for one in person|slice:":1" %}
@@ -39,23 +39,36 @@
             {% endfor %}
        };
     </script>
+    <!--<span class="glyphicon glyphicon-chevron-left btn-lg"></span>-->
+    <div class ="col-lg-6">
+    <div class ="anal card card-outline-success mb-3 text-center">
+        <h3>분석 결과</h3>
+    </div>
+    <div class ="barChart card card-outline-success mb-3 text-center">
+
+    </div>
+    </div>
+    <div class ="col-lg-6">
+    <div class ="visual card card-outline-success mb-3 text-center">
+        <h3>앞모습</h3>
+        <h3>옆모습</h3>
+    </div>
+    </div>
 
     <script src="{% static 'd3_js/visual_base.js' %}"></script>
-
-
-
     {% if types == 'top' %}
     <script src="{% static 'd3_js/top_front.js' %}"></script>
     <script src="{% static 'd3_js/top_side.js' %}"></script>
     <script src="{% static 'd3_js/top_bar.js' %}"></script>
+    <script src="{% static 'js/top_anal.js' %}"></script>
     {% elif types == 'bot' %}
     <script src="{% static 'd3_js/bottom_front.js' %}"></script>
     <script src="{% static 'd3_js/bottom_side.js' %}"></script>
     <script src="{% static 'd3_js/bottom_bar.js' %}"></script>
+    <script src="{% static 'js/bottom_anal.js' %}"></script>
     {% endif %}
 
     <script src="{% static 'd3_js/bar_draw.js' %}"></script>
-
 
 {% endblock %}
 

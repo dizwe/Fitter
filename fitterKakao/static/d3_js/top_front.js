@@ -1,3 +1,28 @@
+var tall = 500; //키기준
+var broad = 700; //어깨기준
+var real_tall = real_tall/2
+var real_broad = suggest_body['shoulder']*2;
+
+var shape = d3.select("div.visual")
+            .append("svg")
+            .attr("width", broad)
+            .attr("height", tall);
+
+function realTallToRatio(real_value){
+  return tall- tall*(real_value-real_tall)/real_tall;
+}
+
+function realBroadToRatio(real_value){
+  return broad * real_value/real_broad;
+}
+
+var topCal = {'length':shirt['len']-(real_tall-suggest_body['crotch_height']),
+              'shoulder':shirt['shoulder']-suggest_body['shoulder'],
+              'chest':shirt['chest']-suggest_body['chest']/2,
+              'waist':shirt['chest']-suggest_body['waist']/2,
+              'sleeve':shirt['sleeve']-suggest_body['arm'],
+        };
+
 //상체만
 var dotData = [
               //가랑이0 - 이건 중요해
@@ -155,17 +180,17 @@ for (var key in shirt){
 myTop = {'remain_shoulder' : shirt['shoulder']-my['shoulder']};
 //어깨는 상황에 따라 위치가 달라져야함
 if (myTop['remain_shoulder']<=0){
-var shoulder_data = [{x: broad/2-realBroadToRatio(my['shoulder']/2+myTop['remain_shoulder']/2),
-                      y: realTallToRatio(my['trunk_leg'])},//어깨왼쪽
-                      {x: broad/2+realBroadToRatio(my['shoulder']/2+myTop['remain_shoulder']/2),
-                      y: realTallToRatio(my['trunk_leg'])},//어깨오른쪽
-                     ]
+    var shoulder_data = [{x: broad/2-realBroadToRatio(my['shoulder']/2+myTop['remain_shoulder']/2),
+                          y: realTallToRatio(my['trunk_leg'])},//어깨왼쪽
+                          {x: broad/2+realBroadToRatio(my['shoulder']/2+myTop['remain_shoulder']/2),
+                          y: realTallToRatio(my['trunk_leg'])},//어깨오른쪽
+                         ]
 }else{
-var shoulder_data = [{x: broad/2-realBroadToRatio(my['shoulder']/2),
-                      y: realTallToRatio(my['trunk_leg']-myTop['remain_shoulder']/2)},//어깨왼쪽
-                      {x: broad/2+realBroadToRatio(my['shoulder']/2),
-                      y: realTallToRatio(my['trunk_leg']-myTop['remain_shoulder']/2)},//어깨오른쪽
-                     ]
+    var shoulder_data = [{x: broad/2-realBroadToRatio(my['shoulder']/2),
+                          y: realTallToRatio(my['trunk_leg']-myTop['remain_shoulder']/2)},//어깨왼쪽
+                          {x: broad/2+realBroadToRatio(my['shoulder']/2),
+                          y: realTallToRatio(my['trunk_leg']-myTop['remain_shoulder']/2)},//어깨오른쪽
+                        ]
 };
 
 
@@ -190,25 +215,26 @@ var topDot = [
           y: realTallToRatio(my['trunk_leg']-(myTop['remain_shoulder']/2+shirt['sleeve']))},//어깨왼쪽
         ];
 
-var topClothesLinks = [
-                  //왼쪽팔
-                  {source : dotData[2], target : topDot[0]},//실제 어깨- 옷 어깨
-                  {source : topDot[0], target : topDot[4]}, //옷 어깨- 팔
-                  {source : topDot[4], target : topDot[6]}, //소매- 소매안쪽
-                  {source : topDot[2], target : dotData[12]}, //소매안쪽- 기장끝
-                  //기장 연결
-                  {source : topDot[2], target : topDot[3]}, // 기장왼쪽 -기장오른쪽
-                  //오른쪽팔
-                  {source : dotData[3], target : topDot[1]},//실제 어깨- 옷 어깨
-                  {source : topDot[1], target : topDot[5]}, //옷 어깨- 팔
-                  {source : topDot[5], target : topDot[7]}, //소매- 소매안쪽
-                  {source : topDot[3], target : dotData[13]}, //소매안쪽- 기장끝
-                  //어깨연결
-                  {source : dotData[2], target : dotData[3]},//양쪽 어깨
-                  {source : topDot[0], target : dotData[12]},// 옷 어깨- 가슴
-                  {source : topDot[1], target : dotData[13]},// 옷 어깨- 가슴
-                ];
 
+var topClothesLinks = [
+              //왼쪽팔
+              {source : topDot[0], target : dotData[2]}, //옷 어깨- 실제 어깨
+              {source : dotData[2], target : topDot[4]}, //실제 어깨- 팔
+              {source : topDot[4], target : topDot[6]}, //소매- 소매안쪽
+              {source : topDot[2], target : dotData[12]}, //소매안쪽- 기장끝
+              //기장 연결
+              {source : topDot[2], target : topDot[3]}, // 기장왼쪽 -기장오른쪽
+              //오른쪽팔
+              {source : topDot[1], target : dotData[3]},//실제 어깨- 옷 어깨
+              {source : dotData[3], target : topDot[5]}, //옷 어깨- 팔
+              {source : topDot[5], target : topDot[7]}, //소매- 소매안쪽
+              {source : topDot[3], target : dotData[13]}, //소매안쪽- 기장끝
+              //어깨연결
+              {source : dotData[2], target : dotData[3]},//양쪽 어깨
+              {source : topDot[0], target : dotData[12]},// 옷 어깨- 가슴
+              {source : topDot[1], target : dotData[13]},// 옷 어깨- 가슴
+
+                ];
 
 shape.selectAll("circle.shirt")
     .data(topDot)
