@@ -116,13 +116,6 @@ shape.selectAll(".line")
      .style("stroke", "rgb(6,120,155)");
 
 
-var pant = test_pants;
-for (var key in pant){
-    pant[key] *= 10;
-};
-console.log(pant);
-
-myBottom = {'bottom_waist' : suggest_body};
 
 var bottomClothesDot = [
               //기장 0

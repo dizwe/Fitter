@@ -16,6 +16,7 @@ function realBroadToRatio(real_value){
   return broad * real_value/real_broad;
 }
 
+console.log(shirt, suggest_body)
 var topCal = {'length':shirt['len']-(real_tall-suggest_body['crotch_height']),
               'shoulder':shirt['shoulder']-suggest_body['shoulder'],
               'chest':shirt['chest']-suggest_body['chest']/2,
