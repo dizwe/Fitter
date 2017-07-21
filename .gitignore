@@ -1,7 +1,8 @@
-    *.pyc
+*.pyc
 __pycache__
 myvenv
 db.sqlite3
 .DS_Store
+fitterKakao/__pycache__
 fitterKakao/static/json/bottom_hw_filtered_survey_more_data.json
 staticfiles/d3/man_size.json

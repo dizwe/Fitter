@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.forms.formsets import formset_factory, BaseFormSet
 import json
 from .forms import PersonForm, TopClothesForm, BottomClothesForm
-from .anticipate_size import int_find_good_data, guess_int_by_question
 
 
 def index(request):
