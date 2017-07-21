@@ -54,15 +54,18 @@
   	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   		<ul class="nav navbar-nav navbar-right">
         <li>
-  				<a href="#">내 데이터</a>
-  			</li>
-  			<li>
-  				{% if user.is_authenticated %}
-                <a href = "{% url 'logout' %}">로그아웃</a>
-                {% else %}
-                <a id="login" href="#myModal" role="button" data-toggle="modal">로그인</a>
-                {% endif %}
-  			</li>
+            <a href="/clothes">옷옷</a>
+        </li>
+        <li>
+            <a href="#">내 데이터</a>
+        </li>
+        <li>
+            {% if user.is_authenticated %}
+            <a href = "{% url 'logout' %}">로그아웃</a>
+            {% else %}
+            <a id="login" href="#myModal" role="button" data-toggle="modal">로그인</a>
+            {% endif %}
+        </li>
   		</ul>
   	</div>
     </div>
