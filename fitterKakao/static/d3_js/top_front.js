@@ -16,7 +16,6 @@ function realBroadToRatio(real_value){
   return broad * real_value/real_broad;
 }
 
-console.log(shirt, suggest_body)
 var topCal = {'length':shirt['len']-(real_tall-suggest_body['crotch_height']),
               'shoulder':shirt['shoulder']-suggest_body['shoulder'],
               'chest':shirt['chest']-suggest_body['chest']/2,
@@ -172,11 +171,7 @@ shape.selectAll(".line")
 
 ////////////////////////////////// 상체 옷////////////////////////////////////////////
 
-var shirt = test_shirt;
-//cm를 mm로 바꾸기
-for (var key in shirt){
-    shirt[key] *= 10;
-}
+
 
 myTop = {'remain_shoulder' : shirt['shoulder']-my['shoulder']};
 //어깨는 상황에 따라 위치가 달라져야함
@@ -257,4 +252,3 @@ shape.selectAll(".line")
      .attr("y2", function(d) { return d.target.y })
      .attr("stroke-width", "3px")
      .style("stroke", "rgb(200,29,155)");
-

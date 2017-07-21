@@ -1,3 +1,7 @@
+function suggestionCal(data, remaining_num){
+    return mmToCm(data)+remaining_num
+}
+
 var data = {
   labels: [
     '전체길이', '어깨', '가슴',
@@ -14,6 +18,6 @@ var data = {
     },
     {
       label: '추천 길이',
-      values: [31, 28, 14, 8, 15, 21]
+      values: [real_tall*2-suggest_body['crotch_height'], suggest_body['shoulder'] , suggest_body['chest']/2, suggest_body['waist']/2, suggest_body['arm']].map(function(x) { return suggestionCal(x, 2); })
     },]
 };

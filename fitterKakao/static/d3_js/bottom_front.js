@@ -117,6 +117,8 @@ shape.selectAll(".line")
 
 
 
+myBottom = {'bottom_waist' : suggest_body};
+
 var bottomClothesDot = [
               //기장 0
               {x: broad/2-realBroadToRatio(my['chest']/2),

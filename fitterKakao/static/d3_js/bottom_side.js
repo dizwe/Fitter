@@ -9,6 +9,7 @@ var shape = d3.select("div.visual")
             .attr("height", tall);
 
 
+
 var myBottomSide = {'visual_waist':my['bottom_waist']/3*2, // thigh랑 길이가 비슷해지면 되는데 thigh랑 비슷하게 만들면 됨
                     'visual_hip':my['hip']/17*11,
                     'visual_pant_waist':pant['waist']/3*2,
@@ -24,6 +25,8 @@ var botCal = {'bot_waist':(myBottomSide['visual_pant_waist']-myBottomSide['visua
               'thigh':(pant['thigh']-my['thigh'])/2,
               'hem' : pant['hem']-dynamic_hem(pant['length']),
               'hip' :(pant['hip']!=0)?(myBottomSide['visual_pant_hip']-myBottomSide['visual_hip']):0};
+
+
 
 
 //////////////////////////////////////// 상체 옆 /////////////////////////////////////////////////
@@ -113,11 +116,12 @@ shape.selectAll(".line")
      .style("stroke", "rgb(6,120,155)");
 
 ///////////////////////////////////////////////////옷 상체 옆 /////////////////////////////////////////
+
 var bottomSideClo = [
                   //바지 허리 0
-                  {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_waist']*2+botCal['waist']),
+                  {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_waist']*2+botCal['bot_waist']),
                   y: realTallToRatio(my['total_leg'])},
-                  {x : myBottomSide['invisible_line'] + realBroadToRatio(botCal['waist']),
+                  {x : myBottomSide['invisible_line'] + realBroadToRatio(botCal['bot_waist']),
                   y : realTallToRatio(my['total_leg'])},
                   //// 엉덩이 2
                   {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_hip']*2+botCal['hip']), //앞부분에서 엉덩이 빼기

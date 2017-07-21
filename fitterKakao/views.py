@@ -6,7 +6,6 @@ import os
 from django.conf import settings
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.forms.formsets import formset_factory, BaseFormSet
-import readAndSave
 import json
 from .forms import PersonForm, TopClothesForm, BottomClothesForm
 from .anticipate_size import int_find_good_data, guess_int_by_question
@@ -28,10 +27,16 @@ def make_question_generator(whole_d):
                 yield sex, height, weight
 
 
+def read_json(fname, encoder):
+    with open(fname, encoding=encoder) as data_file:
+        json_data = json.load(data_file)
+    return json_data
+
+
 @user_passes_test(lambda u: u.is_superuser)
 def data_add(request):
     file_path = os.path.join(settings.STATIC_ROOT, 'json/question_tree.json')
-    question_tree = readAndSave.read_json(file_path, 'utf8')
+    question_tree = read_json(file_path, 'utf8')
     for sex, height, weight in make_question_generator(question_tree):
         print(sex, height, weight)
         parameters_data = question_tree[sex][str(height)][str(weight)]  # 자료가 있어야함
