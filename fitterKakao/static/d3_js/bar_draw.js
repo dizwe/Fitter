@@ -2,8 +2,8 @@ var chartWidth       = 300,
     barHeight        = 20,
     groupHeight      = barHeight * data.series.length,
     gapBetweenGroups = 10,
-    spaceForLabels   = 150,
-    spaceForLegend   = 150;
+    spaceForLabels   = 70,
+    spaceRight   = 20;
 
 // Zip the series data together (first values, second values, etc.)
 var zippedData = [];
@@ -16,7 +16,7 @@ for (var i=0; i<data.labels.length; i++) {
 // Color scale
 var color = d3.scale.category20();
 function colores_google(n) {
-  var colores_g = ["#fdae6b", "#fb57a8", "#fc89c2"];
+  var colores_g = ["#fdae6b", "#17becf", "#9edae5"];
   return colores_g[n % colores_g.length];
 }
 
@@ -36,11 +36,12 @@ var yAxis = d3.svg.axis()
     .orient("left");
 
 // Specify the chart area and dimensions
-var widthSum = spaceForLabels + chartWidth + spaceForLegend;
+var widthSum = spaceForLabels + chartWidth + spaceRight;
+var chartLegendHeight = chartHeight + barHeight*2;// legend 자리 만들어주기
 var chart = d3.select("div.barChart")
             .append("svg")
             .attr("class","chart")
-            .attr("viewBox","0 0 "+widthSum+" "+chartHeight)
+            .attr("viewBox","0 0 "+widthSum+" "+chartLegendHeight)
 //            .attr("width", spaceForLabels + chartWidth + spaceForLegend)
 //            .attr("height", chartHeight);
 
@@ -95,8 +96,8 @@ var legend = chart.selectAll('.legend')
     .attr('transform', function (d, i) {
         var height = legendRectSize + legendSpacing;
         var offset = -gapBetweenGroups/2;
-        var horz = spaceForLabels + chartWidth + 40 - legendRectSize;
-        var vert = i * height - offset;
+        var horz =  150 + i * 70;
+        var vert = groupHeight*(zippedData.length/3+1);//i * height - offset;
         return 'translate(' + horz + ',' + vert + ')';
     });
 
