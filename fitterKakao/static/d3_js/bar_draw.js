@@ -16,7 +16,7 @@ for (var i=0; i<data.labels.length; i++) {
 // Color scale
 var color = d3.scale.category20();
 function colores_google(n) {
-  var colores_g = ["#fdae6b", "#17becf", "#9edae5"];
+  var colores_g = [ "#17becf", "#fdae6b","#9edae5"];
   return colores_g[n % colores_g.length];
 }
 
@@ -42,15 +42,15 @@ var chart = d3.select("div.barChart")
             .append("svg")
             .attr("class","chart")
             .attr("viewBox","0 0 "+widthSum+" "+chartLegendHeight)
-//            .attr("width", spaceForLabels + chartWidth + spaceForLegend)
-//            .attr("height", chartHeight);
 
 // Create bars
 var bar = chart.selectAll("g")
     .data(zippedData)
     .enter().append("g")
     .attr("transform", function(d, i) {
-      return "translate(" + spaceForLabels + "," + (i * barHeight + gapBetweenGroups * (0.5 + Math.floor(i/data.series.length))) + ")";
+      var num =  i;
+//      var num = (i%3===2)?i-1:i; //예상 칸은겹쳐서 하기 위해서 투명도는 fill-opcity
+      return "translate(" + spaceForLabels + "," + (num * barHeight + gapBetweenGroups * (0.5 + Math.floor(i/data.series.length))) + ")";
     });
 
 // Create rectangles of the correct width

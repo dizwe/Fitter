@@ -126,8 +126,7 @@ def suppose_size(request, kinds, tag_num):
 @login_required
 def check_data(request):
     try:
-        person = Person.objects.get(name=request.user)
-        return render(request, 'fitterKakao/update_p.html', {'person': person, })
+        return render(request, 'fitterKakao/update_p.html')
     except Person.DoesNotExist:
         return redirect('fitterKakao:post_new')
 
@@ -148,8 +147,10 @@ def post_new(request):
 
 
 @login_required
-def post_edit(request, pk):
-    existing_data = Person.objects.get(pk=pk)
+def post_edit(request, user_name):
+    if not user_name == request.user.username:
+        return render(request, 'fitterKakao/index.html')
+    existing_data = Person.objects.get(name__username=user_name)
     if request.method == "POST":  # 이미 보낸거라면
         person_form = PersonForm(request.POST, instance=existing_data)
         if person_form.is_valid(): # 저장된 form 형식이 잘 맞는지
@@ -200,6 +201,14 @@ def add_clothes(request, kinds):
 
 @login_required
 def edit_clothes(request, kinds, tag_num):
+    # 데이터 내거인지 확인
+    if kinds == 'top':
+        dataName = TopClothes.objects.filter(pk=tag_num).values('name__username').first()['name__username']
+    elif kinds == 'bot':
+        dataName = BottomClothes.objects.filter(pk=tag_num).values('name__username').first()['name__username']
+    if not dataName == request.user.username:
+        return render(request, 'fitterKakao/index.html')
+
     if request.method == "POST":
         if kinds == 'top':
             clothes_form = TopClothesForm(request.POST)
@@ -207,7 +216,6 @@ def edit_clothes(request, kinds, tag_num):
             clothes_form = BottomClothesForm(request.POST)
         if clothes_form.is_valid():
             clothes = clothes_form.save(commit=False)
-            print(clothes)
             clothes.name = request.user
             clothes.save()
 
