@@ -36,11 +36,13 @@ var yAxis = d3.svg.axis()
     .orient("left");
 
 // Specify the chart area and dimensions
+var widthSum = spaceForLabels + chartWidth + spaceForLegend;
 var chart = d3.select("div.barChart")
             .append("svg")
             .attr("class","chart")
-            .attr("width", spaceForLabels + chartWidth + spaceForLegend)
-            .attr("height", chartHeight);
+            .attr("viewBox","0 0 "+widthSum+" "+chartHeight)
+//            .attr("width", spaceForLabels + chartWidth + spaceForLegend)
+//            .attr("height", chartHeight);
 
 // Create bars
 var bar = chart.selectAll("g")

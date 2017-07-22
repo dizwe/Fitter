@@ -3,10 +3,11 @@ var sideBroad = 300; //어깨기준
 var real_sideTall = real_tall/2*10;
 var real_sideBroad = suggest_body['chest'];
 
-var shape = d3.select("div.visual")
+var shape = d3.select("div.sideVisual")
             .append("svg")
-            .attr("width", sideBroad)
-            .attr("height", sideTall);
+            .attr("viewBox","0 0 300 500");
+//            .attr("width", sideBroad)
+//            .attr("height", sideTall);
 
 
 var myTopSide = {'base_up' : [sideBroad/3, realSideTallToRatio(real_sideTall)+100],

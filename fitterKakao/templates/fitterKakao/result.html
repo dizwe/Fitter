@@ -40,7 +40,8 @@
        };
     </script>
     <!--<span class="glyphicon glyphicon-chevron-left btn-lg"></span>-->
-    <div class ="col-lg-6">
+    <div class ="row row-eq-height">
+    <div class ="col-md-6">
     <div class ="anal card card-outline-success mb-3 text-center">
         <h3>분석 결과</h3>
     </div>
@@ -48,13 +49,19 @@
 
     </div>
     </div>
-    <div class ="col-lg-6">
-    <div class ="visual card card-outline-success mb-3 text-center">
-        <h3>앞모습</h3>
-        <h3>옆모습</h3>
+    <div class ="col-md-6">
+    <div class ="card card-outline-success mb-3 text-center">
+        <div class ="row">
+            <div class = "visual frontVisual col-xs-6">
+                <h3>앞모습</h3>
+            </div>
+            <div class = "visual sideVisual col-xs-6">
+                <h3>옆모습</h3>
+            </div>
+        </div>
     </div>
     </div>
-
+    </div>
     <script src="{% static 'd3_js/visual_base.js' %}"></script>
     {% if types == 'top' %}
     <script src="{% static 'd3_js/top_front.js' %}"></script>

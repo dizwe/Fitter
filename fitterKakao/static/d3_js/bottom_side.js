@@ -1,12 +1,13 @@
-var tall = window.innerHeight; //키기준
-var broad = window.innerWidth/4; //어깨기준
+var tall = 500; //키기준
+var broad = 250; //어깨기준
 var real_tall = my['total_leg'];
 var real_broad = my['thigh']*4;
 
-var shape = d3.select("div.visual")
+var shape = d3.select("div.sideVisual")
             .append("svg")
-            .attr("width", broad)
-            .attr("height", tall);
+            .attr("viewBox","0 0 250 500")
+//            .attr("width", broad)
+//            .attr("height", tall);
 
 
 

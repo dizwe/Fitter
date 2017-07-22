@@ -1,12 +1,13 @@
 var tall = 500; //키기준
-var broad = 700; //어깨기준
+var broad = 350; //어깨기준
 var real_tall = real_tall/2
-var real_broad = suggest_body['shoulder']*2;
+var real_broad = suggest_body['shoulder']+50;
 
-var shape = d3.select("div.visual")
+var shape = d3.select("div.frontVisual")
             .append("svg")
-            .attr("width", broad)
-            .attr("height", tall);
+            .attr("viewBox","0 0 350 500");
+//            .attr("width", broad)
+//            .attr("height", tall);
 
 function realTallToRatio(real_value){
   return tall- tall*(real_value-real_tall)/real_tall;
