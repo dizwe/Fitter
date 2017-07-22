@@ -211,9 +211,11 @@ def edit_clothes(request, kinds, tag_num):
 
     if request.method == "POST":
         if kinds == 'top':
-            clothes_form = TopClothesForm(request.POST)
+            existing_clothes = TopClothes.objects.get(pk=tag_num)
+            clothes_form = TopClothesForm(request.POST, instance=existing_clothes)
         elif kinds == 'bot':
-            clothes_form = BottomClothesForm(request.POST)
+            existing_clothes = BottomClothes.objects.get(pk=tag_num)
+            clothes_form = BottomClothesForm(request.POST, instance=existing_clothes)
         if clothes_form.is_valid():
             clothes = clothes_form.save(commit=False)
             clothes.name = request.user
