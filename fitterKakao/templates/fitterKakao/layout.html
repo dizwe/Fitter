@@ -30,8 +30,8 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-            <h4 class="form-signin-heading">로그인</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="form-signin-heading">로그인<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></h4>
+
         </div>
         <div class="modal-body">
             <div class="embed-responsive embed-responsive-4by3">
@@ -60,6 +60,10 @@
         </li>
         <li>
             <a href="{% url 'fitterKakao:post_edit' user_name=request.user.username %}">내 데이터</a>
+        </li>
+        {% else %}
+        <li>
+            <a href="/accounts/signup">회원가입</a>
         </li>
         {% endif %}
         <li>

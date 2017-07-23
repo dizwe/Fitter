@@ -3,11 +3,26 @@
 회원가입
 {% endblock %}
 {% block content %}
-
-<form method="post" action="{% url 'signup' %}">
-{% csrf_token %}
-{{ form.as_p }}
-<button type="submit">회원가입</button>
-</form>
-
+<div class="col-md-4 col-md-offset-4">
+    <form method="post" action="{% url 'signup' %}">
+        {% csrf_token %}
+        {{ form.username.errors }}
+        <div>
+            <p><h4>아이디</h4></p>{{ form.username }}
+        </div>
+        {{ form.password1.errors }}
+        <div>
+            <p><h4>비밀번호</h4></p>{{ form.password1 }}
+        </div>
+        {{ form.password2.errors }}
+        <div>
+            <p><h4>비밀번호 확인</h4></p>{{ form.password2 }}
+        </div>
+        {{ form.email.errors }}
+        <div>
+            <p><h4>이메일</h4></p>{{ form.email }}
+        </div>
+    <button type="submit" class ="btn btn-success btn-lg">회원가입</button>
+    </form>
+</div>
 {% endblock %}

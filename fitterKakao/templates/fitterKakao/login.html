@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
      <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
 </head>
 <body>
 {% if form.errors %}
@@ -13,17 +14,25 @@
 <form method="post" action="{% url 'login' %}">
 {% csrf_token %}
 <input type="hidden" name="next" value="{{ next }}" />
-    {{ form.as_p }}
 
-<div class="checkbox">
-    <label>
-        <input type="checkbox" value="remember-me"> 자동로그인
-    </label>
-</div>
-<button class="btn btn-lg btn-primary btn-block" type="submit" formtarget="_parent">로그인</button>
+    {{ form.username.errors }}
+    <div>
+    <p><h4>아이디</h4></p>{{ form.username }}
+    </div>
+    {{ form.password.errors }}
+    <div>
+    <p><h4>비밀번호</h4></p>
+    {{ form.password }}
+    </div>
+<!--<div class="checkbox">-->
+    <!--<label>-->
+        <!--<input type="checkbox" value="remember-me"> 자동로그인-->
+    <!--</label>-->
+<!--</div>-->
+<button class="btn btn-lg btn-warning btn-block" type="submit" formtarget="_parent">로그인</button>
 </form>
 
-<a href = "{% url 'signup' %}">계정이 없나요?</a>
+<a href = "{% url 'signup' %}" target="_parent">계정이 없나요?</a>
 
 
 </body>
