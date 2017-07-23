@@ -1,3 +1,20 @@
+@font-face {
+ font-family: 'NanumBarunGothic';
+ font-style: normal;
+ font-weight: 300;
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot');
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.ttf') format('truetype');
+}
+
+@font-face {
+ font-family: 'NanumBarunGothic';
+ font-style: normal;
+ font-weight: 400;
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+}
+
+
 /*navbar*/
 .navbar-right
 {
@@ -8,16 +25,19 @@ margin-right:0px;
 }
 
 body{
+  font-family:'NanumBarunGothic';
+  font-weight:400;
+  font-size:20px;
   background-color: #eff0f2;
 }
 
 .navbar-default .navbar-brand{
-  font-size:24px;
+  font-size:25px;
   color: white;
 }
 
 .navbar-default .navbar-nav>li>a{
- font-size:16px;
+ font-size:25px;
  color: #e8e8e8;
 }
 /*post_new-버튼의 향연*/
@@ -25,6 +45,10 @@ body{
     border-radius: 0;
     border-width: 4px;
     margin-right : 10px;
+}
+
+.btn-group-lg>.btn, .btn-lg{
+  font-size: 20px;
 }
 
 .btn-group>.btn.active{
@@ -47,14 +71,43 @@ input {
   outline: 0;
   background: transparent;
   border-bottom: 4px solid #f0ad4e;
-  width: 90%;
+  margin-bottom:20px;
   height: 30px;
 }
 
+.input-text{
+  width: 90%;
+  display: block;
+}
+
+.fieldWrapper{
+ margin-bottom: 20px;
+}
+
+.body-part{
+ margin-bottom: 45  px;
+}
+.bodyCategory{
+ color:#ff8300;
+ margin-bottom:20px;
+}
 .saveForm{
   float: right;
 }
 
+.sharp{
+  color:red;
+  font-weight:bold;
+}
+/*edit/add clothes*/
+.item p{
+  width: 90%;
+  display: block;
+}
+
+label{
+   margin-bottom:10px;
+}
 /*result-chart*/
 .chart .legend {
   fill: black;

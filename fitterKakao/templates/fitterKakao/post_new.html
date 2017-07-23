@@ -4,13 +4,13 @@
 {% endblock %}
 {%block content%}
 
- <div class="col-md-6 col-md-offset-3">
+
     <form action = "{% url 'fitterKakao:choose_clothes' %}"method="POST">
     {% csrf_token %}
+    <div class="body-part col-lg-4">
     <h2 class="bodyCategory"> 기본 정보 </h2>
-
     <div class="fieldWrapper">
-        <label for="{{ person_form.sex.id_for_label }}">성별</label>
+        <h class="sharp"># </h><label for="{{ person_form.sex.id_for_label }}">성별</label>
         <div class="input-group">
         <div id="radioBtn" class="btn-group">
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="sex" data-title="man">남자</a>
@@ -19,20 +19,22 @@
         <input type="hidden" name="sex" id="sex" value = "{{ person_form.sex.value }}">
         </div>
     </div>
-    <div class="fieldWrapper">
+    <div class="fieldWrapper form-group">
         {{ person_form.height.errors }}
-        <label for="{{ person_form.height.id_for_label }}">키</label>
-        {{ person_form.height }}<h>cm</h>
+        <h class="sharp"># </h><label for="{{ person_form.height.id_for_label }}">키</label>
+        <p class = "input-text">{{ person_form.height }}<h>cm</h></p>
     </div>
     <div class="fieldWrapper">
         {{ person_form.weight.errors }}
-        <label for="{{ person_form.weight.id_for_label }}">몸무게</label>
-        {{ person_form.weight }}<h>kg</h>
+        <h class="sharp"># </h><label for="{{ person_form.weight.id_for_label }}">몸무게</label>
+        <p class = "input-text">{{ person_form.weight }}<h>kg</h></p>
+    </div>
     </div>
 
+    <div class="col-lg-4">
     <h2 class="bodyCategory"> 상체 정보 </h2>
     <div class="fieldWrapper">
-        <label for="{{ person_form.shoulder_a.id_for_label }}">어깨는 ?</label>
+        <h class="sharp"># </h><label for="{{ person_form.shoulder_a.id_for_label }}">어깨는 ?</label>
         <div class="input-group">
         <div id="radioBtn" class="btn-group">
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="shoulder_a" data-title="0">헐렁하다</a>
@@ -44,7 +46,7 @@
     </div>
 
     <div class="fieldWrapper">
-        <label for="{{ person_form.chest_a.id_for_label }}">가슴은 ?</label>
+        <h class="sharp"># </h><label for="{{ person_form.chest_a.id_for_label }}">가슴은 ?</label>
         <div class="input-group">
         <div id="radioBtn" class="btn-group">
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="chest_a" data-title="0">헐렁하다</a>
@@ -56,7 +58,7 @@
     </div>
 
     <div class="fieldWrapper">
-        <label for="{{ person_form.shoulder_a.id_for_label }}">긴 옷을 입으면, 소매 길이가</label>
+        <h class="sharp"># </h><label for="{{ person_form.shoulder_a.id_for_label }}">긴 옷을 입으면, 소매 길이가</label>
         <div class="input-group">
         <div id="radioBtn" class="btn-group">
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="sleeve_a" data-title="0">남는다</a>
@@ -68,7 +70,7 @@
     </div>
 
     <div class="fieldWrapper">
-        <label for="{{ person_form.shoulder_a.id_for_label }}">배는 ?</label>
+        <h class="sharp"># </h><label for="{{ person_form.shoulder_a.id_for_label }}">배는 ?</label>
         <div class="input-group">
         <div id="radioBtn" class="btn-group">
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="waist_a" data-title="0">헐렁하다</a>
@@ -78,11 +80,12 @@
         <input type="hidden" name="waist_a" id="waist_a"  value ="{{ person_form.waist_a.value }}">
         </div>
     </div>
-
+    </div>
+    <div class="col-lg-4">
     <h2 class="bodyCategory"> 하체 정보 </h2>
 
     <div class="fieldWrapper">
-    <label for="{{ person_form.hip_a.id_for_label }}">엉덩이는 ?</label>
+    <h class="sharp"># </h><label for="{{ person_form.hip_a.id_for_label }}">엉덩이는 ?</label>
     <div class="input-group">
         <div id="radioBtn" class="btn-group">
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="hip_a" data-title="0">헐렁하다</a>
@@ -94,7 +97,7 @@
     </div>
 
     <div class="fieldWrapper">
-    <label for="{{ person_form.crotch_a.id_for_label }}">가랑이는 ?</label>
+    <h class="sharp"># </h><label for="{{ person_form.crotch_a.id_for_label }}">가랑이는 ?</label>
     <div class="input-group">
         <div id="radioBtn" class="btn-group">
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="crotch_a" data-title="0">헐렁하다</a>
@@ -106,7 +109,7 @@
     </div>
 
     <div class="fieldWrapper">
-    <label for="{{ person_form.thigh_a.id_for_label }}">허벅지는 ?</label>
+    <h class="sharp"># </h><label for="{{ person_form.thigh_a.id_for_label }}">허벅지는 ?</label>
     <div class="input-group">
         <div id="radioBtn" class="btn-group">
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="thigh_a" data-title="0">헐렁하다</a>
@@ -118,7 +121,7 @@
     </div>
 
     <div class="fieldWrapper">
-    <label for="{{ person_form.hem_a.id_for_label }}">발목이</label>
+    <h class="sharp"># </h><label for="{{ person_form.hem_a.id_for_label }}">발목이</label>
     <div class="input-group">
         <div id="radioBtn" class="btn-group">
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="hem_a" data-title="0">굵다</a>
@@ -130,7 +133,7 @@
     </div>
 
     <div class="fieldWrapper">
-    <label for="{{ person_form.length_a.id_for_label }}">바지길이가 ?</label>
+    <h class="sharp"># </h><label for="{{ person_form.length_a.id_for_label }}">바지길이가 ?</label>
     <div class="input-group">
         <div id="radioBtn" class="btn-group">
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="length_a" data-title="0">남는다</a>
@@ -140,10 +143,10 @@
     <input type="hidden" name="length_a" id="length_a"  value ="{{ person_form.length_a.value }}">
     </div>
     </div>
+    <button type="submit" class ="btn btn-success btn-lg">저장하기</button>
 
-    <div>
-        <button type="submit" class ="btn btn-success btn-lg saveForm">저장하기</button>
     </div>
+
     </form>
 </div>
 

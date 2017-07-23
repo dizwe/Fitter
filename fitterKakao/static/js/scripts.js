@@ -26,10 +26,13 @@ $(document).ready(function(){
 //add_clothes
 $(document).ready(function(){
     $('#hip_check').change(function(){
-        if(this.checked)
-            $('#hip').parent().show();
-        else
-            $('#hip').parent().hide();
+        console.log(this)
+        if(this.checked){
+            $('#hip').hide();
+            $('#hip').next().hide();}
+        else{
+            $('#hip').show();
+            $('#hip').next().show();}
 
     });
 });
