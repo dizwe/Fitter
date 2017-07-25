@@ -7,44 +7,47 @@ function engToKor(param){
 
 function fitCal(calData, criteria=20){
     var info = {'small': [] ,'fit': [],'big': [],'exception':[]};
-    var excepts = ['길이','기장','소매'];
+//    var excepts = ['길이','기장','소매'];
 
     function pushAndExcept(size,param){
         //클로저 자료는 넣고, except가 있다면 except size따로 파악
         var korParam = engToKor(param);
         info[size].push(korParam);
-        for (index in excepts){
-            if (korParam.indexOf(excepts[index])!= -1){
-                info['exception'].push(size);
-            }
-        }
+//        for (index in excepts){
+//            if (korParam.indexOf(excepts[index])!= -1){
+//                info['exception'].push(size);
+//            }
+//        }
     }
 
-    function countWithExcept(size){
-        var except_num = 0;
-        for (var index=0; index<info['exception'].length;index++){
-            if (info['exception'][index]===size){
-                except_num +=1;
-            }
-        }
-        return info[size].length-except_num
-    }
+//    function countWithExcept(size){
+//        var except_num = 0;
+//        for (var index=0; index<info['exception'].length;index++){
+//            if (info['exception'][index]===size){
+//                except_num +=1;
+//            }
+//        }
+//        return info[size].length-except_num
+//    }
 
     for (param in calData){
         var value = calData[param];
         console.log(param,value, criteria)
         if (value<criteria*-1){
+            info['small'].length
             pushAndExcept('small',param);
         }else if(value>criteria){
+            info['big'].length
             pushAndExcept('big',param);
         }else{
+            info['fit'].length
             pushAndExcept('fit',param);
         }
     }
 
-    if (countWithExcept('small')>0){
+    if (info['small'].length>0){//countWithExcept('small')>0){
        conclusion = "작아요ㅜㅜ";
-    }else if(countWithExcept('big')>0){
+    }else if(info['big'].length>0){//countWithExcept('big')>0){
        conclusion = "좀 넉넉해요";
     }else{
        conclusion = "완전히 잘 맞아요.";

@@ -1,11 +1,11 @@
-var tall = 500; //키기준
+var tall = 350; //키기준
 var broad = 350; //어깨기준
-var real_tall = real_tall/2
+var real_tall = real_tall/2;
 var real_broad = suggest_body['shoulder']+50;
 
 var shape = d3.select("div.frontVisual")
             .append("svg")
-            .attr("viewBox","0 0 350 500");
+            .attr("viewBox","0 0 350 400");
 //            .attr("width", broad)
 //            .attr("height", tall);
 
@@ -17,11 +17,12 @@ function realBroadToRatio(real_value){
   return broad * real_value/real_broad;
 }
 
-var topCal = {'length':shirt['len']-(real_tall-suggest_body['crotch_height']),
+var topCal = {
               'shoulder':shirt['shoulder']-suggest_body['shoulder'],
               'chest':shirt['chest']-suggest_body['chest']/2,
               'waist':shirt['chest']-suggest_body['waist']/2,
-              'sleeve':shirt['sleeve']-suggest_body['arm'],
+//            'length':shirt['len']-(real_tall-suggest_body['crotch_height']),
+//              'sleeve':shirt['sleeve']-suggest_body['arm'],
         };
 
 //상체만
@@ -150,7 +151,7 @@ shape.selectAll("text.belly")
      .text("X")
      .attr("font-family", "sans-serif")
      .attr("font-size", "15px")
-     .attr("fill", "rgb(6,120,155)")
+     .attr("fill", "#fdae6b")
      .attr("text-anchor", "middle");
 
 
@@ -165,7 +166,7 @@ shape.selectAll(".line")
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
      .attr("stroke-width", "3px")
-     .style("stroke", "rgb(6,120,155)");
+     .style("stroke", "#fdae6b");
 
 
 
@@ -240,7 +241,7 @@ shape.selectAll("circle.shirt")
     .attr("cx", function(d) { return d.x; })
     .attr("cy", function(d) { return d.y; })
     .attr("r", "5px")
-    .attr("fill", "red");
+    .attr("fill", clothes_color);
 
 
 shape.selectAll(".line")
@@ -252,4 +253,4 @@ shape.selectAll(".line")
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
      .attr("stroke-width", "3px")
-     .style("stroke", "rgb(200,29,155)");
+     .style("stroke", clothes_color);

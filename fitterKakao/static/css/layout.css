@@ -172,6 +172,23 @@ label{
     margin-bottom: 1rem!important;
 }
 
+/*clothes*/
+.btn-warning {
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #f0ad4e;
+}
+
+.btn{
+    font-size:20px;
+}
+/*chart*/
+.chart .label {
+    fill: black;
+    font: 11px NanumBarunGothic;
+    text-anchor: end;
+}
+
 /*visual*/
 .visual{
     max-height : 100%;

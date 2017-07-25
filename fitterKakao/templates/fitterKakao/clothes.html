@@ -9,7 +9,7 @@
             <a href="#top-clothes" data-toggle="tab">상의</a>
         </li>
         <li>
-            <a href="#bot-clothes" data-toggle="tab">하의</a>
+            <a href="#bot-clothes" data-toggle="tab" aria-expanded="true">하의</a>
         </li>
     </ul>
     <div class="tab-content">
@@ -47,7 +47,7 @@
                               </table>
 							</p>
 							<p>
-								<a class="btn btn-primary" href="{% url 'fitterKakao:suppose_size' kinds='top' tag_num=one_top.id %}">확인하기</a>
+								<a class="btn btn-warning" href="{% url 'fitterKakao:suppose_size' kinds='top' tag_num=one_top.id %}">확인하기</a>
                                 <a class="btn" href="{% url 'fitterKakao:edit_clothes' kinds='top' tag_num=one_top.id %}">수정하기</a>
                                 <a class="btn deleteClothes"  href="{% url 'fitterKakao:delete_clothes' kinds='top' tag_num=one_top.id %}">지우기</a>
 							</p>
@@ -93,7 +93,7 @@
                               </table>
 							</p>
 							<p>
-								<a class="btn btn-primary" href="{% url 'fitterKakao:suppose_size' kinds='bot' tag_num=one_bot.id %}">확인하기</a>
+								<a class="btn btn-warning" href="{% url 'fitterKakao:suppose_size' kinds='bot' tag_num=one_bot.id %}">확인하기</a>
                                 <a class="btn" href="{% url 'fitterKakao:edit_clothes' kinds='bot' tag_num=one_bot.id %}">수정하기</a>
                                 <a class="btn deleteClothes"  href="{% url 'fitterKakao:delete_clothes' kinds='bot' tag_num=one_bot.id %}">지우기</a>
 							</p>

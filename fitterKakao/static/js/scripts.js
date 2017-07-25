@@ -15,7 +15,7 @@ $(document).ready(function(){
 
         var tog = select_a.data('toggle');
         var sel = $('#'+tog).val();
-        console.log(sel, tog);
+
 
         $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
         $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
@@ -48,4 +48,11 @@ $(document).ready(function(){
         }
 
     });
+});
+
+$(document).ready(function(){
+    var hash = window.location.hash;
+
+    $(hash).attr('aria-expanded','true');
+
 });

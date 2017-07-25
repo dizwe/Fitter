@@ -44,6 +44,11 @@
     <div class ="col-md-6">
     <div class ="anal card card-outline-success mb-3 text-center">
         <h3>분석 결과</h3>
+        {% if types == 'top' %}
+        <p>길이, 소매는 그래프나 그림을 참고해주세요!</p>
+        {% elif types == 'bot' %}
+        <p>기장은 그래프나 그림을 참고해주세요!</p>
+        {% endif %}
     </div>
     <div class ="barChart card card-outline-success mb-3 text-center">
 

@@ -16,18 +16,25 @@ for (var i=0; i<data.labels.length; i++) {
 // Color scale
 var color = d3.scale.category20();
 function colores_google(n) {
-  var colores_g = [ "#17becf", "#fdae6b","#9edae5"];
+  var colores_g = [ "#ff9900","#31a354","#fdae6b"];
   return colores_g[n % colores_g.length];
 }
 
-var chartHeight = barHeight * zippedData.length + gapBetweenGroups * data.labels.length;
+//except number which is zero and parameter 2
+function Pram2Zero(value,index){
+    return !(value===0 && index%3===2)
+}
+
+var numNoZero = zippedData.filter(Pram2Zero).length
+
+var chartHeight = barHeight * (numNoZero+2) + gapBetweenGroups * data.labels.length;
 
 var x = d3.scale.linear()
     .domain([0, d3.max(zippedData)])
     .range([0, chartWidth]);
 
 var y = d3.scale.linear()
-    .range([chartHeight + gapBetweenGroups, 0]);
+    .range([chartHeight-40 + gapBetweenGroups, 0]);
 
 var yAxis = d3.svg.axis()
     .scale(y)
@@ -44,13 +51,16 @@ var chart = d3.select("div.barChart")
             .attr("viewBox","0 0 "+widthSum+" "+chartLegendHeight)
 
 // Create bars
+var exceptZero =  0;
 var bar = chart.selectAll("g")
     .data(zippedData)
     .enter().append("g")
     .attr("transform", function(d, i) {
-      var num =  i;
-//      var num = (i%3===2)?i-1:i; //예상 칸은겹쳐서 하기 위해서 투명도는 fill-opcity
-      return "translate(" + spaceForLabels + "," + (num * barHeight + gapBetweenGroups * (0.5 + Math.floor(i/data.series.length))) + ")";
+        if (Pram2Zero(d,i)){
+            exceptZero = exceptZero+1;
+        }
+        //예상 칸은겹쳐서 하기 위해서 투명도는 fill-opcity
+      return "translate(" + spaceForLabels + "," + (exceptZero * barHeight + gapBetweenGroups * (0.5 + Math.floor(i/data.series.length))) + ")";
     });
 
 // Create rectangles of the correct width
@@ -66,13 +76,19 @@ bar.append("text")
     .attr("y", barHeight / 2)
     .attr("fill", "red")
     .attr("dy", ".35em")
-    .text(function(d) { return d; });
+    .text(function(d) {
+        if (d==0)
+         return "";
+        else
+         return d; });
+
 
 // Draw labels
 bar.append("text")
     .attr("class", "label")
     .attr("x", function(d) { return - 10; })
-    .attr("y", groupHeight / 2)
+    //옆에 라벨 중간에 두기
+    .attr("y", 20)
     .attr("dy", ".35em")
     .text(function(d,i) {
       if (i % data.series.length === 0)
@@ -82,7 +98,7 @@ bar.append("text")
 
 chart.append("g")
       .attr("class", "y axis")
-      .attr("transform", "translate(" + spaceForLabels + ", " + -gapBetweenGroups/2 + ")")
+      .attr("transform", "translate(" + spaceForLabels + ", "+ 10 + ")")
       .call(yAxis);
 
 // Draw legend
@@ -96,8 +112,9 @@ var legend = chart.selectAll('.legend')
     .attr('transform', function (d, i) {
         var height = legendRectSize + legendSpacing;
         var offset = -gapBetweenGroups/2;
-        var horz =  150 + i * 70;
-        var vert = groupHeight*(zippedData.length/3+1);//i * height - offset;
+        var horz =  120 + i * 70;
+        // 마지막 bar y 값에서 더 내리기
+        var vert = ((exceptZero+4) * barHeight + gapBetweenGroups * (0.5 + Math.floor(i/data.series.length)));
         return 'translate(' + horz + ',' + vert + ')';
     });
 
@@ -111,4 +128,12 @@ legend.append('text')
     .attr('class', 'legend')
     .attr('x', legendRectSize + legendSpacing)
     .attr('y', legendRectSize - legendSpacing)
-    .text(function (d) { return d.label; });
+    .text(function (d) {
+            return d.label; });
+    //if (Array.isArray(d)){
+//                for (index in d){
+//                    return d[index]
+//                }
+//            }else{
+
+

@@ -69,7 +69,7 @@ shape.selectAll(".line")
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
      .attr("stroke-width", "3px")
-     .style("stroke", "rgb(6,120,155)");
+     .style("stroke", "#fdae6b");
 
 
 /////////////////////////////////////////////////옷 상체 옆 /////////////////////////////////////////
@@ -105,7 +105,7 @@ shape.selectAll("circle.shirtSide")
     .attr("cx", function(d) { return d.x; })
     .attr("cy", function(d) { return d.y; })
     .attr("r", "5px")
-    .attr("fill", "red");
+    .attr("fill", clothes_color);
 
 
 shape.selectAll(".line")
@@ -117,4 +117,4 @@ shape.selectAll(".line")
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
      .attr("stroke-width", "3px")
-     .style("stroke", "rgb(200,29,155)");
+     .style("stroke", clothes_color);

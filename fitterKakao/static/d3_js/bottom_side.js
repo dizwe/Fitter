@@ -21,7 +21,7 @@ var myBottomSide = {'visual_waist':my['bottom_waist']/3*2, // thigh랑 길이가
 
 // 옷이 얼마나 남는가
 var botCal = {'bot_waist':(myBottomSide['visual_pant_waist']-myBottomSide['visual_waist'])/2,
-              'bot_length':pant['length']-suggest_body['length'],
+//              'bot_length':pant['length']-suggest_body['length'],
               'crotch':pant['crotch']-suggest_body['crotch'],
               'thigh':(pant['thigh']-my['thigh'])/2,
               'hem' : pant['hem']-dynamic_hem(pant['length']),
@@ -114,7 +114,7 @@ shape.selectAll(".line")
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
      .attr("stroke-width", "3px")
-     .style("stroke", "rgb(6,120,155)");
+     .style("stroke", "#fdae6b");
 
 ///////////////////////////////////////////////////옷 상체 옆 /////////////////////////////////////////
 
@@ -159,7 +159,7 @@ shape.selectAll("circle.pantSide")
     .attr("cx", function(d) { return d.x; })
     .attr("cy", function(d) { return d.y; })
     .attr("r", "5px")
-    .attr("fill", "red");
+    .attr("fill", clothes_color);
 
 
 shape.selectAll(".line")
@@ -171,4 +171,4 @@ shape.selectAll(".line")
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
      .attr("stroke-width", "3px")
-     .style("stroke", "rgb(200,29,155)");
+     .style("stroke", clothes_color);

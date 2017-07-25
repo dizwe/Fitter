@@ -34,7 +34,7 @@ function realTallToRatio(real_value){
 function realBroadToRatio(real_value){
   return broad * real_value/real_broad;
 }
-
+var clothes_color = "#74c476"
 var my = {
   'trunk_leg' : real_tall-150, //목높이
   'shoulder' : suggest_body['shoulder'],
