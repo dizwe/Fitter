@@ -52,7 +52,7 @@ margin-right:0px;
 body{
   font-family:'NanumBarunGothic';
   font-weight:400;
-  font-size:20px;
+  font-size:17px;
   background-color: #eff0f2;
 }
 
@@ -202,7 +202,8 @@ label{
 }
 
 .btn{
-    font-size:20px;
+    font-size:18px;
+    padding: 3px 5px;
 }
 /*result*/
 .anal{
@@ -220,4 +221,15 @@ label{
 /*visual*/
 .visual{
     max-height : 100%;
+}
+
+@media screen and (min-width: 768px) {
+  body{
+  font-size:20px;
+}
+
+.btn{
+    font-size:20px;
+    padding: 6px 12px;
+}
 }

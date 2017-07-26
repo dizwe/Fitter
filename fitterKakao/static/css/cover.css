@@ -19,42 +19,6 @@ a:hover {
   border: 1px solid #fff;
 }
 
-
-/*
- * Base structure
- */
-
-html,
-body {
-  height: 100%;
-  background-color: #f79256;/*#eff0f2;*/
-}
-body {
-  color: white;
-}
-
-/* Extra markup and styles for table-esque vertical and horizontal centering */
-.site-wrapper {
-  display: table;
-  width: 100%;
-  height: 100%; /* For at least Firefox */
-  min-height: 100%;
-}
-.site-wrapper-inner {
-  display: table-cell;
-  vertical-align: top;
-}
-.cover-container {
-  margin-right: auto;
-  margin-left: auto;
-}
-
-/* Padding for spacing */
-.inner {
-  padding: 30px;
-}
-
-
 /*
  * Header
  */
@@ -80,17 +44,12 @@ body {
 {
 margin-right:0px;
 }
+
 .navbar-default{
   background-color: white;/*#f79256;*/
   border-color: white;/*#f79256;*/
 }
 
-body{
-  font-family:'NanumBarunGothic';
-  font-weight:400;
-  font-size:20px;
-
-}
 
 .navbar-default .navbar-nav>li>a{
  font-size:25px;
@@ -98,40 +57,67 @@ body{
 }
 
 /*
- * Cover
+ * Base structure
  */
+
+body{
+  font-family:'NanumBarunGothic';
+  font-weight:400;
+  font-size:11px;
+  height: 100%;
+  background-color: #f79256;/*#eff0f2;*/
+  color: white;
+}
+
+/*
+ MAIN
+ */
+.block{
+  display:block;
+}
+.display{
+  display : none;
+}
+
+.cover-container {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top:30px;
+}
+
+.inner {
+  padding: 30px;
+}
 
 .cover {
   padding: 0 20px;
 }
-.cover .btn-lg {
+
+.btn-lg {
   padding: 10px 20px;
-  font-weight: bold;
+  margin-top:40px;
+  float :right;
+  height: 40px;
+  font-size : 20px;
+  font-weight:bold;
+  color:#f79256;
 }
 
 .description{
     text-align: center;
-    font-size: 28px;
+    font-size: 30px;
     color : #444444;
   font-weight:bold;
+  margin-bottom:20px;
 }
 
 svg{
-  margin-top : 50px;
+  margin-top : 20px;
   margin-bottom: 30px;
 }
 
-.cover-heading{
-  font-size:50px;
-  font-weight:bold;
-}
 
-.btn-lg {
-    margin-top:40px;
-    float :right;
-    height: 70px;
-    font-size : 30px;
-}
+
 /*
  * Footer
  */
@@ -145,7 +131,7 @@ svg{
  * Affix and center
  */
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   /* Pull out the header and footer */
   .masthead {
     position: fixed;
@@ -159,18 +145,35 @@ svg{
   .site-wrapper-inner {
     vertical-align: middle;
   }
-  /* Handle the widths */
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 100%; /* Must be percentage or pixels for horizontal alignment */
+  /* Body part */
+  .btn-lg {
+        margin-top:40px;
+        float :right;
+        height: 70px;
+        font-size : 30px;
+        font-weight:bold;
+        color:#f79256;
+  }
+  .description{
+    text-align: center;
+    font-size: 28px;
+    color : #444444;
+  font-weight:bold;
+  }
+  .cover-heading{
+  font-size:50px;
+  font-weight:bold;
+  margin-top : 60px;
+  }
+  .display{
+    display:inline;
+  }
+  .block{
+    display:inline;
+  }
+  svg{
+  margin-top : 50px;
+  margin-bottom: 30px;
   }
 }
 
-@media (min-width: 992px) {
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 100%;
-  }
-}

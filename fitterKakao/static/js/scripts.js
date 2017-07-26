@@ -1,3 +1,22 @@
+//index
+$(window).ready(function () {
+    if (window.matchMedia('(min-width: 768px)').matches) {
+           $('#input').removeAttr('viewBox');
+           $('#input').each(function () { $(this)[0].setAttribute('viewBox', '0 0 16 16') });
+    }else{
+        $('#input').removeAttr('viewBox');
+        $('#input').each(function () { $(this)[0].setAttribute('viewBox', '0 4 16 9') });
+    }});
+
+$(window).resize(function () {
+    if (window.matchMedia('(min-width: 768px)').matches) {
+           $('#input').removeAttr('viewBox');
+           $('#input').each(function () { $(this)[0].setAttribute('viewBox', '0 0 16 16') });
+    }else{
+        $('#input').removeAttr('viewBox');
+           $('#input').each(function () { $(this)[0].setAttribute('viewBox', '0 4 16 9') });
+    }});
+
 //post_new
 $('#radioBtn a').on('click', function(){
     var sel = $(this).data('title');
