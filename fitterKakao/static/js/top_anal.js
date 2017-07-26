@@ -5,8 +5,8 @@ function engToKor(param){
     return engKor[param]
 }
 
-function fitCal(calData, criteria=20){
-    var info = {'small': [] ,'fit': [],'big': [],'exception':[]};
+function fitCal(calData, big_criteria=20, too_criteria=50){
+    var info = {'small': [] ,'fit': [],'big': [],'too':[],'exception':[]};
 //    var excepts = ['길이','기장','소매'];
 
     function pushAndExcept(size,param){
@@ -32,28 +32,29 @@ function fitCal(calData, criteria=20){
 
     for (param in calData){
         var value = calData[param];
-        console.log(param,value, criteria)
-        if (value<criteria*-1){
+        if (value<0){
             info['small'].length
             pushAndExcept('small',param);
-        }else if(value>criteria){
-            info['big'].length
+        }else if(value>big_criteria && value<=too_criteria){
             pushAndExcept('big',param);
+        }else if(value>too_criteria){
+            pushAndExcept('too',param);
         }else{
-            info['fit'].length
             pushAndExcept('fit',param);
         }
     }
 
-    if (info['small'].length>0){//countWithExcept('small')>0){
-       conclusion = "작아요ㅜㅜ";
-    }else if(info['big'].length>0){//countWithExcept('big')>0){
-       conclusion = "좀 넉넉해요";
-    }else{
-       conclusion = "완전히 잘 맞아요.";
-    }
-
-    info['conclusion'] = conclusion; // add conclusion
+//    if (info['small'].length>0){//countWithExcept('small')>0){
+//       conclusion = "작아요ㅜㅜ";
+//    }else if(info['too'].length>0){
+//       conclusion = "오버핏이네요";
+//    }else if(info['big'].length>0){//countWithExcept('big')>0){
+//       conclusion = "넉넉해요";
+//    }else{
+//       conclusion = "몸에 맞아요.";
+//    }
+//
+//    info['conclusion'] = conclusion; // add conclusion
     return info
 }
 
@@ -63,7 +64,7 @@ var divided_param =fitCal(topCal);
 
 $(document).ready(function(){
     var target = document.getElementsByClassName('anal')[0];
-    target.innerHTML += "<p>"+divided_param['conclusion']+"</p>";
+//    target.innerHTML += "<p>"+divided_param['conclusion']+"</p>";
     if(divided_param['small'].length>0){
         target.innerHTML += "<p>"+divided_param['small']+"가 좀 작아요</p>";
     }
@@ -72,5 +73,8 @@ $(document).ready(function(){
     }
     if(divided_param['big'].length>0){
         target.innerHTML += "<p>"+divided_param['big']+"가 좀 커요</p>";
+    }
+    if(divided_param['too'].length>0){
+        target.innerHTML += "<p>"+divided_param['too']+" 좀 커요</p>";
     }
 });
