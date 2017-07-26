@@ -5,7 +5,7 @@ var real_sideBroad = suggest_body['chest'];
 
 var shape = d3.select("div.sideVisual")
             .append("svg")
-            .attr("viewBox","0 0 350 700");
+            .attr("viewBox","0 0 350 550");
 //            .attr("width", sideBroad)
 //            .attr("height", sideTall);
 

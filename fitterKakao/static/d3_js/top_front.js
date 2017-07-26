@@ -1,11 +1,11 @@
-var tall = 600; //키기준
+var tall = 450; //키기준
 var broad = 350; //어깨기준
 var half_tall = real_tall/2;
 var real_broad = suggest_body['shoulder']+50;
 
 var shape = d3.select("div.frontVisual")
             .append("svg")
-            .attr("viewBox","0 0 350 700");
+            .attr("viewBox","0 0 350 550");
 //            .attr("width", broad)
 //            .attr("height", tall);
 
