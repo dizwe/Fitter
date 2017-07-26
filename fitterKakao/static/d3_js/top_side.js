@@ -5,7 +5,7 @@ var real_sideBroad = suggest_body['chest'];
 
 var shape = d3.select("div.sideVisual")
             .append("svg")
-            .attr("viewBox","0 0 300 500");
+            .attr("viewBox","0 0 350 700");
 //            .attr("width", sideBroad)
 //            .attr("height", sideTall);
 
@@ -57,8 +57,8 @@ shape.selectAll("circle.bodySide")
      .append("circle")
      .attr("cx", function(d) { return d.x; })
      .attr("cy", function(d) { return d.y; })
-     .attr("r", "2px")
-     .attr("fill", "grey");
+     .attr("r", "4px")
+     .attr("fill", bodyColor);
 
 shape.selectAll(".line")
      .data(topSideLinks)
@@ -69,7 +69,7 @@ shape.selectAll(".line")
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
      .attr("stroke-width", "3px")
-     .style("stroke", "#fdae6b");
+     .style("stroke", bodyColor);
 
 
 /////////////////////////////////////////////////옷 상체 옆 /////////////////////////////////////////

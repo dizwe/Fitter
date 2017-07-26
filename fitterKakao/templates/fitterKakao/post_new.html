@@ -19,6 +19,7 @@
         <input type="hidden" name="sex" id="sex" value = "{{ person_form.sex.value }}">
         </div>
     </div>
+        <p class ="info"> 키와 몸무게는 반올림한 값을 적어주세요.</p>
     <div class="fieldWrapper form-group">
         {{ person_form.height.errors }}
         <h class="sharp"># </h><label for="{{ person_form.height.id_for_label }}">키</label>
@@ -29,6 +30,14 @@
         <h class="sharp"># </h><label for="{{ person_form.weight.id_for_label }}">몸무게</label>
         <p class = "input-text">{{ person_form.weight }}<h>kg</h></p>
     </div>
+
+    <div class = "info">
+        <h2 class="bodyCategory"> ! 정보를 입력할 때 </h2>
+        <p> 보통 옷을 샀을때에 어떤 어려움을 겪는지 생각해 보세요.</p>
+        <p> <span class ="impInfo">보통</span>이면 입력한 키와 몸무게 데이터 <span class ="impInfo">중간값</span> 추정해요.</p>
+        <p>  <span class ="impInfo">작다</span>면 오차범위 내  <span class ="impInfo">최대값</span>을,  <span class ="impInfo">크다</span>면  <span class ="impInfo">최소값</span>을 추정해요.</p>
+
+    </div>
     </div>
 
     <div class="col-lg-4">
@@ -38,7 +47,7 @@
         <div class="input-group">
         <div id="radioBtn" class="btn-group">
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="shoulder_a" data-title="0">헐렁하다</a>
-            <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="shoulder_a" data-title="1">별일없다</a>
+            <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="shoulder_a" data-title="1">보통이다</a>
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="shoulder_a" data-title="2">낀다</a>
         </div>
         <input type="hidden" name="shoulder_a" id="shoulder_a" value = "{{ person_form.shoulder_a.value }}">
@@ -50,7 +59,7 @@
         <div class="input-group">
         <div id="radioBtn" class="btn-group">
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="chest_a" data-title="0">헐렁하다</a>
-            <a class="btn btn-outline-secondary btn-lg active" data-toggle="chest_a" data-title="1">별일없다</a>
+            <a class="btn btn-outline-secondary btn-lg active" data-toggle="chest_a" data-title="1">보통이다</a>
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="chest_a" data-title="2">낀다</a>
         </div>
         <input type="hidden" name="chest_a" id="chest_a" value ="{{ person_form.chest_a.value }}">
@@ -62,7 +71,7 @@
         <div class="input-group">
         <div id="radioBtn" class="btn-group">
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="sleeve_a" data-title="0">남는다</a>
-            <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="sleeve_a" data-title="1">별일없다</a>
+            <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="sleeve_a" data-title="1">보통이다</a>
             <a class="btn btn-outline-secondary btn-lg active" data-toggle="sleeve_a" data-title="2">짧다</a>
         </div>
         <input type="hidden" name="sleeve_a" id="sleeve_a"  value ="{{ person_form.sleeve_a.value }}">
@@ -74,7 +83,7 @@
         <div class="input-group">
         <div id="radioBtn" class="btn-group">
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="waist_a" data-title="0">헐렁하다</a>
-            <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="waist_a" data-title="1">별일없다</a>
+            <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="waist_a" data-title="1">보통이다</a>
             <a class="btn btn-outline-secondary btn-lg active" data-toggle="waist_a" data-title="2">낀다</a>
         </div>
         <input type="hidden" name="waist_a" id="waist_a"  value ="{{ person_form.waist_a.value }}">
@@ -89,7 +98,7 @@
     <div class="input-group">
         <div id="radioBtn" class="btn-group">
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="hip_a" data-title="0">헐렁하다</a>
-        <a class="btn btn-outline-secondary btn-lg active" data-toggle="hip_a" data-title="1">별일없다</a>
+        <a class="btn btn-outline-secondary btn-lg active" data-toggle="hip_a" data-title="1">보통이다</a>
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="hip_a" data-title="2">낀다</a>
     </div>
     <input type="hidden" name="hip_a" id="hip_a"  value ="{{ person_form.hip_a.value }}">
@@ -101,7 +110,7 @@
     <div class="input-group">
         <div id="radioBtn" class="btn-group">
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="crotch_a" data-title="0">헐렁하다</a>
-        <a class="btn btn-outline-secondary btn-lg active" data-toggle="crotch_a" data-title="1">별일없다</a>
+        <a class="btn btn-outline-secondary btn-lg active" data-toggle="crotch_a" data-title="1">보통이다</a>
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="crotch_a" data-title="2">낀다</a>
     </div>
     <input type="hidden" name="crotch_a" id="crotch_a"  value ="{{ person_form.crotch_a.value }}">
@@ -113,7 +122,7 @@
     <div class="input-group">
         <div id="radioBtn" class="btn-group">
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="thigh_a" data-title="0">헐렁하다</a>
-        <a class="btn btn-outline-secondary btn-lg active" data-toggle="thigh_a" data-title="1">별일없다</a>
+        <a class="btn btn-outline-secondary btn-lg active" data-toggle="thigh_a" data-title="1">보통이다</a>
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="thigh_a" data-title="2">낀다</a>
     </div>
     <input type="hidden" name="thigh_a" id="thigh_a"  value ="{{ person_form.thigh_a.value }}">

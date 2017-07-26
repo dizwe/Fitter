@@ -6,7 +6,7 @@
 
 <script src="{% static 'web_js/add_forms.js' %}"></script>
 <div class="row">
-    <div class="col-md-4 col-md-offset-4">
+    <div class="col-md-3 col-md-offset-3">
 
 <form method="POST">
     {% csrf_token %}
@@ -62,5 +62,18 @@
     <button type="submit" class ="btn btn-success btn-lg">저장하기</button>
     </form>
       </div>
+    <div class="col-md-3">
+        <h2 class="bodyCategory"> 치수 입력 기준 </h2>
+        {% if types == "top" %}
+        <img src="{% static 'pic/top.png' %}">
+        <p>옷을 바닥에 눕혀서 잰 길이로 입력해주세요.</p>
+        <p>만약 가슴이라면 옷 앞부분 가슴길이만 잽니다.</p>
+        {% elif types == "bot" %}
+        <img src="{% static 'pic/bottom.png' %}">
+        <br/>
+        <p>옷을 바닥에 눕혀서 잰 길이로 입력해주세요.</p>
+        <p>만약 허리라면 바지 앞부분 허리길이만 잽니다.</p>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

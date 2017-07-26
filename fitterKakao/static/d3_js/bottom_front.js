@@ -114,7 +114,7 @@ shape.selectAll(".line")
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
      .attr("stroke-width", "3px")
-     .style("stroke", "#fdae6b");
+     .style("stroke", bodyColor);
 
 
 

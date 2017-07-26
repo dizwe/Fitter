@@ -22,12 +22,31 @@
 }
 
 /*navbar*/
+.navbar {
+    min-height: 80px;
+    margin-bottom:20px;
+}
+.navbar-padding{
+    margin-top: 15px;
+}
+
+.navbar-default .navbar-brand{
+  font-size:35px;
+  color: white;
+  font-weight: bold;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: #f79256;
+}
+
 .navbar-right
 {
 margin-right:0px;
 }
 .navbar-default{
   background-color: #F79256;
+    border-color: #f79256;
 }
 
 body{
@@ -37,16 +56,19 @@ body{
   background-color: #eff0f2;
 }
 
-.navbar-default .navbar-brand{
-  font-size:25px;
-  color: white;
-}
-
 .navbar-default .navbar-nav>li>a{
  font-size:25px;
  color: #e8e8e8;
 }
 /*post_new-버튼의 향연*/
+.info p{
+  font-size:22px;
+  margin-bottom:10px;
+}
+
+.impInfo{
+  font-weight:bold;
+}
 .btn{
     border-radius: 0;
     border-width: 4px;
@@ -181,6 +203,12 @@ label{
 
 .btn{
     font-size:20px;
+}
+/*result*/
+.anal{
+  margin-top:20px;
+  font-size:27px;
+  font-weight:bold;
 }
 /*chart*/
 .chart .label {

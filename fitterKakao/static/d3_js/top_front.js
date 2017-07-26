@@ -1,16 +1,16 @@
-var tall = 350; //키기준
+var tall = 600; //키기준
 var broad = 350; //어깨기준
-var real_tall = real_tall/2;
+var half_tall = real_tall/2;
 var real_broad = suggest_body['shoulder']+50;
 
 var shape = d3.select("div.frontVisual")
             .append("svg")
-            .attr("viewBox","0 0 350 400");
+            .attr("viewBox","0 0 350 700");
 //            .attr("width", broad)
 //            .attr("height", tall);
 
 function realTallToRatio(real_value){
-  return tall- tall*(real_value-real_tall)/real_tall;
+  return tall- tall*(real_value-half_tall)/half_tall;
 }
 
 function realBroadToRatio(real_value){
@@ -20,7 +20,7 @@ function realBroadToRatio(real_value){
 var topCal = {
               'shoulder':shirt['shoulder']-suggest_body['shoulder'],
               'chest':shirt['chest']-suggest_body['chest']/2,
-              'waist':shirt['chest']-suggest_body['waist']/2,
+//              'waist':shirt['chest']-suggest_body['waist']/2,
 //            'length':shirt['len']-(real_tall-suggest_body['crotch_height']),
 //              'sleeve':shirt['sleeve']-suggest_body['arm'],
         };
@@ -151,7 +151,7 @@ shape.selectAll("text.belly")
      .text("X")
      .attr("font-family", "sans-serif")
      .attr("font-size", "15px")
-     .attr("fill", "#fdae6b")
+     .attr("fill", bodyColor)
      .attr("text-anchor", "middle");
 
 
@@ -166,7 +166,7 @@ shape.selectAll(".line")
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
      .attr("stroke-width", "3px")
-     .style("stroke", "#fdae6b");
+     .style("stroke", bodyColor);
 
 
 

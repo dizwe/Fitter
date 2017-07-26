@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load staticfiles %}
-{% block head %}
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,10 +19,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
     <link href="{% static 'css/layout.css' %}" rel="stylesheet">
-
-
+    {% block head %}{% endblock %}
 </head>
-{% endblock %}
+
 
 <body>
   <!-- LOGIN Modal -->
@@ -56,7 +55,7 @@
 
         {% if user.is_authenticated %}
         <li>
-            <a href="/clothes">옷옷</a>
+            <a href="/clothes">옷s</a>
         </li>
         <li>
             <a href="{% url 'fitterKakao:post_edit' user_name=request.user.username %}">내 데이터</a>

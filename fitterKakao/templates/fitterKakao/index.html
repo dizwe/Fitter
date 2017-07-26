@@ -1,4 +1,155 @@
-{% extends "fitterKakao/layout.html"%}
-{% block title %}
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
 
-{% endblock %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Fitter</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+     <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <link href="{% static 'css/cover.css' %}" rel="stylesheet">
+</head>
+
+
+<body>
+  <!-- LOGIN Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="form-signin-heading">로그인<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></h4>
+
+        </div>
+        <div class="modal-body">
+            <div class="embed-responsive embed-responsive-4by3">
+              <iframe class="embed-responsive-item" src="/accounts/login"></iframe>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class='col-lg-offset-1 col-lg-10 navbar-padding'>
+  	<div class="navbar-header">
+  		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+  			 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+  		</button> <a class="navbar-brand" href="/">Fitter</a>
+  	</div>
+
+  	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  		<ul class="nav navbar-nav navbar-right">
+
+        {% if user.is_authenticated %}
+        <li>
+            <a href="/clothes">옷옷</a>
+        </li>
+        <li>
+            <a href="{% url 'fitterKakao:post_edit' user_name=request.user.username %}">내 데이터</a>
+        </li>
+        {% else %}
+        <li>
+            <a href="/accounts/signup">회원가입</a>
+        </li>
+        {% endif %}
+        <li>
+            {% if user.is_authenticated %}
+            <a href = "{% url 'logout' %}">로그아웃</a>
+            {% else %}
+            <a id="login" href="#myModal" role="button" data-toggle="modal">로그인</a>
+            {% endif %}
+        </li>
+  		</ul>
+  	</div>
+    </div>
+
+  </nav>
+  <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+          <div class="col-md-offset-1 col-md-10">
+          <div class="inner cover">
+            <h1 class="cover-heading">기본적인 정보와 몇가지 질문으로 옷 사이즈를 추정해 보세요!</h1>
+            <p class="lead">
+              <div class ="col-md-4">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16">
+                <path fill="#444444" d="M16 5c0-0.6-0.4-1-1-1h-14c-0.6 0-1 0.4-1 1v6c0 0.6 0.4 1 1 1h14c0.6 0 1-0.4 1-1v-6zM15 11h-14v-6h14v6z"></path>
+                <path fill="#444444" d="M2 6h1v4h-1v-4z"></path>
+                </svg>
+                <p class = "description">키,몸무게와 몇가지 답변만 입력하세요</p>
+              </div>
+              <div class ="col-md-4">
+                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     viewBox="0 0 262.02 262.02" style="enable-background:new 0 0 262.02 262.02;" xml:space="preserve">
+                <g>
+                    <path fill="#444444" d="M130.914,61.404c16.928,0,30.701-13.771,30.701-30.699C161.615,13.774,147.842,0,130.914,0
+                        c-16.93,0-30.703,13.774-30.703,30.705C100.211,47.633,113.984,61.404,130.914,61.404z M130.914,15
+                        c8.657,0,15.701,7.045,15.701,15.705c0,8.656-7.044,15.699-15.701,15.699c-8.659,0-15.703-7.043-15.703-15.699
+                        C115.211,22.045,122.255,15,130.914,15z"></path>
+                    <path fill="#444444" d="M142.779,68.914h-23.54c-16.518,0-29.956,13.439-29.956,29.959v50.484c0,9.509,4.495,18.307,11.966,23.924v81.238
+                        c0,4.143,3.358,7.5,7.5,7.5c4.142,0,7.5-3.357,7.5-7.5v-85.316c0-2.879-1.623-5.376-4.003-6.633
+                        c-4.912-2.623-7.963-7.684-7.963-13.213V98.873c0-8.248,6.709-14.959,14.956-14.959h23.54c8.248,0,14.957,6.711,14.957,14.959
+                        v50.484c0,5.53-3.054,10.592-7.971,13.216c-2.377,1.258-3.998,3.753-3.998,6.63v85.316c0,4.143,3.358,7.5,7.5,7.5
+                        c4.142,0,7.5-3.357,7.5-7.5V173.28c7.473-5.616,11.969-14.415,11.969-23.923V98.873C172.736,82.354,159.298,68.914,142.779,68.914z
+                        "></path>
+                </g>
+                </svg>
+
+                  <p class = "description">예상 사이즈를 알려드려요</p>
+              </div>
+              <div class ="col-md-4">
+                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 425.336 425.336" style="enable-background:new 0 0 425.336 425.336;" xml:space="preserve">
+                <g>
+                    <path fill="#444444" d="M182.79,221.346h-45.872V15h28.342c3.613,22.915,23.495,40.496,47.409,40.496S256.465,37.915,260.079,15h28.339v114.851
+                        c0,4.142,3.358,7.5,7.5,7.5s7.5-3.358,7.5-7.5v-20.217l16.141,8.07c1.071,0.536,2.217,0.792,3.35,0.792
+                        c2.372,0,4.685-1.126,6.132-3.176l35.999-50.997c2.254-3.194,1.677-7.584-1.326-10.087L300.747,1.765
+                        C299.442,0.665,297.758,0,295.918,0h-166.5c-1.843,0-3.528,0.667-4.834,1.77l-62.96,52.466c-3.003,2.503-3.581,6.893-1.326,10.087
+                        l35.999,50.997c1.447,2.049,3.76,3.176,6.132,3.176c1.132,0,2.278-0.257,3.35-0.792l16.14-8.07v119.212c0,4.142,3.358,7.5,7.5,7.5
+                        h53.372c4.142,0,7.5-3.358,7.5-7.5S186.932,221.346,182.79,221.346z M320.502,101.405l-17.084-8.542V23.517l45.374,37.811
+                        L320.502,101.405z M212.669,40.496c-15.615,0-28.722-10.905-32.129-25.496h64.258C241.391,29.592,228.284,40.496,212.669,40.496z
+                         M104.834,101.405l-28.29-40.077l45.374-37.811v69.346L104.834,101.405z"></path>
+                    <path fill="#444444" d="M357.692,146.063H206.896c-4.142,0-7.5,3.358-7.5,7.5v264.274c0,4.142,3.358,7.5,7.5,7.5h57.751
+                        c3.98,0,7.268-3.109,7.488-7.084l10.158-182.747l10.158,182.747c0.221,3.974,3.508,7.084,7.488,7.084h57.751
+                        c4.142,0,7.5-3.358,7.5-7.5V153.563C365.192,149.42,361.834,146.063,357.692,146.063z M350.192,177.848h-23.65v-16.785h23.65
+                        V177.848z M253.046,177.848v-16.785h58.496v16.785H253.046z M238.046,161.063v16.785h-23.65v-16.785H238.046z M307.036,410.336
+                        L296.841,226.94c-0.221-3.974-3.508-7.084-7.488-7.084h-14.117c-3.98,0-7.268,3.109-7.488,7.084l-10.194,183.396h-43.157V192.848
+                        h135.796v217.488H307.036z"></path>
+                </g>
+                </svg>
+                <p class = "description"> 옷 실측 사이즈와 비교해보세요</p>
+              </div>
+            </p>
+            <p class="lead">
+              <a href="/clothes" class="btn btn-lg btn-default">로그인하고 사이즈 추정하기</a>
+            </p>
+          </div>
+        </div>
+          <!--<div class="mastfoot">-->
+            <!--<div class="inner">-->
+              <!--<p><a href="https://twitter.com/mdo">dizwe</a>    </p>-->
+            <!--</div>-->
+          <!--</div>-->
+
+        </div>
+
+      </div>
+
+    </div>
+<script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

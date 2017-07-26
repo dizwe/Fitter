@@ -101,7 +101,7 @@ shape.selectAll("circle.bottomSide")
      .append("circle")
      .attr("cx", function(d) { return d.x; })
      .attr("cy", function(d) { return d.y; })
-     .attr("r", "5px")
+     .attr("r", "3px")
      .attr("fill", "grey");
 
 
@@ -114,7 +114,7 @@ shape.selectAll(".line")
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
      .attr("stroke-width", "3px")
-     .style("stroke", "#fdae6b");
+     .style("stroke", bodyColor);
 
 ///////////////////////////////////////////////////옷 상체 옆 /////////////////////////////////////////
 
