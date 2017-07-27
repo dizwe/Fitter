@@ -226,6 +226,11 @@ label{
   font-size:27px;
   font-weight:bold;
 }
+
+.back{
+    font-size: 40px;
+    color: #f79256;
+}
 /*chart*/
 .chart .label {
     fill: black;
@@ -237,7 +242,6 @@ label{
 .visual{
     max-height : 100%;
 }
-
 @media screen and (min-width: 768px) {
   body{
   font-size:20px;

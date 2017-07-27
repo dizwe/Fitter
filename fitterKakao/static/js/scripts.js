@@ -71,7 +71,17 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     var hash = window.location.hash;
+    if (hash ==="#top-clothes"){
 
-    $(hash).attr('aria-expanded','true');
+    $('#top-nav').attr('class','active');
+    $('#bot-nav').removeAttr('class');
+    $("#top-clothes").attr('class','tab-pane active');
+    $("#bot-clothes").attr('class','tab-pane');
+    }else{
 
+    $('#bot-nav').attr('class','active');
+    $('#top-nav').removeAttr('class');
+    $("#top-clothes").attr('class','tab-pane');
+    $("#bot-clothes").attr('class','tab-pane active');
+    }
 });
