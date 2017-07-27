@@ -18,38 +18,38 @@
             <a href = "{% url 'fitterKakao:add_clothes' kinds='top' %}"><h3>상의 추가하기</h3></a>
             </div>
             {% for one_top in top_clothes %}
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6 col-xs-12">
 					<div class="thumbnail">
 						<div class="caption">
 							<h3>
 								{{one_top.nick}}
 							</h3>
+                            <h4>
+								사이즈 : {{one_top.size}}
+							</h4>
+                            <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>길이</th>
+                                <th>어깨</th>
+                                <th>가슴</th>
+                                <th>소매</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>{{one_top.top_length}}</td>
+                                <td>{{one_top.shoulder}}</td>
+                                <td>{{one_top.chest}}</td>
+                                <td>{{one_top.sleeve}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+
 							<p>
-								<table class="table table-striped">
-                                <thead>
-                                  <tr>
-                                    <th>#</th>
-                                    <th>길이</th>
-                                    <th>어깨</th>
-                                    <th>가슴</th>
-                                    <th>소매</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>{{one_top.size}}</td>
-                                    <td>{{one_top.top_length}}</td>
-                                    <td>{{one_top.shoulder}}</td>
-                                    <td>{{one_top.chest}}</td>
-                                    <td>{{one_top.sleeve}}</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-							</p>
-							<p>
-								<a class="btn btn-warning" href="{% url 'fitterKakao:suppose_size' kinds='top' tag_num=one_top.id %}">확인하기</a>
-                                <a class="btn" href="{% url 'fitterKakao:edit_clothes' kinds='top' tag_num=one_top.id %}">수정하기</a>
-                                <a class="btn deleteClothes"  href="{% url 'fitterKakao:delete_clothes' kinds='top' tag_num=one_top.id %}">지우기</a>
+								<a class="btn-clothes btn-warning" href="{% url 'fitterKakao:suppose_size' kinds='top' tag_num=one_top.id %}">확인하기</a>
+                                <a class="btn-clothes" href="{% url 'fitterKakao:edit_clothes' kinds='top' tag_num=one_top.id %}">수정하기</a>
+                                <a class="btn-clothes deleteClothes"  href="{% url 'fitterKakao:delete_clothes' kinds='top' tag_num=one_top.id %}">지우기</a>
 							</p>
 						</div>
 					</div>
@@ -67,11 +67,14 @@
                             <h3>
 								{{one_bot.nick}}
 							</h3>
+
+                            <h4>
+								사이즈 : {{one_bot.size}}
+							</h4>
 							<p>
 								<table class="table table-striped">
                                 <thead>
                                   <tr>
-                                    <th>#</th>
                                     <th>기장</th>
                                     <th>허리</th>
                                     <th>허벅지</th>
@@ -82,7 +85,6 @@
                                 </thead>
                                 <tbody>
                                   <tr>
-                                    <td>{{one_bot.size}}</td>
                                     <td>{{one_bot.bot_length}}</td>
                                     <td>{{one_bot.waist}}</td>
                                     <td>{{one_bot.thigh}}</td>
@@ -93,9 +95,9 @@
                               </table>
 							</p>
 							<p>
-								<a class="btn btn-warning" href="{% url 'fitterKakao:suppose_size' kinds='bot' tag_num=one_bot.id %}">확인하기</a>
-                                <a class="btn" href="{% url 'fitterKakao:edit_clothes' kinds='bot' tag_num=one_bot.id %}">수정하기</a>
-                                <a class="btn deleteClothes"  href="{% url 'fitterKakao:delete_clothes' kinds='bot' tag_num=one_bot.id %}">지우기</a>
+								<a class="btn-clothes btn-warning" href="{% url 'fitterKakao:suppose_size' kinds='bot' tag_num=one_bot.id %}">확인하기</a>
+                                <a class="btn-clothes" href="{% url 'fitterKakao:edit_clothes' kinds='bot' tag_num=one_bot.id %}">수정하기</a>
+                                <a class="btn-clothes deleteClothes"  href="{% url 'fitterKakao:delete_clothes' kinds='bot' tag_num=one_bot.id %}">지우기</a>
 							</p>
 						</div>
 					</div>

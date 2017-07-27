@@ -56,6 +56,10 @@ body{
   background-color: #eff0f2;
 }
 
+.cover {
+  margin-bottom:40px;
+}
+
 .navbar-default .navbar-nav>li>a{
  font-size:25px;
  color: #e8e8e8;
@@ -168,6 +172,10 @@ label{
 }
 
 /*result-basic*/
+.block{
+  display:block;
+}
+
 .card {
     position: relative;
     display: -webkit-box;
@@ -202,9 +210,16 @@ label{
 }
 
 .btn{
-    font-size:18px;
-    padding: 3px 5px;
+    font-size:20px;
+    padding: 6px 12px;
 }
+
+.btn-clothes{
+    font-size:17px;
+    padding: 6px 12px;
+}
+
+
 /*result*/
 .anal{
   margin-top:20px;
@@ -231,5 +246,12 @@ label{
 .btn{
     font-size:20px;
     padding: 6px 12px;
+}
+  .block{
+    display:inline;
+  }
+  .btn-clothes{
+    font-size:20px;
+    padding: 9px 18px;
 }
 }

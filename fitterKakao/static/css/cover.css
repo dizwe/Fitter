@@ -90,14 +90,14 @@ body{
 }
 
 .cover {
-  padding: 0 20px;
+  margin-bottom:40px;
 }
 
 .btn-lg {
   padding: 10px 20px;
   margin-top:40px;
   float :right;
-  height: 40px;
+  height: 50px;
   font-size : 20px;
   font-weight:bold;
   color:#f79256;
@@ -122,11 +122,13 @@ svg{
  * Footer
  */
 
-.mastfoot {
-  color: black; /* IE8 proofing */
+.foot {
+   text-align: center;
 }
 
-
+.foot a{
+  color:#f2dede;
+}
 /*
  * Affix and center
  */
