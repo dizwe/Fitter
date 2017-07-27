@@ -68,6 +68,26 @@ body{
   background-color: #f79256;/*#eff0f2;*/
   color: white;
 }
+/* Modal*/
+.form-signin-heading{
+    font-size: 24px;
+}
+.close{
+    font-size: 30px;
+}
+
+
+.modal-content {
+  height: auto;
+  min-height: 80%;
+  border-radius: 0;
+}
+.embed-responsive.embed-responsive-ratio {
+    padding-bottom: 100%;
+}
+
+
+
 
 /*
  MAIN
@@ -177,5 +197,6 @@ svg{
   margin-top : 50px;
   margin-bottom: 30px;
   }
+
 }
 

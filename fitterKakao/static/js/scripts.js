@@ -69,6 +69,7 @@ $(document).ready(function(){
     });
 });
 
+// 해시태그 보고 버튼 들어가기
 $(document).ready(function(){
     var hash = window.location.hash;
     if (hash ==="#top-clothes"){
@@ -85,3 +86,12 @@ $(document).ready(function(){
     $("#bot-clothes").attr('class','tab-pane active');
     }
 });
+
+//버튼 누르면 해시태그 만들기
+$('#top-tab').on('click', function(){
+    document.location.hash = "top-clothes";
+})
+
+$('#bot-tab').on('click', function(){
+    document.location.hash = "bot-clothes";
+})

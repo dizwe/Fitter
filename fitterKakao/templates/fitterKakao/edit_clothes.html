@@ -21,11 +21,11 @@
         <label for="id_top_length">길이:</label>
         <p><input id="id_top_length" name="top_length" step="any" type="number" value="{{ clothes_form.top_length.value }}" />cm</p>
         <label for="id_shoulder">어깨:</label>
-        <p><input id="id_shoulder" name="shoulder" step="any" type="number" value="{{ clothes_form.shoulder.value }}" />cm</p>
+        <p><input id="id_shoulder" name="shoulder" step="any" type="number" value="{{ clothes_form.shoulder.value }}" /><span class ="unit">cm</span></p>
         <label for="id_chest">가슴:</label>
-        <p><input id="id_chest" name="chest" step="any" type="number" value="{{ clothes_form.chest.value }}" />cm</p>
+        <p><input id="id_chest" name="chest" step="any" type="number" value="{{ clothes_form.chest.value }}" /><span class ="unit">cm</span></p>
         <label for="id_sleeve">소매:</label>
-        <p><input id="id_sleeve" name="sleeve" step="any" type="number" value="{{ clothes_form.sleeve.value }}" />cm</p>
+        <p><input id="id_sleeve" name="sleeve" step="any" type="number" value="{{ clothes_form.sleeve.value }}" /><span class ="unit">cm</span></p>
     </div>
     {% elif types == "bot" %}
     <div class="item">
@@ -34,19 +34,19 @@
         <label for="id_size">사이즈:</label>
         <p><input id="id_size" maxlength="4" name="size" type="text" value="{{ clothes_form.size.value }}" /></p>
         <label for="id_waist">허리:</label>
-        <p><input id="id_waist" name="waist" step="any" type="number" value="{{ clothes_form.waist.value }}" />cm</p>
+        <p><input id="id_waist" name="waist" step="any" type="number" value="{{ clothes_form.waist.value }}" /><span class ="unit">cm</span></p>
         <label for="id_bot_length">기장:</label>
-        <p><input id="id_bot_length" name="bot_length" step="any" type="number" value="{{ clothes_form.bot_length.value }}" />cm</p>
+        <p><input id="id_bot_length" name="bot_length" step="any" type="number" value="{{ clothes_form.bot_length.value }}" /><span class ="unit">cm</span></p>
 
         <label for="id_crotch">밑위:</label>
-        <p><input id="id_crotch" name="crotch" step="any" type="number" value="{{ clothes_form.crotch.value }}" />cm</p>
+        <p><input id="id_crotch" name="crotch" step="any" type="number" value="{{ clothes_form.crotch.value }}" /><span class ="unit">cm</span></p>
         <label for="id_thigh">허벅지:</label>
-        <p><input id="id_thigh" name="thigh" step="any" type="number" value="{{ clothes_form.thigh.value }}" />cm</p>
+        <p><input id="id_thigh" name="thigh" step="any" type="number" value="{{ clothes_form.thigh.value }}" /><span class ="unit">cm</span></p>
         <label for="id_hem">밑단:</label>
-        <p><input id="id_hem" name="hem" step="any" type="number" value="{{ clothes_form.hem.value }}" />cm</p>
+        <p><input id="id_hem" name="hem" step="any" type="number" value="{{ clothes_form.hem.value }}" /><span class ="unit">cm</span></p>
         <label><input type="checkbox" id= "hip_check" name="hip_exist" value="no"> 엉덩이 부분은 몰라요</label><br/>
         <label for="id_hip" id = "hip">엉덩이:</label>
-        <p><input id="id_hip" name="hip" step="any" type="number" value="{{ clothes_form.hip.value }}" />cm</p>
+        <p><input id="id_hip" name="hip" step="any" type="number" value="{{ clothes_form.hip.value }}" /><span class ="unit">cm</span></p>
     </div>
     {% endif %}
 
