@@ -43,6 +43,9 @@ function fitCal(calData, big_criteria=20, too_criteria=50){
 if (clothes_type ==='top')
     var divided_param =fitCal(topCal);
 else if(clothes_type ==='bot')
+    if (botCal['hip']===0){// 엉덩이는 없으면 분석에서 뺀다
+        delete botCal['hip'];
+    }
     var divided_param =fitCal(botCal);
 
 $(document).ready(function(){

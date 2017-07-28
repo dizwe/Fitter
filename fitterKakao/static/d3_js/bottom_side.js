@@ -20,14 +20,14 @@ var myBottomSide = {'visual_waist':my['bottom_waist']/3*2, // thigh랑 길이가
                     };
 
 // 옷이 얼마나 남는가
+
 var botCal = {'bot_waist':(myBottomSide['visual_pant_waist']-myBottomSide['visual_waist'])/2,
 //              'bot_length':pant['length']-suggest_body['length'],
               'crotch':pant['crotch']-suggest_body['crotch'],
               'thigh':(pant['thigh']-my['thigh'])/2,
               'hem' : pant['hem']-dynamic_hem(pant['length']),
-              'hip' :(pant['hip']!=0)?(myBottomSide['visual_pant_hip']-myBottomSide['visual_hip']):0};
-
-
+              'hip' :(pant['hip']!=0)?(myBottomSide['visual_pant_hip']-myBottomSide['visual_hip']):0,
+              };
 
 
 //////////////////////////////////////// 상체 옆 /////////////////////////////////////////////////
@@ -125,6 +125,7 @@ var bottomSideClo = [
                   {x : myBottomSide['invisible_line'] + realBroadToRatio(botCal['bot_waist']),
                   y : realTallToRatio(my['total_leg'])},
                   //// 엉덩이 2
+
                   {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_hip']*2+botCal['hip']), //앞부분에서 엉덩이 빼기
                   y: realTallToRatio((my['total_leg']+my['crotch_height'])/2)},
                   {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_hip']*2+botCal['hip']), //앞부분에서 엉덩이 빼기
