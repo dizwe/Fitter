@@ -5,7 +5,7 @@
 {%block content%}
 
 
-    <form action = "{% url 'fitterKakao:choose_clothes' %}"method="POST">
+<form method="POST">
     {% csrf_token %}
     <div class="body-part col-lg-4">
     <h2 class="bodyCategory"> 기본 정보 </h2>

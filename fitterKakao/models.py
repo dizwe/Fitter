@@ -52,7 +52,7 @@ class Person(models.Model):
     hem_a = models.IntegerField(choices=CHOICES, default=AVG)
 
     def __str__(self):  # Change title as name(메소드처럼)
-        return self.name
+        return self.name.username
 
 
 class ClothesNick(models.Model):

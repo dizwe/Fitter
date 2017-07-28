@@ -134,13 +134,17 @@ def check_data(request):
 @login_required
 def post_new(request):
     if request.method == "POST": #이미 보낸거라면
+        print('upup1')
         person_form = PersonForm(request.POST)
+        print('upup')
         if person_form.is_valid(): # 저장된 form 형식이 잘 맞는지
+            print(person_form)
             person = person_form.save(commit=False) # False 바로 저장하지는 마
             person.name = request.user
             person.save()
             return redirect('fitterKakao:choose_clothes')
     else:
+        print('downdown')
         person_form = PersonForm()
 
     return render(request, 'fitterKakao/post_new.html', {'person_form': person_form,})
