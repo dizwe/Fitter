@@ -31,6 +31,8 @@
     {% endfor %}
     {% elif types == "bot" %}
     {% for form in clothes_formset.forms %}
+    <label><input type="checkbox" id= "hip_check" name="hip_exist" value="no"> 엉덩이 부분은 몰라요</label><br/>
+
     <div class="item">
         <label for="id_form-0-nick">이름:</label>
         <p><input id="id_form-0-nick" maxlength="20" name="form-0-nick" type="text" value="Untitled" /></p>
@@ -50,8 +52,7 @@
         <p><input id="id_form-0-thigh" name="form-0-thigh" step="any" type="number" value="0" /><span class ="unit">cm</span></p>
         <label for="id_form-0-hem">밑단:</label>
         <p><input id="id_form-0-hem" name="form-0-hem" step="any" type="number" value="0" /><span class ="unit">cm</span></p>
-        <label><input type="checkbox" id= "hip_check" name="hip_exist" value="no"> 엉덩이 부분은 몰라요</label><br/>
-        <label for="id_form-0-hip" id = "hip">엉덩이:</label>
+        <label for="id_form-0-hip" class = "hip">엉덩이:</label>
         <p><input id="id_form-0-hip" name="form-0-hip" step="any" type="number" value="0" /><span class ="unit">cm</span></p>
         <p><a class="delete" href="#">데이터 지우기</a></p>
     </div>

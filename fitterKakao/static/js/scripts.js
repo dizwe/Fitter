@@ -45,13 +45,14 @@ $(document).ready(function(){
 //add_clothes
 $(document).ready(function(){
     $('#hip_check').change(function(){
-        console.log(this)
         if(this.checked){
-            $('#hip').hide();
-            $('#hip').next().hide();}
+            $('.hip_check').attr('checked','checked');
+            $('.hip').hide();
+            $('.hip').next().hide();}
         else{
-            $('#hip').show();
-            $('#hip').next().show();}
+            $('.hip_check').attr('checked','false');
+            $('.hip').show();
+            $('.hip').next().show();}
 
     });
 });
