@@ -150,7 +150,11 @@ def post_new(request):
 def post_edit(request, user_name):
     if not user_name == request.user.username:
         return render(request, 'fitterKakao/index.html')
-    existing_data = Person.objects.get(name__username=user_name)
+    try:
+        existing_data = Person.objects.get(name__username=user_name)
+    except Person.DoesNotExist:
+        return redirect('fitterKakao:post_new')
+
     if request.method == "POST":  # 이미 보낸거라면
         person_form = PersonForm(request.POST, instance=existing_data)
         if person_form.is_valid(): # 저장된 form 형식이 잘 맞는지
