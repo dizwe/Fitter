@@ -116,11 +116,18 @@ input {
   border-bottom: 4px solid #f0ad4e;
   margin-bottom:20px;
   height: 30px;
+
 }
 
-.input-text{
-  width: 80%;
-  display: block;
+.item input{
+  width:90%;
+}
+
+input[type='checkbox']{
+   width:20px;
+}
+#hip-check{
+   width: unset;
 }
 
 .fieldWrapper{
@@ -128,7 +135,7 @@ input {
 }
 
 .body-part{
- margin-bottom: 45  px;
+ margin-bottom: 45px;
 }
 .bodyCategory{
  color:#ff8300;
