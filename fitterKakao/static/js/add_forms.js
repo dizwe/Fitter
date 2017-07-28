@@ -44,7 +44,12 @@ $(document).ready(function(){
 
             $(row).children().children().each(function(){
                 updateElementIndex(this, prefix, formCount);
-                $(this).val("");
+
+                if($(this).attr('id')){ //nick은 남겨두기
+                    if(!($(this).attr('id').indexOf('nick')>-1)){
+                        $(this).val("");
+                    }
+                }
             });
 
             $(row).find(".delete").click(function(){
@@ -54,7 +59,7 @@ $(document).ready(function(){
             $("#id_" + prefix + "-TOTAL_FORMS").val(formCount + 1);
 
         }else{
-            alert("이미 많이 만들었잖아!!!");
+            alert("이미 많이 만들었쟈나~ 한계야!");
         }
         return false;
     }
