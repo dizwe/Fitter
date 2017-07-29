@@ -1,13 +1,11 @@
 var tall = 500; //키기준
 var broad = 250; //어깨기준
-var real_tall = real_tall/2
+var real_tall = my['total_leg'];
 var real_broad = suggest_body['shoulder'];
 
 var shape = d3.select("div.frontVisual")
             .append("svg")
-            .attr("viewBox","0 0 250 500")
-//            .attr("width", broad)
-//            .attr("height", tall);
+            .attr("viewBox","0 -10 250 520");
 
 function realTallToRatio(real_value){
     return tall- tall*real_value/real_tall;
@@ -17,6 +15,24 @@ function realBroadToRatio(real_value){
   return broad * real_value/real_broad;
 }
 
+
+
+// 옷이 얼마나 남는가
+var myBottomSide = {'visual_waist':my['bottom_waist']/3*2, // thigh랑 길이가 비슷해지면 되는데 thigh랑 비슷하게 만들면 됨
+                    'visual_hip':my['hip']/17*11,
+                    'visual_pant_waist':pant['waist']/3*2,
+                    'visual_pant_hip':pant['hip']/17*11,
+                    'above_knee_x':my['knee']/5,
+                    'invisible_line' : broad/4*3,
+                    };
+
+var botCal = {'bot_waist':(myBottomSide['visual_pant_waist']-myBottomSide['visual_waist'])/2,
+              'bot_length':pant['length']-suggest_body['length'],
+              'crotch':pant['crotch']-suggest_body['crotch'],
+              'thigh':(pant['thigh']-my['thigh'])/2,
+              'hem' : pant['hem']-dynamic_hem(pant['length']),
+              'hip' :(pant['hip']!=0)?(myBottomSide['visual_pant_hip']-myBottomSide['visual_hip']):0,
+              };
 
 /////////////////////////////////////////////////하체////////////////////////////////////////////////
 var bottomDotData = [
@@ -102,8 +118,8 @@ shape.selectAll("circle.bottom")
      .append("circle")
      .attr("cx", function(d) { return d.x; })
      .attr("cy", function(d) { return d.y; })
-     .attr("r", "2px")
-     .attr("fill", "grey");
+     .attr("r", "4px")
+     .attr("fill", bodyColor);
 
 shape.selectAll(".line")
      .data(bottomLinks)

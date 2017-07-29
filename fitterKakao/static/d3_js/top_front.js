@@ -13,13 +13,19 @@ function realTallToRatio(real_value){
   return tall- tall*(real_value-half_tall)/half_tall;
 }
 
-function realTallToRatio2(real_value){
-    return tall- tall*real_value/real_tall;
-}
-
 function realBroadToRatio(real_value){
   return broad * real_value/real_broad;
 }
+
+
+var topCal = {
+              'shoulder':shirt['shoulder']-suggest_body['shoulder'],
+              'chest':shirt['chest']-suggest_body['chest']/2,
+              'waist':shirt['chest']-suggest_body['waist']/2,
+              'length':shirt['len']-(real_tall-suggest_body['crotch_height']),
+              'sleeve':shirt['sleeve']-suggest_body['arm'],
+        };
+
 
 
 //상체만
@@ -135,8 +141,8 @@ shape.selectAll("circle.body")
      .append("circle")
      .attr("cx", function(d) { return d.x; })
      .attr("cy", function(d) { return d.y; })
-     .attr("r", "2px")
-     .attr("fill", "grey");
+     .attr("r", "4px")
+     .attr("fill", bodyColor);
 
 // 배꼽
 shape.selectAll("text.belly")

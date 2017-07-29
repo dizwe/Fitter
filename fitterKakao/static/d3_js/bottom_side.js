@@ -5,30 +5,9 @@ var real_broad = my['thigh']*4;
 
 var shape = d3.select("div.sideVisual")
             .append("svg")
-            .attr("viewBox","0 0 250 500")
+            .attr("viewBox","0 -5 250 500")
 //            .attr("width", broad)
 //            .attr("height", tall);
-
-
-
-// 옷이 얼마나 남는가
-var myBottomSide = {'visual_waist':my['bottom_waist']/3*2, // thigh랑 길이가 비슷해지면 되는데 thigh랑 비슷하게 만들면 됨
-                    'visual_hip':my['hip']/17*11,
-                    'visual_pant_waist':pant['waist']/3*2,
-                    'visual_pant_hip':pant['hip']/17*11,
-                    'above_knee_x':my['knee']/5,
-                    'invisible_line' : broad/4*3,
-                    };
-
-var botCal = {'bot_waist':(myBottomSide['visual_pant_waist']-myBottomSide['visual_waist'])/2,
-//              'bot_length':pant['length']-suggest_body['length'],
-              'crotch':pant['crotch']-suggest_body['crotch'],
-              'thigh':(pant['thigh']-my['thigh'])/2,
-              'hem' : pant['hem']-dynamic_hem(pant['length']),
-              'hip' :(pant['hip']!=0)?(myBottomSide['visual_pant_hip']-myBottomSide['visual_hip']):0,
-              };
-
-
 
 
 //////////////////////////////////////// 상체 옆 /////////////////////////////////////////////////
@@ -102,8 +81,8 @@ shape.selectAll("circle.bottomSide")
      .append("circle")
      .attr("cx", function(d) { return d.x; })
      .attr("cy", function(d) { return d.y; })
-     .attr("r", "3px")
-     .attr("fill", "grey");
+     .attr("r", "4px")
+     .attr("fill", bodyColor);
 
 
 shape.selectAll(".line")

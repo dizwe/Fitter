@@ -248,10 +248,31 @@ label{
 
 
 /*result*/
+
+
 .anal{
-  margin-top:20px;
+  margin-top:10px;
   font-size:27px;
   font-weight:bold;
+  margin-left:20px;
+
+}
+.conclusion{
+  margin-bottom:20px;
+}
+.anal-head{
+  color:grey;
+  font-size:17px;
+  font-weight:bold;
+}
+
+.anal-li{
+  font-size:24px;
+  color:#672600;
+}
+.anal-description{
+  font-size:20px;
+  color:rgba(103, 38, 0, 0.57);
 }
 
 .back{

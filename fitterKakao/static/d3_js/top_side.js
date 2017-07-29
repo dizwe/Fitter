@@ -15,7 +15,9 @@ var myTopSide = {'base_up' : [sideBroad/3, realSideTallToRatio(real_sideTall)+10
                  'base_down' : [sideBroad/3, realSideTallToRatio(100)]};
 
 
-
+var topCloCal = {'chest': (shirt['chest'] - my['chest_half'])/2,
+              'nipple': (shirt['chest'] - my['nipple_half'])/2,
+              'waist': (shirt['chest'] - my['waist_half'])/2};
 function realSideTallToRatio(real_value){
   return sideTall - sideTall*real_value/real_sideTall;
 }
