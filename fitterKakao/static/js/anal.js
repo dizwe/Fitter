@@ -40,14 +40,14 @@ function fitCal(calData, big_criteria=20, too_criteria=50){
 //    info['conclusion'] = conclusion; // add conclusion
     return info
 }
-if (clothes_type ==='top')
-    var divided_param =fitCal(topCal);
-else if(clothes_type ==='bot')
+if (clothes_type ==='top'){
+    var divided_param =fitCal(topCal);}
+else if(clothes_type ==='bot'){
     if (botCal['hip']===0){// 엉덩이는 없으면 분석에서 뺀다
         delete botCal['hip'];
     }
     var divided_param =fitCal(botCal);
-
+}
 $(document).ready(function(){
     var target = document.getElementsByClassName('anal')[0];
 //    target.innerHTML += "<p>"+divided_param['conclusion']+"</p>";

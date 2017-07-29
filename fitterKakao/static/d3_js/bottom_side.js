@@ -11,6 +11,7 @@ var shape = d3.select("div.sideVisual")
 
 
 
+// 옷이 얼마나 남는가
 var myBottomSide = {'visual_waist':my['bottom_waist']/3*2, // thigh랑 길이가 비슷해지면 되는데 thigh랑 비슷하게 만들면 됨
                     'visual_hip':my['hip']/17*11,
                     'visual_pant_waist':pant['waist']/3*2,
@@ -19,8 +20,6 @@ var myBottomSide = {'visual_waist':my['bottom_waist']/3*2, // thigh랑 길이가
                     'invisible_line' : broad/4*3,
                     };
 
-// 옷이 얼마나 남는가
-
 var botCal = {'bot_waist':(myBottomSide['visual_pant_waist']-myBottomSide['visual_waist'])/2,
 //              'bot_length':pant['length']-suggest_body['length'],
               'crotch':pant['crotch']-suggest_body['crotch'],
@@ -28,6 +27,8 @@ var botCal = {'bot_waist':(myBottomSide['visual_pant_waist']-myBottomSide['visua
               'hem' : pant['hem']-dynamic_hem(pant['length']),
               'hip' :(pant['hip']!=0)?(myBottomSide['visual_pant_hip']-myBottomSide['visual_hip']):0,
               };
+
+
 
 
 //////////////////////////////////////// 상체 옆 /////////////////////////////////////////////////

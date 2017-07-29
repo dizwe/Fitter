@@ -34,10 +34,18 @@ function realTallToRatio(real_value){
 function realBroadToRatio(real_value){
   return broad * real_value/real_broad;
 }
+
+function manPart(value){
+  if (sex==='man'){
+    return value - 50;
+  }else{
+    return value
+  }
+}
 var bodyColor = "#fdae6b"
 var clothes_color = "#74c476"
 var my = {
-  'trunk_leg' : real_tall-150, //목높이
+  'trunk_leg' : real_tall-real_tall/6, //180-30(목까지) 정도로 계산
   'shoulder' : suggest_body['shoulder'],
   'arm_len' : suggest_body['arm'],
   'chest' : suggest_body['chest']/3.14,
@@ -45,7 +53,9 @@ var my = {
   'chest_half' : suggest_body['chest']/2,
   'waist_half' : suggest_body['waist']/2,
   'nipple_half' : suggest_body['nipple']/2,
-  'crotch_height' : suggest_body['crotch_height'],
+  'crotch_height_from_top' : real_tall-real_tall/6-manPart(suggest_body['crotch_height']),
+  'belly_from_top' : (real_tall-real_tall/6-manPart(suggest_body['crotch_height']))/10*7,
+  'crotch_height' : manPart(suggest_body['crotch_height']),
   'total_leg' : suggest_body['length']/10*11, // 복숭아뼈 위부터였는데 다시 전체길이로
   //아래도리 - 옆모양으로 대부분 한거임
   'bottom_waist' : suggest_body['bottom_waist']/2, // 1:2인 타원 계산하면 짧은부분 반지름
@@ -77,3 +87,18 @@ function dynamic_hem(pant){
                 return (noPantLen - b)/a }//x 구하기
             else {continue;}
             }};
+
+
+
+
+var topCal = {
+              'shoulder':shirt['shoulder']-suggest_body['shoulder'],
+              'chest':shirt['chest']-suggest_body['chest']/2,
+//              'waist':shirt['chest']-suggest_body['waist']/2,
+//            'length':shirt['len']-(real_tall-suggest_body['crotch_height']),
+//              'sleeve':shirt['sleeve']-suggest_body['arm'],
+        };
+
+var topCloCal = {'chest': (shirt['chest'] - my['chest_half'])/2,
+              'nipple': (shirt['chest'] - my['nipple_half'])/2,
+              'waist': (shirt['chest'] - my['waist_half'])/2};

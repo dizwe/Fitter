@@ -14,9 +14,7 @@ var myTopSide = {'base_up' : [sideBroad/3, realSideTallToRatio(real_sideTall)+10
                  'base_middle' : [sideBroad/3, realSideTallToRatio(real_sideTall/5*4)+100],
                  'base_down' : [sideBroad/3, realSideTallToRatio(100)]};
 
-var botCal = {'chest': (shirt['chest'] - my['chest_half'])/2,
-              'nipple': (shirt['chest'] - my['nipple_half'])/2,
-              'waist': (shirt['chest'] - my['waist_half'])/2};
+
 
 function realSideTallToRatio(real_value){
   return sideTall - sideTall*real_value/real_sideTall;
@@ -73,21 +71,22 @@ shape.selectAll(".line")
 
 
 /////////////////////////////////////////////////옷 상체 옆 /////////////////////////////////////////
+console.log(topCloCal['chest'])
 var topSideClo = [
               // 가슴 0
-              {x: myTopSide['base_up'][0] - realSideBroadToRatio(botCal['chest'])/2,
+              {x: myTopSide['base_up'][0] - realSideBroadToRatio(topCloCal['chest']/2),
               y: myTopSide['base_up'][1]},
-              {x: myTopSide['base_up'][0] + realSideBroadToRatio(my['chest_half']+botCal['chest']/2),
+              {x: myTopSide['base_up'][0] + realSideBroadToRatio(my['chest_half']+topCloCal['chest']/2),
               y: myTopSide['base_up'][1]},
               // 젖가슴 2
-              {x: myTopSide['base_middle'][0] + realSideBroadToRatio(my['nipple_half']+botCal['nipple']/2),
+              {x: myTopSide['base_middle'][0] + realSideBroadToRatio(my['nipple_half']+topCloCal['nipple']/2),
               y: myTopSide['base_middle'][1]},
-              {x: myTopSide['base_middle'][0] + realSideBroadToRatio(my['nipple_half']+botCal['nipple']/2),
+              {x: myTopSide['base_middle'][0] + realSideBroadToRatio(my['nipple_half']+topCloCal['nipple']/2),
               y: myTopSide['base_middle'][1]},
               //배 4
-              {x: myTopSide['base_down'][0] - realSideBroadToRatio(botCal['chest'])/2,
+              {x: myTopSide['base_down'][0] - realSideBroadToRatio(topCloCal['chest']/2),
               y: myTopSide['base_down'][1]},
-              {x: myTopSide['base_down'][0] + realSideBroadToRatio(my['waist_half']+botCal['waist']/2+botCal['chest']/2),
+              {x: myTopSide['base_down'][0] + realSideBroadToRatio(my['waist_half']+topCloCal['waist']/2+(topCloCal['waist']/2-topCloCal['chest']/2)),
               y: myTopSide['base_down'][1]},
             ];
 

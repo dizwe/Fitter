@@ -9,6 +9,7 @@
         // 신체 사이즈
         {% for one in person|slice:":1" %}
             var real_tall = {{ one.height }};
+            var sex = "{{ one.sex }}";
         {% endfor %}
         var suggest_body = {};
         {% for body_part, survey in suggest_size.items %}

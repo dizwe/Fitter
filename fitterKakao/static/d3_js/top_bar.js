@@ -9,7 +9,7 @@ var data = {
   series: [
     {
       label: '몸 길이',
-      values: [real_tall-suggest_body['crotch_height'], suggest_body['shoulder'] , suggest_body['chest']/2, suggest_body['arm']].map(mmToCm)
+      values: [my['crotch_height_from_top'], suggest_body['shoulder'] , suggest_body['chest']/2, suggest_body['arm']].map(mmToCm)
     },
     {
       label: '옷 길이',
@@ -17,6 +17,6 @@ var data = {
     },
     {
       label: '몸 길이2',
-      values: [12, 0, suggest_body['waist']/2, suggest_body['arm']/2].map(mmToCm)
+      values: [my['belly_from_top'], 0, suggest_body['waist']/2, suggest_body['arm']/2].map(mmToCm)
     },]
 };

@@ -5,7 +5,7 @@ var real_broad = suggest_body['shoulder']+50;
 
 var shape = d3.select("div.frontVisual")
             .append("svg")
-            .attr("viewBox","0 0 350 550");
+            .attr("viewBox","0 50 350 550");
 //            .attr("width", broad)
 //            .attr("height", tall);
 
@@ -13,17 +13,14 @@ function realTallToRatio(real_value){
   return tall- tall*(real_value-half_tall)/half_tall;
 }
 
+function realTallToRatio2(real_value){
+    return tall- tall*real_value/real_tall;
+}
+
 function realBroadToRatio(real_value){
   return broad * real_value/real_broad;
 }
 
-var topCal = {
-              'shoulder':shirt['shoulder']-suggest_body['shoulder'],
-              'chest':shirt['chest']-suggest_body['chest']/2,
-//              'waist':shirt['chest']-suggest_body['waist']/2,
-//            'length':shirt['len']-(real_tall-suggest_body['crotch_height']),
-//              'sleeve':shirt['sleeve']-suggest_body['arm'],
-        };
 
 //상체만
 var dotData = [
@@ -80,19 +77,19 @@ var dotData = [
               y: realTallToRatio(my['trunk_leg']-my['arm_len']-(my['shoulder']/4))},//손 안쪽
               //밑위 가랑이 20
                {x: broad/2-realBroadToRatio(my['between_leg']/2),
-               y: realTallToRatio(my['total_leg']-suggest_body['crotch'])},//밑위 왼쪽
+               y: realTallToRatio(my['crotch_height'])},//밑위 왼쪽
                {x: broad/2+realBroadToRatio(my['between_leg']/2),
-               y: realTallToRatio(my['total_leg']-suggest_body['crotch'])},//밑위 오른쪽
+               y: realTallToRatio(my['crotch_height'])},//밑위 오른쪽
                //밑위 가랑이 아래 22
                {x: broad/2-realBroadToRatio(my['between_leg']/2),
-               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-20)},//밑위 왼쪽
+               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-100)},//밑위 왼쪽
                {x: broad/2+realBroadToRatio(my['between_leg']/2),
-               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-20)},//밑위 오른쪽
+               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-100)},//밑위 오른쪽
                //가랑이 양옆 점 24
                {x: broad/2-realBroadToRatio(my['chest']/2),
-               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-20)},//밑위 왼쪽
+               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-100)},//밑위 왼쪽
                {x: broad/2+realBroadToRatio(my['chest']/2),
-               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-20)},//밑위 오른쪽
+               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-100)},//밑위 오른쪽
 //              //가랑이 12 - 이건 중요해
 //              {x: broad/2,
 //              y: realTallToRatio(my['crotch_height']-20)},//가랑이
@@ -147,7 +144,7 @@ shape.selectAll("text.belly")
      .enter()
      .append("text")
      .attr("x", broad/2)
-     .attr("y", realTallToRatio(my['trunk_leg']-my['shoulder']/4*5))
+     .attr("y", realTallToRatio(my['trunk_leg']-my['belly_from_top']))
      .text("X")
      .attr("font-family", "sans-serif")
      .attr("font-size", "15px")
