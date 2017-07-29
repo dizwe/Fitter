@@ -45,9 +45,9 @@ function fitCal(calData, big_criteria=20, too_criteria=50){
     }
 
     if (countWithExcept('small')>0){
-       conclusion = "작아요ㅜㅜ";
+       conclusion = "작아요:(";
     }else if(countWithExcept('too')>0){
-       conclusion = "오버핏이네요";
+       conclusion = "커요~";
     }else if(countWithExcept('big')>0){
        conclusion = "넉넉해요";
     }else{
@@ -70,7 +70,7 @@ else if(clothes_type ==='bot'){
 
 $(document).ready(function(){
     var target = document.getElementsByClassName('anal')[0];
-    target.innerHTML += "<p class ='anal-head'>[FIT=해당 부위 옷 길이-몸 길이] 기준</p>";
+    target.innerHTML += "<p class ='anal-head'>[FIT=해당 부위 옷 길이-몸 길이]</p>";
     if(divided_param['small'].length>0){
         target.innerHTML += "<p><span  class = 'anal-description'>"
                             + "<span class ='anal-li block'>옷이 작은 부분</span>(FIT&lt;0) : </span>"
@@ -98,7 +98,7 @@ $(document).ready(function(){
                             + "<span class ='anal-li    block'>옷이 큰 부분 </span>(5cm&lt;FIT) : </span>"
                             + divided_param['too']+"</p>";
     }
-    target.innerHTML += "<p class ='conclusion'><span class ='anal-li'>종합 추측하면...</span> "
+    target.innerHTML += "<p class ='conclusion'><span class ='anal-li'>종합 추측하면, </span> "
                         +divided_param['conclusion']+"</p>";
 
 });
