@@ -4,7 +4,7 @@ function suggestionCal(data, remaining_num){
 
 var data = {
   labels: [
-    '가랑이/배꼽', '어깨', '가슴/배', '긴팔/반팔'
+    ['가랑이','옷 길이','배꼽'],  '어깨', ['가슴','옷 가슴','배'],['긴팔','소매','반팔'],
   ],
   series: [
     {

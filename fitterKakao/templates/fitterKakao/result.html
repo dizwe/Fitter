@@ -43,16 +43,17 @@
     <!--<span class="glyphicon glyphicon-chevron-left btn-lg"></span>-->
     <div class ="row row-eq-height">
     <div class ="col-md-12">
-            {% if types == 'top' %}
-            <a href="/clothes/#top-clothes" class = "back">← 옷s로 돌아가기</a>
-            {% elif types == 'bot' %}
-            <a href="/clothes/#bot-clothes" class = "back">← 옷s로 돌아가기</a>
-            {% endif %}
-        </div>
+        {% if types == 'top' %}
+        <a href="/clothes/#top-clothes" class = "back">← 옷s로 돌아가기</a>
+        {% elif types == 'bot' %}
+        <a href="/clothes/#bot-clothes" class = "back">← 옷s로 돌아가기</a>
+        {% endif %}
+    </div>
+    </div>
     <div class ="col-md-6">
 
     <div class ="card card-outline-success mb-3">
-        <h1 class = "text-center">분석 결과</h1>
+        <h1 class = "text-center"><span class="block">{{clothes.0.nick}}</span>({{clothes.0.size}}) 분석 결과</h1>
         <div class = "anal"></div>
         <!--{% if types == 'top' %}-->
         <!--<p>길이, 소매는 그래프나 그림을 참고해주세요!</p>-->

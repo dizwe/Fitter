@@ -5,7 +5,7 @@ var real_broad = suggest_body['shoulder']+50;
 
 var shape = d3.select("div.frontVisual")
             .append("svg")
-            .attr("viewBox","0 50 350 550");
+            .attr("viewBox","0 100 350 550");
 //            .attr("width", broad)
 //            .attr("height", tall);
 

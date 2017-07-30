@@ -282,7 +282,7 @@ label{
 /*chart*/
 .chart .label {
     fill: black;
-    font: 11px NanumBarunGothic;
+    font: 15px NanumBarunGothic;
     text-anchor: end;
 }
 

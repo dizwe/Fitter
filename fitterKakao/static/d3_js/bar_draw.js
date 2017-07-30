@@ -1,7 +1,7 @@
 var chartWidth       = 300,
-    barHeight        = 20,
+    barHeight        = 30,
     groupHeight      = barHeight * data.series.length,
-    gapBetweenGroups = 10,
+    gapBetweenGroups = 20,
     spaceForLabels   = 70,
     spaceRight   = 20;
 
@@ -82,19 +82,29 @@ bar.append("text")
         else
          return d; });
 
-
 // Draw labels
 bar.append("text")
     .attr("class", "label")
     .attr("x", function(d) { return - 10; })
     //옆에 라벨 중간에 두기
-    .attr("y", 20)
+    .attr("y", function(d,i){
+        if(typeof(data.labels[Math.floor(i/data.series.length)])==="object") //
+            return 10
+        else
+            return 30;
+    })
     .attr("dy", ".35em")
-    .text(function(d,i) {
-      if (i % data.series.length === 0)
-        return data.labels[Math.floor(i/data.series.length)];
-      else
-        return ""});
+    .text(function(d,i) { // 이건 익명함수라 쓰고나면 안 데이터 기억 못 함
+      if(typeof(data.labels[Math.floor(i/data.series.length)])==="object"){// 딱 한번 되는데
+            var label = data.labels[Math.floor(i/data.series.length)][i % data.series.length];
+            return label
+      }else{
+          if (i % data.series.length === 0)
+            return data.labels[Math.floor(i/data.series.length)];
+          else
+            return ""
+            }
+      });
 
 chart.append("g")
       .attr("class", "y axis")
