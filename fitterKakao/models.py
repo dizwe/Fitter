@@ -1,6 +1,7 @@
 from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.conf import settings
+from django_resized import ResizedImageField
 
 required = '채워주세요.'
 class SizeInfo(models.Model):
@@ -61,7 +62,7 @@ class ClothesNick(models.Model):
 
 class TopClothes(models.Model):
     name = models.ForeignKey(settings.AUTH_USER_MODEL)
-    photo = models.ImageField(blank=True, upload_to="top/%Y/%m/%d")
+    photo = ResizedImageField(blank=True, size=[300, 300], upload_to="top/%Y/%m/%d")
     nick = models.CharField(max_length=50, default='Untitled')
     size = models.CharField(max_length=4, default='FREE')
     top_length = models.FloatField(default=0)
@@ -74,7 +75,8 @@ class TopClothes(models.Model):
 
 class BottomClothes(models.Model):
     name = models.ForeignKey(settings.AUTH_USER_MODEL)
-    photo = models.ImageField(blank=True, upload_to="bot/%Y/%m/%d")
+    # photo = models.ImageField(blank=True, upload_to="bot/%Y/%m/%d")
+    photo = ResizedImageField(blank=True, size=[300, 300], upload_to="bot/%Y/%m/%d")
     nick = models.CharField(max_length=20, default='Untitled')
     size = models.CharField(max_length=4, default='FREE')
     bot_length = models.FloatField(default=0)

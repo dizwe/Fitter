@@ -70,6 +70,10 @@ $(document).ready(function(){
     });
 });
 
+//$(document).ready(function() {
+//    $('.nailthumb-container').nailthumb();
+//});
+
 // 해시태그 보고 버튼 들어가기
 $(document).ready(function(){
     var hash = window.location.hash;

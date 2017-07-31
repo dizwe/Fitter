@@ -2,6 +2,12 @@
 {% block title %}
 옷s | Fitter
 {% endblock %}
+{% block head %}
+    <!--<script type="text/javascript" src="{% static 'js/jquery.nailthumb.1.1.min.js' %}"></script>-->
+    <!--<link href="{% static 'css/jquery.nailthumb.1.1.min.css' %}" rel="stylesheet">-->
+
+{% endblock %}
+
 {%block content%}
 
     <ul class="nav nav-tabs">
@@ -27,12 +33,16 @@
                             <h4>
 								사이즈 : {{one_top.size}}
 							</h4>
+                            <div class="col-xs-12 clothes-img-div">
+                                <div class = "content">
                             {% if one_top.photo %}
-                            hi
-                            <img src="{{ one_top.photo.url }}" alt="">
+                            <img width="400" height="400" class = "clothes-img" src="{{ one_top.photo.url }}" alt="">
                             {% else %}
-                            <img src="{% static 'pic/top.png' %}" alt="">
+                            <img width="400" height="400" class = "clothes-img" src="{% static 'pic/top.png' %}" alt="">
                             {% endif %}
+                            </div>
+
+                            </div>
                             <table class="table table-striped">
                             <thead>
                               <tr>
@@ -76,12 +86,15 @@
                             <h4>
 								사이즈 : {{one_bot.size}}
 							</h4>
+                            <div class="col-xs-12 clothes-img-div">
+                            <div class = "content">
                             {% if one_bot.photo %}
-                            hi
-                            <img src="{{ one_bot.photo.url }}" alt="">
+                            <img width="400" height="400" class = "clothes-img" src="{{ one_bot.photo.url }}" alt="">
                             {% else %}
-                            <img src="{% static 'pic/bottom.png' %}" alt="">
+                            <img width="400" height="400" class = "clothes-img" src="{% static 'pic/bottom.png' %}" alt="">
                             {% endif %}
+                            </div>
+                            </div>
 							<p>
 								<table class="table table-striped">
                                 <thead>
@@ -117,4 +130,7 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+
+    </script>
 {% endblock %}
