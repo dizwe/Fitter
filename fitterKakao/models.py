@@ -2,7 +2,7 @@ from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.conf import settings
 
-
+required = '채워주세요.'
 class SizeInfo(models.Model):
     MAN = 'man'; WOMAN = 'woman'
     SEX_CHOICES = [(MAN, '남자'), (WOMAN, '여자')]

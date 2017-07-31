@@ -1,7 +1,7 @@
 var chartWidth       = 300,
-    barHeight        = 30,
+    barHeight        = 25,
     groupHeight      = barHeight * data.series.length,
-    gapBetweenGroups = 20,
+    gapBetweenGroups = 15,
     spaceForLabels   = 70,
     spaceRight   = 20;
 
@@ -91,7 +91,7 @@ bar.append("text")
         if(typeof(data.labels[Math.floor(i/data.series.length)])==="object") //
             return 10
         else
-            return 30;
+            return 25;
     })
     .attr("dy", ".35em")
     .text(function(d,i) { // 이건 익명함수라 쓰고나면 안 데이터 기억 못 함
