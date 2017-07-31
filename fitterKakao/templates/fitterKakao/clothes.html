@@ -27,6 +27,12 @@
                             <h4>
 								사이즈 : {{one_top.size}}
 							</h4>
+                            {% if one_top.photo %}
+                            hi
+                            <img src="{{ one_top.photo.url }}" alt="">
+                            {% else %}
+                            <img src="{% static 'pic/top.png' %}" alt="">
+                            {% endif %}
                             <table class="table table-striped">
                             <thead>
                               <tr>
@@ -67,10 +73,15 @@
                             <h3>
 								{{one_bot.nick}}
 							</h3>
-
                             <h4>
 								사이즈 : {{one_bot.size}}
 							</h4>
+                            {% if one_bot.photo %}
+                            hi
+                            <img src="{{ one_bot.photo.url }}" alt="">
+                            {% else %}
+                            <img src="{% static 'pic/bottom.png' %}" alt="">
+                            {% endif %}
 							<p>
 								<table class="table table-striped">
                                 <thead>

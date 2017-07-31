@@ -8,18 +8,24 @@
 <div class="row">
     <div class="col-md-3 col-md-offset-3">
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ clothes_formset.management_form }}
     {% if types == "top" %}
     {% for form in clothes_formset.forms %}
+
     <div class="item">
         <label for="id_form-0-nick">이름:</label>
          {{ form.nick.errors }}
         <p><input id="id_form-0-nick" maxlength="50" name="form-0-nick" type="text" value="{{ form.nick.value }}" /></p>
         <label for="id_form-0-size">사이즈:</label>
         {{ form.size.errors }}
-         <p><input id="id_form-0-size input-lg input-text" maxlength="4" name="form-0-size" type="text" value="{{ form.size.value }}" /></p>
+        <p><input id="id_form-0-size input-lg input-text" maxlength="4" name="form-0-size" type="text" value="{{ form.size.value }}" /></p>
+
+        <label for="id_form-0-photo">사진:</label>
+        {{ form.photo.errors }}
+        <p><input id="id_form-0-photo" name="form-0-photo" type="file" /></p>
+
         <label for="id_form-0-top_length">길이:</label>
          {{ form.top_length.errors }}
         <p><input id="id_form-0-top_length" name="form-0-top_length" step="any" type="number" value="{{ form.top_length.value }}" /><span class ="unit">cm</span></p>
@@ -48,6 +54,11 @@
         <label for="id_form-0-size">사이즈:</label>
          {{ form.size.errors }}
        <p><input id="id_form-0-size" maxlength="4" name="form-0-size" type="text" value="FREE" /></p>
+
+        <label for="id_form-0-photo">사진:</label>
+        {{ form.photo.errors }}
+        <p><input id="id_form-0-photo" name="form-0-photo" type="file" /></p>
+
 
         <label for="id_form-0-waist">허리:</label>
          {{ form.waist.errors }}

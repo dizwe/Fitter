@@ -2,6 +2,8 @@
 
 from django.conf.urls import url
 from . import views  # .은 현재 디렉토리 의미
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = 'fitterKakao'
 urlpatterns = [
@@ -18,3 +20,5 @@ urlpatterns = [
     # url(r'^keyboard/', views.keyboard), # 카톡
     # url(r'^message', views.answer), # 카톡
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

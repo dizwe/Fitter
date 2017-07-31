@@ -183,9 +183,9 @@ def add_clothes(request, kinds):
 
     if request.method == "POST":
         if kinds == 'top':
-            clothes_formset = top_clothes_formset(request.POST)
+            clothes_formset = top_clothes_formset(request.POST, request.FILES)
         elif kinds == 'bot':
-            clothes_formset = bottom_clothes_formset(request.POST)
+            clothes_formset = bottom_clothes_formset(request.POST, request.FILES)
         if clothes_formset.is_valid():
             for form in clothes_formset.forms:
                 clothes = form.save(commit=False)
@@ -217,10 +217,10 @@ def edit_clothes(request, kinds, tag_num):
     if request.method == "POST":
         if kinds == 'top':
             existing_clothes = TopClothes.objects.get(pk=tag_num)
-            clothes_form = TopClothesForm(request.POST, instance=existing_clothes)
+            clothes_form = TopClothesForm(request.POST, request.FILES, instance=existing_clothes)
         elif kinds == 'bot':
             existing_clothes = BottomClothes.objects.get(pk=tag_num)
-            clothes_form = BottomClothesForm(request.POST, instance=existing_clothes)
+            clothes_form = BottomClothesForm(request.POST, request.FILES, instance=existing_clothes)
         if clothes_form.is_valid():
             clothes = clothes_form.save(commit=False)
             clothes.name = request.user

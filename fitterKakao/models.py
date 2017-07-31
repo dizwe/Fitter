@@ -61,6 +61,7 @@ class ClothesNick(models.Model):
 
 class TopClothes(models.Model):
     name = models.ForeignKey(settings.AUTH_USER_MODEL)
+    photo = models.ImageField(blank=True, upload_to="top/%Y/%m/%d")
     nick = models.CharField(max_length=50, default='Untitled')
     size = models.CharField(max_length=4, default='FREE')
     top_length = models.FloatField(default=0)
@@ -73,6 +74,7 @@ class TopClothes(models.Model):
 
 class BottomClothes(models.Model):
     name = models.ForeignKey(settings.AUTH_USER_MODEL)
+    photo = models.ImageField(blank=True, upload_to="bot/%Y/%m/%d")
     nick = models.CharField(max_length=20, default='Untitled')
     size = models.CharField(max_length=4, default='FREE')
     bot_length = models.FloatField(default=0)
