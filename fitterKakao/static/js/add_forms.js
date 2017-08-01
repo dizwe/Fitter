@@ -46,7 +46,7 @@ $(document).ready(function(){
                 updateElementIndex(this, prefix, formCount);
 
                 if($(this).attr('id')){ //nick은 남겨두기
-                    if(!($(this).attr('id').indexOf('nick')>-1)){
+                    if(!(($(this).attr('id').indexOf('nick')>-1)||($(this).attr('id').indexOf('photo')>-1))){
                         $(this).val("0");
                     }
                 }

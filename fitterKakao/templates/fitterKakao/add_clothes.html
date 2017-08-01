@@ -13,7 +13,6 @@
     {{ clothes_formset.management_form }}
     {% if types == "top" %}
     {% for form in clothes_formset.forms %}
-
     <div class="item">
         <label for="id_form-0-nick">이름:</label>
          {{ form.nick.errors }}
@@ -22,7 +21,7 @@
         {{ form.size.errors }}
         <p><input id="id_form-0-size input-lg input-text" maxlength="4" name="form-0-size" type="text" value="{{ form.size.value }}" /></p>
 
-        <label for="id_form-0-photo">사진:</label>
+        <label for="id_form-0-photo">사진(선택):</label>
         {{ form.photo.errors }}
         <p><input id="id_form-0-photo" name="form-0-photo" type="file" /></p>
 
@@ -55,7 +54,7 @@
          {{ form.size.errors }}
        <p><input id="id_form-0-size" maxlength="4" name="form-0-size" type="text" value="FREE" /></p>
 
-        <label for="id_form-0-photo">사진:</label>
+        <label for="id_form-0-photo">사진(선택):</label>
         {{ form.photo.errors }}
         <p><input id="id_form-0-photo" name="form-0-photo" type="file" /></p>
 
