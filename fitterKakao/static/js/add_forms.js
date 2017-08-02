@@ -49,7 +49,7 @@ $(document).ready(function(){
                     if($(this).attr('id').indexOf('nick')>-1){
                         $(this).parent().attr('class','all-nick hiding');
                     }else if($(this).attr('id').indexOf('photo')>-1){
-                        $(this).parent().attr('class','all-clothes hiding');
+                        $(this).parent().attr('class','all-clothes');
                     }else{
                         $(this).val("0");
                     }
