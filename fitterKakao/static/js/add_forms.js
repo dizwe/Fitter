@@ -85,7 +85,7 @@ $('#id_form-0-nick').change(function(){
     for (i=1;i<formCount;i++){
         console.log(i,formCount);
         var changed_val = $(this).val()
-        var clone = $(this).clone(); // 첫번재거 복사
+        var clone = $(this).clone(); // 첫번재 item 복사
 //        clone.attr('id','id_form-'+i+'-'+param);
 //        clone.attr('name','id_form-'+i+'-'+param);
 //        clone.val(changed_val);

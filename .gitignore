@@ -7,3 +7,4 @@ fitterKakao/__pycache__
 fitterKakao/static/json/bottom_hw_filtered_survey_more_data.json
 staticfiles/d3/man_size.json
 /media
+/staticfiles
