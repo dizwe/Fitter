@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import Http404, JsonResponse, HttpResponseRedirect, HttpResponse
+from django.core.urlresolvers import reverse
 from .models import Person, TopClothes, BottomClothes, SizeInfo
 import os
 
@@ -111,7 +112,7 @@ def suppose_size(request, kinds, tag_num):
             parameter_dict = suggested_size_filter.values(parameter).first()[parameter]
             parameter_dict = json.loads(parameter_dict.replace("'", '"'))
             suggested_size.append(parameter_dict[str(q)])
-        print(suggested_size)
+
         suggested_size = size_list_to_dict(suggested_size)
 
         if kinds == 'top':
@@ -142,7 +143,6 @@ def post_new(request):
     if request.method == "POST": #이미 보낸거라면
         person_form = PersonForm(request.POST)
         if person_form.is_valid(): # 저장된 form 형식이 잘 맞는지
-            print(person_form)
             person = person_form.save(commit=False) # False 바로 저장하지는 마
             person.name = request.user
             person.save()
@@ -190,16 +190,17 @@ def add_clothes(request, kinds):
     if request.method == "POST":
         if kinds == 'top':
             clothes_formset = top_clothes_formset(request.POST, request.FILES)
+            hashTag = '#top-clothes'
         elif kinds == 'bot':
             clothes_formset = bottom_clothes_formset(request.POST, request.FILES)
+            hashTag = '#bottom-clothes'
         if clothes_formset.is_valid():
             for form in clothes_formset.forms:
                 clothes = form.save(commit=False)
-                print(clothes)
                 clothes.name = request.user
                 clothes.save()
 
-            return redirect('fitterKakao:choose_clothes')
+            return redirect(reverse('fitterKakao:choose_clothes')+hashTag)
     else:
         if kinds == 'top':
             clothes_formset = top_clothes_formset()
@@ -215,8 +216,10 @@ def edit_clothes(request, kinds, tag_num):
     # 데이터 내거인지 확인
     if kinds == 'top':
         dataName = TopClothes.objects.filter(pk=tag_num).values('name__username').first()['name__username']
+        hashTag = '#top-clothes'
     elif kinds == 'bot':
         dataName = BottomClothes.objects.filter(pk=tag_num).values('name__username').first()['name__username']
+        hashTag = '#bottom-clothes'
     if not dataName == request.user.username:
         return render(request, 'fitterKakao/index.html')
 
@@ -232,7 +235,7 @@ def edit_clothes(request, kinds, tag_num):
             clothes.name = request.user
             clothes.save()
 
-            return redirect('fitterKakao:choose_clothes')
+            return redirect(reverse('fitterKakao:choose_clothes')+hashTag)
     else:
         if kinds == 'top':
             existing_clothes = TopClothes.objects.get(pk=tag_num)
