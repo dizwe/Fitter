@@ -1,3 +1,33 @@
+var tall = 450; //키기준
+var broad = 350; //어깨기준
+var half_tall = real_tall/2;
+var real_broad = suggest_body['shoulder']+50;
+
+var shape = d3.select("div.frontVisual")
+            .append("svg")
+            .attr("viewBox","0 100 350 550");
+//            .attr("width", broad)
+//            .attr("height", tall);
+
+function realTallToRatio(real_value){
+  return tall- tall*(real_value-half_tall)/half_tall;
+}
+
+function realBroadToRatio(real_value){
+  return broad * real_value/real_broad;
+}
+
+
+var topCal = {
+              'shoulder':shirt['shoulder']-suggest_body['shoulder'],
+              'chest':shirt['chest']-suggest_body['chest']/2,
+              'waist':shirt['chest']-suggest_body['waist']/2,
+              'length':shirt['len']-(real_tall-suggest_body['crotch_height']),
+              'sleeve':shirt['sleeve']-suggest_body['arm'],
+        };
+
+
+
 //상체만
 var dotData = [
               //가랑이0 - 이건 중요해
@@ -53,19 +83,19 @@ var dotData = [
               y: realTallToRatio(my['trunk_leg']-my['arm_len']-(my['shoulder']/4))},//손 안쪽
               //밑위 가랑이 20
                {x: broad/2-realBroadToRatio(my['between_leg']/2),
-               y: realTallToRatio(my['total_leg']-suggest_body['crotch'])},//밑위 왼쪽
+               y: realTallToRatio(my['crotch_height'])},//밑위 왼쪽
                {x: broad/2+realBroadToRatio(my['between_leg']/2),
-               y: realTallToRatio(my['total_leg']-suggest_body['crotch'])},//밑위 오른쪽
+               y: realTallToRatio(my['crotch_height'])},//밑위 오른쪽
                //밑위 가랑이 아래 22
                {x: broad/2-realBroadToRatio(my['between_leg']/2),
-               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-20)},//밑위 왼쪽
+               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-100)},//밑위 왼쪽
                {x: broad/2+realBroadToRatio(my['between_leg']/2),
-               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-20)},//밑위 오른쪽
+               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-100)},//밑위 오른쪽
                //가랑이 양옆 점 24
                {x: broad/2-realBroadToRatio(my['chest']/2),
-               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-20)},//밑위 왼쪽
+               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-100)},//밑위 왼쪽
                {x: broad/2+realBroadToRatio(my['chest']/2),
-               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-20)},//밑위 오른쪽
+               y: realTallToRatio(my['total_leg']-suggest_body['crotch']-100)},//밑위 오른쪽
 //              //가랑이 12 - 이건 중요해
 //              {x: broad/2,
 //              y: realTallToRatio(my['crotch_height']-20)},//가랑이
@@ -111,8 +141,8 @@ shape.selectAll("circle.body")
      .append("circle")
      .attr("cx", function(d) { return d.x; })
      .attr("cy", function(d) { return d.y; })
-     .attr("r", "2px")
-     .attr("fill", "grey");
+     .attr("r", "4px")
+     .attr("fill", bodyColor);
 
 // 배꼽
 shape.selectAll("text.belly")
@@ -120,11 +150,11 @@ shape.selectAll("text.belly")
      .enter()
      .append("text")
      .attr("x", broad/2)
-     .attr("y", realTallToRatio(my['trunk_leg']-my['shoulder']/4*5))
+     .attr("y", realTallToRatio(my['trunk_leg']-my['belly_from_top']))
      .text("X")
      .attr("font-family", "sans-serif")
      .attr("font-size", "15px")
-     .attr("fill", "rgb(6,120,155)")
+     .attr("fill", bodyColor)
      .attr("text-anchor", "middle");
 
 
@@ -139,33 +169,29 @@ shape.selectAll(".line")
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
      .attr("stroke-width", "3px")
-     .style("stroke", "rgb(6,120,155)");
+     .style("stroke", bodyColor);
 
 
 
 
 ////////////////////////////////// 상체 옷////////////////////////////////////////////
 
-var shirt = test_shirt;
-//cm를 mm로 바꾸기
-for (var key in shirt){
-    shirt[key] *= 10;
-}
+
 
 myTop = {'remain_shoulder' : shirt['shoulder']-my['shoulder']};
 //어깨는 상황에 따라 위치가 달라져야함
 if (myTop['remain_shoulder']<=0){
-var shoulder_data = [{x: broad/2-realBroadToRatio(my['shoulder']/2+myTop['remain_shoulder']/2),
-                      y: realTallToRatio(my['trunk_leg'])},//어깨왼쪽
-                      {x: broad/2+realBroadToRatio(my['shoulder']/2+myTop['remain_shoulder']/2),
-                      y: realTallToRatio(my['trunk_leg'])},//어깨오른쪽
-                     ]
+    var shoulder_data = [{x: broad/2-realBroadToRatio(my['shoulder']/2+myTop['remain_shoulder']/2),
+                          y: realTallToRatio(my['trunk_leg'])},//어깨왼쪽
+                          {x: broad/2+realBroadToRatio(my['shoulder']/2+myTop['remain_shoulder']/2),
+                          y: realTallToRatio(my['trunk_leg'])},//어깨오른쪽
+                         ]
 }else{
-var shoulder_data = [{x: broad/2-realBroadToRatio(my['shoulder']/2),
-                      y: realTallToRatio(my['trunk_leg']-myTop['remain_shoulder']/2)},//어깨왼쪽
-                      {x: broad/2+realBroadToRatio(my['shoulder']/2),
-                      y: realTallToRatio(my['trunk_leg']-myTop['remain_shoulder']/2)},//어깨오른쪽
-                     ]
+    var shoulder_data = [{x: broad/2-realBroadToRatio(my['shoulder']/2),
+                          y: realTallToRatio(my['trunk_leg']-myTop['remain_shoulder']/2)},//어깨왼쪽
+                          {x: broad/2+realBroadToRatio(my['shoulder']/2),
+                          y: realTallToRatio(my['trunk_leg']-myTop['remain_shoulder']/2)},//어깨오른쪽
+                        ]
 };
 
 
@@ -190,25 +216,26 @@ var topDot = [
           y: realTallToRatio(my['trunk_leg']-(myTop['remain_shoulder']/2+shirt['sleeve']))},//어깨왼쪽
         ];
 
-var topClothesLinks = [
-                  //왼쪽팔
-                  {source : dotData[2], target : topDot[0]},//실제 어깨- 옷 어깨
-                  {source : topDot[0], target : topDot[4]}, //옷 어깨- 팔
-                  {source : topDot[4], target : topDot[6]}, //소매- 소매안쪽
-                  {source : topDot[2], target : dotData[12]}, //소매안쪽- 기장끝
-                  //기장 연결
-                  {source : topDot[2], target : topDot[3]}, // 기장왼쪽 -기장오른쪽
-                  //오른쪽팔
-                  {source : dotData[3], target : topDot[1]},//실제 어깨- 옷 어깨
-                  {source : topDot[1], target : topDot[5]}, //옷 어깨- 팔
-                  {source : topDot[5], target : topDot[7]}, //소매- 소매안쪽
-                  {source : topDot[3], target : dotData[13]}, //소매안쪽- 기장끝
-                  //어깨연결
-                  {source : dotData[2], target : dotData[3]},//양쪽 어깨
-                  {source : topDot[0], target : dotData[12]},// 옷 어깨- 가슴
-                  {source : topDot[1], target : dotData[13]},// 옷 어깨- 가슴
-                ];
 
+var topClothesLinks = [
+              //왼쪽팔
+              {source : topDot[0], target : dotData[2]}, //옷 어깨- 실제 어깨
+              {source : dotData[2], target : topDot[4]}, //실제 어깨- 팔
+              {source : topDot[4], target : topDot[6]}, //소매- 소매안쪽
+              {source : topDot[2], target : dotData[12]}, //소매안쪽- 기장끝
+              //기장 연결
+              {source : topDot[2], target : topDot[3]}, // 기장왼쪽 -기장오른쪽
+              //오른쪽팔
+              {source : topDot[1], target : dotData[3]},//실제 어깨- 옷 어깨
+              {source : dotData[3], target : topDot[5]}, //옷 어깨- 팔
+              {source : topDot[5], target : topDot[7]}, //소매- 소매안쪽
+              {source : topDot[3], target : dotData[13]}, //소매안쪽- 기장끝
+              //어깨연결
+              {source : dotData[2], target : dotData[3]},//양쪽 어깨
+              {source : topDot[0], target : dotData[12]},// 옷 어깨- 가슴
+              {source : topDot[1], target : dotData[13]},// 옷 어깨- 가슴
+
+                ];
 
 shape.selectAll("circle.shirt")
     .data(topDot)
@@ -217,7 +244,7 @@ shape.selectAll("circle.shirt")
     .attr("cx", function(d) { return d.x; })
     .attr("cy", function(d) { return d.y; })
     .attr("r", "5px")
-    .attr("fill", "red");
+    .attr("fill", clothes_color);
 
 
 shape.selectAll(".line")
@@ -229,5 +256,4 @@ shape.selectAll(".line")
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
      .attr("stroke-width", "3px")
-     .style("stroke", "rgb(200,29,155)");
-
+     .style("stroke", clothes_color);

@@ -17,12 +17,12 @@ def index(request):
 
 def make_question_generator(whole_d):
     # data 과부하 줄이기
-    for sex in ['man', 'woman']:
+    for sex in ['man']: #'man'
         shw_filtered_sizes = whole_d[sex]
         height_key = list(shw_filtered_sizes.keys())
         height_key = list(map(int, height_key))  # 원래 문자니까
         for height in range(min(height_key), max(height_key)+10, 10):
-            for weight in range(15, 152):  # 해보니 그렇던데?
+            for weight in range(15, 152): # (15, 105) # 해보니 그렇던데?/여자
                 yield sex, height, weight
 
 
@@ -53,6 +53,12 @@ def data_add(request):
             continue
 
     return HttpResponse("DONE")
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def data_del(request):
+    SizeInfo.objects.all().delete()
+    return HttpResponse("DEL DONE")
 
 
 def size_list_to_dict(suggested_size):

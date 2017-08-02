@@ -48,6 +48,7 @@ $(document).ready(function(){
                 if($(this).attr('id')){ //nick은 남겨두기
                     if($(this).attr('id').indexOf('nick')>-1){
                         $(this).parent().attr('class','all-nick hiding');
+                        console.log($("input #id_form-0-size").val());
                     }else if($(this).attr('id').indexOf('photo')>-1){
                         $(this).parent().attr('class','all-clothes hiding');
                     }else{
@@ -81,17 +82,14 @@ $(document).ready(function(){
 $('#id_form-0-nick').change(function(){
     var prefix = "form";
     var param = "nick";
+    console.log('start');
     var formCount = parseInt($('#id_'+prefix+'-TOTAL_FORMS').val()); // total_form id의 val 값
     for (i=1;i<formCount;i++){
-        console.log(i,formCount);
-        var changed_val = $(this).val()
+        console.log(i);
         var clone = $(this).clone(); // 첫번재거 복사
-//        clone.attr('id','id_form-'+i+'-'+param);
-//        clone.attr('name','id_form-'+i+'-'+param);
-//        clone.val(changed_val);
-//        console.log(clone)
-//        $('#id_'+prefix+'-'+i+'-'+param).parent().html(clone);  //이렇게 하면 변동하는 값을 하는게 아니라 그냥 html만 복사
-        $('#id_'+prefix+'-'+i+'-'+param).val(changed_val);
+        clone.attr('id','id_form-'+i+'-'+param);
+        clone.attr('name','id_form-'+i+'-'+param);
+        $('#id_'+prefix+'-'+i+'-'+param).parent().html(clone);
     }
 
 })

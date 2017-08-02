@@ -1,57 +1,42 @@
-var tall = 700; //키기준
-var broad = 300; //어깨기준
+var tall = 500; //키기준
+var broad = 250; //어깨기준
 var real_tall = my['total_leg'];
 var real_broad = my['thigh']*4;
 
-var shape = d3.select("body")
+var shape = d3.select("div.sideVisual")
             .append("svg")
-            .attr("width", broad)
-            .attr("height", tall);
-
-
-var myBottomSide = {'visual_waist':my['bottom_waist']/3*2, // thigh랑 길이가 비슷해지면 되는데 thigh랑 비슷하게 만들면 됨
-                    'visual_hip':my['hip']/17*11,
-                    'visual_pant_waist':pant['waist']/3*2,
-                    'visual_pant_hip':pant['hip']/17*11,
-                    'above_knee_x':my['knee']/5,
-                    'invisible_line' : broad/4*3,
-                    };
-
-// 옷이 얼마나 남는가
-var botCal = {'waist':(myBottomSide['visual_pant_waist']-myBottomSide['visual_waist'])/2,
-              'thigh':(pant['thigh']-my['thigh'])/2,
-              'hem' : pant['hem']-dynamic_hem(pant['length']),
-              'hip' :(pant['hip']!=0)?(myBottomSide['visual_pant_hip']-myBottomSide['visual_hip']):0};
-
+            .attr("viewBox","0 -5 250 500")
+//            .attr("width", broad)
+//            .attr("height", tall);
 
 
 //////////////////////////////////////// 상체 옆 /////////////////////////////////////////////////
 var bottomSide = [
               // 바지도 무릎이면 무릎 두배로 되어있으므로 2를 나눠가진다고 생각해야함
               //바지 허리 0
-              {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_waist']*2-myBottomSide['above_knee_x']),
+              {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_waist']*2),
               y: realTallToRatio(my['total_leg'])},
-              {x : myBottomSide['invisible_line'] + realBroadToRatio(myBottomSide['above_knee_x']),
+              {x : myBottomSide['invisible_line'],
               y : realTallToRatio(my['total_leg'])},
               // 엉덩이 2
-              {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_hip']*2-myBottomSide['above_knee_x']), //앞부분에서 엉덩이 빼기
+              {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_hip']*2), //앞부분에서 엉덩이 빼기
               y: realTallToRatio((my['total_leg']+my['crotch_height'])/2)},
-              {x: myBottomSide['invisible_line'] + realBroadToRatio(myBottomSide['above_knee_x']),
+              {x: myBottomSide['invisible_line'],
               y: realTallToRatio((my['total_leg']+my['crotch_height'])/2)},
               // 허벅지 4
-              {x: myBottomSide['invisible_line'] - realBroadToRatio(my['thigh']*2-myBottomSide['above_knee_x']/5*9),
+              {x: myBottomSide['invisible_line'] - realBroadToRatio(my['thigh']*2),
               y: realTallToRatio(my['crotch_height'])},
-              {x: myBottomSide['invisible_line'] + realBroadToRatio(myBottomSide['above_knee_x']),
+              {x: myBottomSide['invisible_line'],
               y: realTallToRatio(my['crotch_height'])},
               // 중간 허벅지 6
-              {x: myBottomSide['invisible_line'] - realBroadToRatio(my['middle_thigh']*2-myBottomSide['above_knee_x']/5*9),
+              {x: myBottomSide['invisible_line'] - realBroadToRatio(my['middle_thigh']*2),
               y: realTallToRatio((my['crotch_height']+my['total_leg']/2)/2)},
-              {x: myBottomSide['invisible_line'] + realBroadToRatio(myBottomSide['above_knee_x']),
+              {x: myBottomSide['invisible_line'] ,
               y: realTallToRatio((my['crotch_height']+my['total_leg']/2)/2)},
               // 무릎 8
               {x: myBottomSide['invisible_line'] - realBroadToRatio(my['knee'])/5*9,
               y: realTallToRatio(my['total_leg']/2)},
-              {x: myBottomSide['invisible_line'] + realBroadToRatio(myBottomSide['above_knee_x']),
+              {x: myBottomSide['invisible_line'],
               y: realTallToRatio(my['total_leg']/2)},
               // 장딴지 10
               {x: myBottomSide['invisible_line'] - realBroadToRatio(my['calf'])*2,
@@ -96,8 +81,8 @@ shape.selectAll("circle.bottomSide")
      .append("circle")
      .attr("cx", function(d) { return d.x; })
      .attr("cy", function(d) { return d.y; })
-     .attr("r", "5px")
-     .attr("fill", "grey");
+     .attr("r", "4px")
+     .attr("fill", bodyColor);
 
 
 shape.selectAll(".line")
@@ -109,29 +94,31 @@ shape.selectAll(".line")
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
      .attr("stroke-width", "3px")
-     .style("stroke", "rgb(6,120,155)");
+     .style("stroke", bodyColor);
 
 ///////////////////////////////////////////////////옷 상체 옆 /////////////////////////////////////////
+
 var bottomSideClo = [
                   //바지 허리 0
-                  {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_waist']*2+botCal['waist']-myBottomSide['above_knee_x']),
+                  {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_waist']*2+botCal['bot_waist']),
                   y: realTallToRatio(my['total_leg'])},
-                  {x : myBottomSide['invisible_line'] + realBroadToRatio(myBottomSide['above_knee_x']+botCal['waist']),
+                  {x : myBottomSide['invisible_line'] + realBroadToRatio(botCal['bot_waist']),
                   y : realTallToRatio(my['total_leg'])},
                   //// 엉덩이 2
-                  {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_hip']*2+botCal['hip']-myBottomSide['above_knee_x']), //앞부분에서 엉덩이 빼기
+
+                  {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_hip']*2+botCal['hip']), //앞부분에서 엉덩이 빼기
                   y: realTallToRatio((my['total_leg']+my['crotch_height'])/2)},
-                  {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_hip']*2+botCal['hip']-myBottomSide['above_knee_x']), //앞부분에서 엉덩이 빼기
+                  {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_hip']*2+botCal['hip']), //앞부분에서 엉덩이 빼기
                   y: realTallToRatio((my['total_leg']+my['crotch_height'])/2)},
                   // 허벅지 4
-                  {x: myBottomSide['invisible_line'] - realBroadToRatio(my['thigh']*2+botCal['thigh']-myBottomSide['above_knee_x']/5*9),
+                  {x: myBottomSide['invisible_line'] - realBroadToRatio(my['thigh']*2+botCal['thigh']),
                   y: realTallToRatio(my['crotch_height'])},
-                  {x: myBottomSide['invisible_line'] + realBroadToRatio(myBottomSide['above_knee_x']+botCal['thigh']),
+                  {x: myBottomSide['invisible_line'] + realBroadToRatio(botCal['thigh']),
                   y: realTallToRatio(my['crotch_height'])},
                   // 발목 6 dynamic
-                  {x: myBottomSide['invisible_line'] - realBroadToRatio(my['hem']+botCal['hem']-myBottomSide['above_knee_x'])*2,
+                  {x: myBottomSide['invisible_line'] - realBroadToRatio(my['hem']*2+botCal['hem']/2*3),
                   y: realTallToRatio(my['total_leg']-pant['length'])},
-                  {x: myBottomSide['invisible_line'] + realBroadToRatio(myBottomSide['above_knee_x']),
+                  {x: myBottomSide['invisible_line'] + realBroadToRatio(botCal['hem']/2),
                   y: realTallToRatio(my['total_leg']-pant['length'])},
                 ];
 
@@ -153,7 +140,7 @@ shape.selectAll("circle.pantSide")
     .attr("cx", function(d) { return d.x; })
     .attr("cy", function(d) { return d.y; })
     .attr("r", "5px")
-    .attr("fill", "red");
+    .attr("fill", clothes_color);
 
 
 shape.selectAll(".line")
@@ -165,4 +152,4 @@ shape.selectAll(".line")
      .attr("x2", function(d) { return d.target.x })
      .attr("y2", function(d) { return d.target.y })
      .attr("stroke-width", "3px")
-     .style("stroke", "rgb(200,29,155)");
+     .style("stroke", clothes_color);

@@ -160,6 +160,9 @@ img{
   display: block;
 }
 
+.hiding{
+    display:none !important;
+}
 label{
    margin-bottom:10px;
 }

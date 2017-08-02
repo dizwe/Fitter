@@ -1,0 +1,202 @@
+/*
+ * Globals
+ */
+
+/* Links */
+a,
+a:focus,
+a:hover {
+  color: #f79256;
+}
+
+/* Custom default button */
+.btn-default,
+.btn-default:hover,
+.btn-default:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #fff;
+  border: 1px solid #fff;
+}
+
+/*
+ * Header
+ */
+.navbar {
+    min-height: 80px;
+    margin-bottom:0px;
+}
+.navbar-padding{
+    margin-top: 15px;
+}
+
+.navbar-default .navbar-brand{
+  font-size:35px;
+  font-weight: bold;
+  color: #f79256;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: white;/*#f79256;*/
+}
+
+.navbar-right
+{
+margin-right:0px;
+}
+
+.navbar-default{
+  background-color: white;/*#f79256;*/
+  border-color: white;/*#f79256;*/
+}
+
+
+.navbar-default .navbar-nav>li>a{
+ font-size:25px;
+ color: #f79256;
+}
+
+/*
+ * Base structure
+ */
+
+body{
+  font-family:'NanumBarunGothic';
+  font-weight:400;
+  font-size:11px;
+  height: 100%;
+  background-color: #f79256;/*#eff0f2;*/
+  color: white;
+}
+/* Modal*/
+.form-signin-heading{
+    font-size: 24px;
+}
+.close{
+    font-size: 30px;
+}
+
+
+.modal-content {
+  height: auto;
+  min-height: 80%;
+  border-radius: 0;
+}
+.embed-responsive.embed-responsive-ratio {
+    padding-bottom: 100%;
+}
+
+
+
+
+/*
+ MAIN
+ */
+.block{
+  display:block;
+}
+.display{
+  display : none;
+}
+
+.cover-container {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top:30px;
+}
+
+.inner {
+  padding: 30px;
+}
+
+.cover {
+  margin-bottom:40px;
+}
+
+.btn-lg {
+  padding: 10px 20px;
+  margin-top:40px;
+  float :right;
+  height: 50px;
+  font-size : 20px;
+  font-weight:bold;
+  color:#f79256;
+}
+
+.description{
+    text-align: center;
+    font-size: 30px;
+    color : #444444;
+  font-weight:bold;
+  margin-bottom:20px;
+}
+
+svg{
+  margin-top : 20px;
+  margin-bottom: 30px;
+}
+
+
+
+/*
+ * Footer
+ */
+
+.foot {
+   text-align: center;
+}
+
+.foot a{
+  color:#f2dede;
+}
+/*
+ * Affix and center
+ */
+
+@media screen and (min-width: 768px) {
+  /* Pull out the header and footer */
+  .masthead {
+    position: fixed;
+    top: 0;
+  }
+  .mastfoot {
+    position: fixed;
+    bottom: 0;
+  }
+  /* Start the vertical centering */
+  .site-wrapper-inner {
+    vertical-align: middle;
+  }
+  /* Body part */
+  .btn-lg {
+        margin-top:40px;
+        float :right;
+        height: 70px;
+        font-size : 30px;
+        font-weight:bold;
+        color:#f79256;
+  }
+  .description{
+    text-align: center;
+    font-size: 28px;
+    color : #444444;
+  font-weight:bold;
+  }
+  .cover-heading{
+  font-size:50px;
+  font-weight:bold;
+  margin-top : 60px;
+  }
+  .display{
+    display:inline;
+  }
+  .block{
+    display:inline;
+  }
+  svg{
+  margin-top : 50px;
+  margin-bottom: 30px;
+  }
+
+}
+

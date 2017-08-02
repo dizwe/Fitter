@@ -1,6 +1,6 @@
 var data = {
   labels: [
-    '기장', '허리', '허벅지',
+    ['복숭아뼈','기장','무릎'],'허리', '허벅지',
     '밑단', '밑위', '엉덩이'
   ],
   series: [
@@ -14,7 +14,7 @@ var data = {
       values: [pant['length'], pant['waist'], pant['thigh'], pant['hem'], pant['crotch'], pant['hip']].map(mmToCm),
     },
     {
-      label: '추천 길이',
-      values: [31, 28, 14, 8, 15, 21],
+      label: '두번째 몸 길이',
+      values: [suggest_body['length']/2, 0,0,0,0,0].map(mmToCm),
     },]
 };

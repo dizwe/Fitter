@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^clothes/del/(?P<kinds>[a-z]+)/(?P<tag_num>[0-9]+)/$', views.delete_clothes, name='delete_clothes'),
     url(r'^clothes/edit/(?P<kinds>[a-z]+)/(?P<tag_num>[0-9]+)/$', views.edit_clothes, name='edit_clothes'),
     url(r'^queer/$', views.data_add, name='data_add'),
+    url(r'^gaaay/$', views.data_del, name='data_del'),
     # url(r'^keyboard/', views.keyboard), # 카톡
     # url(r'^message', views.answer), # 카톡
 ]

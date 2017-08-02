@@ -1,0 +1,24 @@
+body{
+  font-family:'NanumBarunGothic';
+  font-weight:bold;
+  font-size:20px;
+}
+
+input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 4px solid #f0ad4e;
+  margin-bottom:20px;
+  height: 10%;
+  width: 100%;
+}
+
+.btn-lg{
+  font-size: 20px;
+}
+
+h4{
+ font-family:'NanumBarunGothic';
+ font-weight:bold;
+}

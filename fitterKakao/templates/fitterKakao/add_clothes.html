@@ -14,16 +14,17 @@
     {% if types == "top" %}
     {% for form in clothes_formset.forms %}
     <div class="item">
-        <label for="id_form-0-nick">이름:</label>
+        <p class = "all-nick"><label for="id_form-0-nick">이름:</label>
          {{ form.nick.errors }}
-        <p><input id="id_form-0-nick" maxlength="50" name="form-0-nick" type="text" value="{{ form.nick.value }}" /></p>
+        <input id="id_form-0-nick" maxlength="50" name="form-0-nick" type="text" value="{{ form.nick.value }}" /></p>
+
+        <p class = "all-photo"><label for="id_form-0-photo">사진(선택):</label>
+        {{ form.photo.errors }}
+        <input id="id_form-0-photo" name="form-0-photo" type="file" /></p>
+
         <label for="id_form-0-size">사이즈:</label>
         {{ form.size.errors }}
         <p><input id="id_form-0-size input-lg input-text" maxlength="4" name="form-0-size" type="text" value="{{ form.size.value }}" /></p>
-
-        <label for="id_form-0-photo">사진(선택):</label>
-        {{ form.photo.errors }}
-        <p><input id="id_form-0-photo" name="form-0-photo" type="file" /></p>
 
         <label for="id_form-0-top_length">길이:</label>
          {{ form.top_length.errors }}

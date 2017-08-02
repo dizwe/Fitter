@@ -1,23 +1,176 @@
+@font-face {
+ font-family: 'NanumBarunGothic';
+ font-style: normal;
+ font-weight: 300;
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot');
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.ttf') format('truetype');
+}
+
+@font-face {
+ font-family: 'NanumBarunGothic';
+ font-style: normal;
+ font-weight: 400;
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+}
+/*layout*/
+.form-signin-heading{
+    font-size: 24px;
+}
+.close{
+    font-size: 30px;
+}
+
+.modal-content {
+  height: auto;
+  min-height: 80%;
+  border-radius: 0;
+}
+.embed-responsive.embed-responsive-ratio {
+    padding-bottom: 100%;
+}
+
+
+
 /*navbar*/
+.navbar {
+    min-height: 80px;
+    margin-bottom:20px;
+}
+.navbar-padding{
+    margin-top: 15px;
+}
+
+.navbar-default .navbar-brand{
+  font-size:35px;
+  color: white;
+  font-weight: bold;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: #f79256;
+}
+
 .navbar-right
 {
 margin-right:0px;
 }
 .navbar-default{
-  background-color: #ef9f9d;
+  background-color: #F79256;
+    border-color: #f79256;
 }
 
 body{
-  background-color: #c7d2e7;
+  font-family:'NanumBarunGothic';
+  font-weight:400;
+  font-size:17px;
+  background-color: #eff0f2;
 }
 
-/*post_new*/
-.radioBtn .notActive{
-    color: #3276b1;
-    background-color: #fff;
+.cover {
+  margin-bottom:40px;
 }
 
-/*result*/
+.navbar-default .navbar-nav>li>a{
+ font-size:25px;
+ color: #e8e8e8;
+}
+/*post_new-버튼의 향연*/
+.info p{
+  font-size:18px;
+  margin-bottom:10px;
+}
+
+.impInfo{
+  font-weight:bold;
+}
+.btn{
+    border-radius: 0;
+    border-width: 4px;
+    margin-right : 10px;
+}
+
+.btn-group-lg>.btn, .btn-lg{
+  font-size: 20px;
+}
+
+.btn-group>.btn.active{
+    font-weight: bold;
+    color: #ff8300;
+    background-image: none;
+    background-color: transparent;
+    border-color: #f0ad4e;
+}
+
+.btn-outline-secondary {
+    color: #b2b0b0;
+    background-image: none;
+    background-color: transparent;
+    border-color: #ccc;
+}
+
+input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 4px solid #f0ad4e;
+  margin-bottom:20px;
+  height: 30px;
+
+}
+
+.item input, .fieldWrapper input{
+  width:90%;
+}
+
+input[type='checkbox']{
+   width:20px;
+}
+#hip-check{
+   width: unset;
+}
+
+.fieldWrapper{
+ margin-bottom: 20px;
+}
+
+img{
+    width:100%;
+    max-width:350px;
+}
+
+.body-part{
+ margin-bottom: 45px;
+}
+.bodyCategory{
+ color:#ff8300;
+ margin-bottom:20px;
+}
+.saveForm{
+  float: right;
+}
+
+.sharp{
+  color:red;
+  font-weight:bold;
+}
+/*edit/add clothes*/
+.item p{
+  width: 90%;
+  display: block;
+}
+
+.hiding{
+    display:none !important;
+}
+label{
+   margin-bottom:10px;
+}
+
+.unit{
+    margin-left:-20px;
+}
+/*result-chart*/
 .chart .legend {
   fill: black;
   font: 14px sans-serif;
@@ -47,3 +200,166 @@ body{
   stroke: #000;
   shape-rendering: crispEdges;
 }
+
+/*result-basic*/
+.block{
+  display:block;
+}
+
+.card {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: #fff;
+    border: 2px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+.card-outline-success {
+    background-color: transparent;
+    border-color: #F79256;
+
+}
+
+.mb-3 {
+    margin-bottom: 1rem!important;
+}
+
+/*clothes*/
+.btn-warning {
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #f0ad4e;
+}
+
+.btn {
+    font-size: 18px;
+    padding: 6px 7px;
+}
+
+.btn-clothes{
+    font-size:17px;
+    padding: 6px 12px;
+}
+
+
+.clothes-img {
+  display: block;
+  max-height:200px;
+  width: 100%;
+  height: auto;
+  margin: auto;
+}
+
+.clothes-img-div{
+    display: table;
+    width:100%;
+    height:200px;
+    margin-bottom:20px;
+}
+
+.content{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/*result*/
+
+
+.anal{
+  margin-top:10px;
+  font-size:27px;
+  font-weight:bold;
+  margin-left:15px;
+
+}
+.conclusion{
+  margin-bottom:20px;
+}
+.anal-head{
+  color:grey;
+  font-size:15px;
+  font-weight:bold;
+}
+
+.anal-li{
+  font-size:24px;
+  color:#672600;
+}
+.anal-description{
+  font-size:20px;
+  color:rgba(103, 38, 0, 0.57);
+}
+
+.back{
+    font-size: 40px;
+    color: #f79256;
+}
+/*chart*/
+.chart .label {
+    fill: black;
+    font: 15px NanumBarunGothic;
+    text-anchor: end;
+}
+
+/*visual*/
+.visual{
+    max-height : 100%;
+}
+@media screen and (min-width: 768px) {
+  body{
+  font-size:20px;
+}
+
+.btn{
+    font-size:20px;
+    padding: 6px 12px;
+}
+  .block{
+    display:inline;
+  }
+  .btn-clothes{
+    font-size:20px;
+    padding: 9px 18px;
+}
+.info p{
+  font-size:22px;
+  margin-bottom:10px;
+}
+.anal-head{
+  color:grey;
+  font-size:20px;
+  font-weight:bold;
+}
+
+.clothes-img {
+  display: block;
+  max-height:300px;
+  width: 100%;
+  height: auto;
+  margin: auto;
+}
+
+.clothes-img-div{
+    display: table;
+    margin-bottom:20px;
+    width:100%;
+    height:300px;
+}
+
+.content{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+
+}
+
