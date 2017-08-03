@@ -10,6 +10,7 @@
 
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
+    {{same_clothes_form.as_p}}
     {{ clothes_formset.management_form }}
     {% if types == "top" %}
     {% for form in clothes_formset.forms %}

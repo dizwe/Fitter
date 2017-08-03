@@ -1,14 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import Http404, JsonResponse, HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
-from .models import Person, TopClothes, BottomClothes, SizeInfo
+from .models import Person, TopClothes, BottomClothes, SizeInfo, SameClothes
 import os
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.forms.formsets import formset_factory, BaseFormSet
 import json
-from .forms import PersonForm, TopClothesForm, BottomClothesForm
+from .forms import PersonForm, TopClothesForm, BottomClothesForm, SameClothesForm
 
 
 def index(request):
@@ -182,12 +182,14 @@ def add_clothes(request, kinds):
             super(RequiredFormSet, self).__init__(*args, **kwargs)
             for form in self.forms:
                 form.empty_permitted = False
+
     top_clothes_formset = formset_factory(TopClothesForm, max_num=3,
                                      formset=RequiredFormSet)
     bottom_clothes_formset = formset_factory(BottomClothesForm, max_num=3,
                                         formset=RequiredFormSet)
 
     if request.method == "POST":
+        same_clothes_form = SameClothesForm(request.POST, request.FILES)
         if kinds == 'top':
             clothes_formset = top_clothes_formset(request.POST, request.FILES)
             hashTag = '#top-clothes'
@@ -195,6 +197,9 @@ def add_clothes(request, kinds):
             clothes_formset = bottom_clothes_formset(request.POST, request.FILES)
             hashTag = '#bottom-clothes'
         if clothes_formset.is_valid():
+            same_clothes = same_clothes_form.save(commit=False)
+            same_clothes.save()
+            print(same_clothes.pk)
             for form in clothes_formset.forms:
                 clothes = form.save(commit=False)
                 clothes.name = request.user
@@ -202,13 +207,15 @@ def add_clothes(request, kinds):
 
             return redirect(reverse('fitterKakao:choose_clothes')+hashTag)
     else:
+        same_clothes_form = SameClothesForm()
         if kinds == 'top':
             clothes_formset = top_clothes_formset()
         elif kinds == 'bot':
             clothes_formset = bottom_clothes_formset()
 
     return render(request, 'fitterKakao/add_clothes.html', {'types' : kinds,
-                                                            'clothes_formset': clothes_formset, })
+                                                            'clothes_formset': clothes_formset,
+                                                            'same_clothes_form': same_clothes_form,})
 
 
 @login_required
@@ -259,12 +266,14 @@ def choose_clothes(request):
 
 def delete_clothes(request, kinds, tag_num):
     if kinds == 'top':
+        hashTag = '#top-clothes'
         clothes = TopClothes.objects.filter(pk=tag_num)  # POST 한 정보만 보게?(일단 그냥 하나만 보게 하자)
     elif kinds == 'bot':
+        hashTag = '#bottom-clothes'
         clothes = BottomClothes.objects.filter(pk=tag_num)  # POST 한 정보만 보게?(일단 그냥 하나만 보게 하자)
 
     clothes.delete()
-    return redirect('fitterKakao:choose_clothes')
+    return redirect(reverse('fitterKakao:choose_clothes')+hashTag)
 
 
 

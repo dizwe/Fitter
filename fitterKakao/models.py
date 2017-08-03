@@ -56,8 +56,8 @@ class Person(models.Model):
         return self.name.username
 
 
-class ClothesNick(models.Model):
-    nick = models.CharField(max_length=20, default='Untitled')
+class SameClothes(models.Model):
+    same_photo = ResizedImageField(blank=True, size=[300, 300], upload_to="top/%Y/%m/%d")
 
 
 class TopClothes(models.Model):
