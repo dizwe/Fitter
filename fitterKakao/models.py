@@ -57,33 +57,35 @@ class Person(models.Model):
 
 
 class SameClothes(models.Model):
+    same_nick = models.CharField(max_length=80, default='무제(Untitled,2017)')
     same_photo = ResizedImageField(blank=True, size=[300, 300], upload_to="%Y/%m/%d")
+    same_url = models.URLField(blank=True, default='')
 
     def __str__(self):  # Change title as name(메소드처럼)
-        return str(self.pk)
+        return str(self.same_nick)
 
 
 class TopClothes(models.Model):
     name = models.ForeignKey(settings.AUTH_USER_MODEL)
-    photo = models.ForeignKey(SameClothes, on_delete=models.CASCADE)
-    # photo = ResizedImageField(blank=True, size=[300, 300], upload_to="top/%Y/%m/%d")
-    nick = models.CharField(max_length=80, default='무제(Untitled,2017)')
+    photo = models.ForeignKey(SameClothes, on_delete=models.CASCADE, related_name='topclothes_photo_set')
+    url = models.ForeignKey(SameClothes, on_delete=models.CASCADE, related_name='topclothes_url_set', null=True)
+    nick = models.ForeignKey(SameClothes, on_delete=models.CASCADE, related_name='topclothes_nick_set')
     size = models.CharField(max_length=4, default='FREE')
     top_length = models.FloatField(default=0)
     shoulder = models.FloatField(default=0)
     chest = models.FloatField(default=0)
     sleeve = models.FloatField(default=0)
 
-    def __str__(self):  # Change title as name(메소드처럼)
-        return self.nick
+    # def __str__(self):  # Change title as name(메소드처럼)
+    #     print(self.nick.same_nick)
+    #     return str(self.nick.same_nick)
 
 
 class BottomClothes(models.Model):
     name = models.ForeignKey(settings.AUTH_USER_MODEL)
-    photo = models.ForeignKey(SameClothes, on_delete=models.CASCADE)
-    # photo = models.ImageField(blank=True, upload_to="bot/%Y/%m/%d")
-    # photo = ResizedImageField(blank=True, size=[300, 300], upload_to="bot/%Y/%m/%d")
-    nick = models.CharField(max_length=20, default='무제(Untitled,2017)')
+    photo = models.ForeignKey(SameClothes, on_delete=models.CASCADE, related_name='bottomclothes_photo_set')
+    url = models.ForeignKey(SameClothes, on_delete=models.CASCADE, related_name='bottomclothes_url_set', null=True)
+    nick = models.ForeignKey(SameClothes, on_delete=models.CASCADE, related_name='bottomclothes_nick_set')
     size = models.CharField(max_length=4, default='FREE')
     bot_length = models.FloatField(default=0)
     waist = models.FloatField(default=0)
@@ -92,7 +94,7 @@ class BottomClothes(models.Model):
     thigh = models.FloatField(default=0)
     hem = models.FloatField(default=0)
 
-    def __str__(self):  # Change title as name(메소드처럼)
-        return self.nick
+    # def __str__(self):  # Change title as name(메소드처럼)
+    #     return str(self.nick.same_nick)
 
 # Create your models here.

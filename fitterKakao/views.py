@@ -203,6 +203,7 @@ def add_clothes(request, kinds):
             # print(same_clothes.pk)
             for form in clothes_formset.forms:
                 clothes = form.save(commit=False)
+                clothes.nick = just_saved
                 clothes.photo = just_saved
                 clothes.name = request.user
                 clothes.save()
