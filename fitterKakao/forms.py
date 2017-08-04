@@ -18,13 +18,13 @@ class SameClothesForm(forms.ModelForm):
 class TopClothesForm(forms.ModelForm):
     class Meta:
         model = TopClothes
-        fields = ('nick', 'size','photo', 'top_length', 'shoulder', 'chest', 'sleeve')
+        fields = ('nick', 'size', 'top_length', 'shoulder', 'chest', 'sleeve')
 
 
 class BottomClothesForm(forms.ModelForm):
     class Meta:
         model = BottomClothes
-        fields = ('nick', 'size','photo', 'waist', 'bot_length', 'hip', 'crotch', 'thigh', 'hem')
+        fields = ('nick', 'size', 'waist', 'bot_length', 'hip', 'crotch', 'thigh', 'hem')
 
 
 

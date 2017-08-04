@@ -34,9 +34,10 @@
 								사이즈 : {{one_top.size}}
 							</h4>
                             <div class="col-xs-12 clothes-img-div">
-                                <div class = "content">
-                            {% if one_top.photo %}
-                            <img width="400" height="400" class = "clothes-img" src="{{ one_top.photo.url }}" alt="">
+                            <div class = "content">
+
+                            {% if one_top.photo.same_photo %}
+                            <img width="400" height="400" class = "clothes-img" src="{{one_top.photo.same_photo.url}}" alt="">
                             {% else %}
                             <img width="100" height="100" class = "clothes-img" src="{% static 'pic/character.png' %}" alt="">
                             {% endif %}
@@ -88,13 +89,15 @@
 							</h4>
                             <div class="col-xs-12 clothes-img-div">
                             <div class = "content">
-                            {% if one_bot.photo %}
-                            <img width="400" height="400" class = "clothes-img" src="{{ one_bot.photo.url }}" alt="">
+
+                            {% if one_bot.photo.same_photo %}
+                            <img width="400" height="400" class = "clothes-img" src="{{ one_bot.photo.same_photo.url }}" alt="">
                             {% else %}
                             <img width="400" height="400" class = "clothes-img" src="{% static 'pic/satisfied.png' %}" alt="">
                             {% endif %}
                             </div>
                             </div>
+
 							<p>
 								<table class="table table-striped">
                                 <thead>

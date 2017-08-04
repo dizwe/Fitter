@@ -199,9 +199,11 @@ def add_clothes(request, kinds):
         if clothes_formset.is_valid():
             same_clothes = same_clothes_form.save(commit=False)
             same_clothes.save()
-            print(same_clothes.pk)
+            just_saved = SameClothes.objects.get(pk=same_clothes.pk)
+            # print(same_clothes.pk)
             for form in clothes_formset.forms:
                 clothes = form.save(commit=False)
+                clothes.photo = just_saved
                 clothes.name = request.user
                 clothes.save()
 
