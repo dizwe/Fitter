@@ -178,14 +178,14 @@ svg{
   }
   .description{
     text-align: center;
-    font-size: 28px;
+    font-size: 22px;
     color : #444444;
   font-weight:bold;
   }
   .cover-heading{
-  font-size:50px;
+  font-size:35px;
   font-weight:bold;
-  margin-top : 60px;
+  margin-top : 40px;
   }
   .display{
     display:inline;
