@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^', include('fitterKakao.urls')),
     url(r'^admin/', admin.site.urls),
     url(
-        r'^accounts/login',
+        r'^accounts/login$',
         auth_views.login,
         name='login',
         kwargs={
@@ -39,6 +39,6 @@ urlpatterns = [
         }
     ),
     url(r'^accounts/signup$', fitter_views.CreateUser.as_view(), name='signup'),
-    url(r'^accounts/login/done$', fitter_views.Registered.as_view(), name='create_user_done'),
+    url(r'^accounts/signup/done$', fitter_views.registered, name='create_user_done'),
 
 ]
