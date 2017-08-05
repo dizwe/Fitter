@@ -66,7 +66,7 @@
 
         <label for="id_form-0-size">사이즈:</label>
          {{ form.size.errors }}
-       <p><input id="id_form-0-size" maxlength="4" name="form-0-size" type="text" value="FREE" /></p>
+       <p><input id="id_form-0-size" maxlength="4" name="form-0-size" type="text" value="{{ form.size.value }}" /></p>
 
         <!--<label for="id_form-0-photo">사진(선택):</label>-->
         <!--{{ form.photo.errors }}-->
@@ -75,25 +75,25 @@
 
         <label for="id_form-0-waist">허리:</label>
          {{ form.waist.errors }}
-       <p><input id="id_form-0-waist" name="form-0-waist" step="any" type="number" value="0" /><span class ="unit">cm</span></p>
+       <p><input id="id_form-0-waist" name="form-0-waist" step="any" type="number" value="{{ form.waist.value }}" /><span class ="unit">cm</span></p>
 
         <label for="id_form-0-bot_length">기장:</label>
          {{ form.bot_length.errors }}
-       <p><input id="id_form-0-bot_length" name="form-0-bot_length" step="any" type="number" value="0" /><span class ="unit">cm</span></p>
+       <p><input id="id_form-0-bot_length" name="form-0-bot_length" step="any" type="number" value="{{ form.bot_length.value }}" /><span class ="unit">cm</span></p>
 
         <label for="id_form-0-crotch">밑위:</label>
         {{ form.crotch.errors }}
-       <p><input id="id_form-0-crotch" name="form-0-crotch" step="any" type="number" value="0" /><span class ="unit">cm</span></p>
+       <p><input id="id_form-0-crotch" name="form-0-crotch" step="any" type="number" value="{{ form.crotch.value }}" /><span class ="unit">cm</span></p>
         <label for="id_form-0-thigh">허벅지:</label>
          {{ form.thigh.errors }}
-       <p><input id="id_form-0-thigh" name="form-0-thigh" step="any" type="number" value="0" /><span class ="unit">cm</span></p>
+       <p><input id="id_form-0-thigh" name="form-0-thigh" step="any" type="number" value="{{ form.thigh.value }}" /><span class ="unit">cm</span></p>
         <label for="id_form-0-hem">밑단:</label>
          {{ form.hem.errors }}
-       <p><input id="id_form-0-hem" name="form-0-hem" step="any" type="number" value="0" /><span class ="unit">cm</span></p>
+       <p><input id="id_form-0-hem" name="form-0-hem" step="any" type="number" value="{{ form.hem.value }}" /><span class ="unit">cm</span></p>
         <p class ="greyer"><label><input type="checkbox" id= "hip_check" name="hip_exist" value="no"> 엉덩이 부분은 몰라요</label></p>
         <label for="id_form-0-hip" class = "hip">엉덩이:</label>
         {{ form.hip.errors }}
-        <p><input id="id_form-0-hip" name="form-0-hip" step="any" type="number" value="0" /><span class ="unit">cm</span></p>
+        <p><input id="id_form-0-hip" name="form-0-hip" step="any" type="number" value="{{ form.hip.value }}" /><span class ="unit">cm</span></p>
         <p><a class="delete" href="#">위 사이즈 지우기</a></p>
     </div>
         {% endfor %}

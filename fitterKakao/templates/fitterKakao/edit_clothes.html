@@ -76,9 +76,9 @@
         {{ clothes_form.hem.errors }}
         <p class ="greyer"><input id="id_hem" name="hem" step="any" type="number" value="{{ clothes_form.hem.value }}" /><span class ="unit">cm</span></p>
         <p class ="greyer"><label><input type="checkbox" id= "hip_check" name="hip_exist" value="no"> 엉덩이 부분은 몰라요</label></p>
-        <label for="id_form-0-hip" class = "hip">엉덩이:</label>
-        {{ form.hip.errors }}
-        <p><input id="id_form-0-hip" name="form-0-hip" step="any" type="number" value="{{ clothes_form.hip.value }}" /><span class ="unit">cm</span></p>
+        <label for="id_hip" class = "hip">엉덩이:</label>
+        {{ clothes_form.hip.errors }}
+        <p><input id="id_hip" name="hip" step="any" type="number" value="{{ clothes_form.hip.value }}" /><span class ="unit">cm</span></p>
 
     </div>
     {% endif %}
