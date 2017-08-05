@@ -10,7 +10,7 @@ input {
   background: transparent;
   border-bottom: 4px solid #f0ad4e;
   margin-bottom:20px;
-  height: 10%;
+  height: 30px;
   width: 100%;
 }
 
@@ -18,7 +18,8 @@ input {
   font-size: 20px;
 }
 
-h4{
+h4, p{
  font-family:'NanumBarunGothic';
  font-weight:bold;
+ font-size:30px;
 }
