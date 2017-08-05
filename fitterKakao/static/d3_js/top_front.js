@@ -22,8 +22,8 @@ var topCal = {
               'shoulder':shirt['shoulder']-suggest_body['shoulder'],
               'chest':shirt['chest']-suggest_body['chest']/2,
               'waist':shirt['chest']-suggest_body['waist']/2,
-              'length':shirt['len']-(real_tall-suggest_body['crotch_height']),
-              'sleeve':shirt['sleeve']-suggest_body['arm'],
+//              'length':shirt['len']-(real_tall-suggest_body['crotch_height']),
+//              'sleeve':shirt['sleeve']-suggest_body['arm'],
         };
 
 

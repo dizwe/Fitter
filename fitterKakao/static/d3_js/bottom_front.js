@@ -27,7 +27,7 @@ var myBottomSide = {'visual_waist':my['bottom_waist']/3*2, // thigh랑 길이가
                     };
 
 var botCal = {'bot_waist':(myBottomSide['visual_pant_waist']-myBottomSide['visual_waist'])/2,
-              'bot_length':pant['length']-suggest_body['length'],
+//              'bot_length':pant['length']-suggest_body['length'],
               'crotch':pant['crotch']-suggest_body['crotch'],
               'thigh':(pant['thigh']-my['thigh'])/2,
               'hem' : pant['hem']-dynamic_hem(pant['length']),

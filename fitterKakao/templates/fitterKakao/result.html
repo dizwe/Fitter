@@ -55,11 +55,11 @@
     <div class ="card card-outline-success mb-3">
         <h1 class = "text-center"><span class="block">{{clothes.0.nick}}</span>({{clothes.0.size}}) 분석 결과</h1>
         <div class = "anal"></div>
-        <!--{% if types == 'top' %}-->
-        <!--<p>길이, 소매는 그래프나 그림을 참고해주세요!</p>-->
-        <!--{% elif types == 'bot' %}-->
-        <!--<p>기장은 그래프나 그림을 참고해주세요!</p>-->
-        <!--{% endif %}-->
+        {% if types == 'top' %}
+        <p class = "text-center"><span class="block">길이, 소매는</span> 그래프나 그림을 참고해주세요!</p>
+        {% elif types == 'bot' %}
+        <p class = "text-center"><span class="block">기장은</span> 그래프나 그림을 참고해주세요!</p>
+        {% endif %}
     </div>
     <div class ="barChart card card-outline-success mb-3 text-center">
 

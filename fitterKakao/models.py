@@ -57,7 +57,7 @@ class Person(models.Model):
 
 
 class SameClothes(models.Model):
-    same_nick = models.CharField(max_length=80, default='무제(Untitled,2017)')
+    same_nick = models.CharField(max_length=80, default='Untitled')
     same_photo = ResizedImageField(blank=True, size=[300, 300], upload_to="%Y/%m/%d")
     same_url = models.URLField(blank=True, default='')
 
