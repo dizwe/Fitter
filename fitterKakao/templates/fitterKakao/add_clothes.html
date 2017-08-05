@@ -6,16 +6,27 @@
 
 <script src="{% static 'js/add_forms.js' %}"></script>
 <div class="row">
-    <div class="col-md-3 col-md-offset-3">
+    <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1">
 
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{same_clothes_form.as_p}}
-    
+    <div class="item">
+        <h2 class="bodyCategory"> <span class="sharp"># </span>공통 데이터 </h2>
+        <p><label class="interim-block" for="id_same_nick">이름:</label>
+            {{same_clothes_form.same_nick.errors}}
+            <input id="id_same_nick" maxlength="80" name="same_nick" type="text" value="무제(Untitled,2017)" required /></p>
+        <p><label for="id_same_photo">사진(선택):</label>
+            {{same_clothes_form.same_photo.errors}}
+            <input id="id_same_photo" name="same_photo" type="file" /></p>
+        <p><label for="id_same_url">링크(선택):</label>
+            {{same_clothes_form.same_url.errors}}
+            <input id="id_same_url" maxlength="200" name="same_url" type="url" /></p>
+    </div>
     {{ clothes_formset.management_form }}
     {% if types == "top" %}
     {% for form in clothes_formset.forms %}
     <div class="item">
+        <h2 class="bodyCategory"> <span class="sharp"># </span>사이즈 데이터 </h2>
         <!--<p class = "all-nick"><label for="id_form-0-nick">이름:</label>-->
          <!--{{ form.nick.errors }}-->
         <!--<input id="id_form-0-nick" maxlength="50" name="form-0-nick" type="text" value="{{ form.nick.value }}" /></p>-->
@@ -40,15 +51,15 @@
         <label for="id_form-0-sleeve">소매:</label>
           {{ form.sleeve.errors }}
       <p><input id="id_form-0-sleeve" name="form-0-sleeve" step="any" type="number" value="{{ form.sleeve.value }}" /><span class ="unit">cm</span></p>
-        <p><a class="delete" href="#">데이터 지우기</a></p>
+        <p><a class="delete" href="#">위 사이즈 지우기</a></p>
     </div>
     {% endfor %}
     {% elif types == "bot" %}
     {% for form in clothes_formset.forms %}
-
-    <label><input type="checkbox" id= "hip_check" name="hip_exist" value="no"> 엉덩이 부분은 몰라요</label><br/>
-
     <div class="item">
+    <h2 class="bodyCategory"> <span class="sharp"># </span>사이즈 데이터 </h2>
+
+
         <!--<label for="id_form-0-nick">이름:</label>-->
          <!--{{ form.nick.errors }}-->
        <!--<p><input id="id_form-0-nick" maxlength="20" name="form-0-nick" type="text" value="Untitled" /></p>-->
@@ -79,10 +90,11 @@
         <label for="id_form-0-hem">밑단:</label>
          {{ form.hem.errors }}
        <p><input id="id_form-0-hem" name="form-0-hem" step="any" type="number" value="0" /><span class ="unit">cm</span></p>
+        <p class ="greyer"><label><input type="checkbox" id= "hip_check" name="hip_exist" value="no"> 엉덩이 부분은 몰라요</label></p>
         <label for="id_form-0-hip" class = "hip">엉덩이:</label>
         {{ form.hip.errors }}
         <p><input id="id_form-0-hip" name="form-0-hip" step="any" type="number" value="0" /><span class ="unit">cm</span></p>
-        <p><a class="delete" href="#">데이터 지우기</a></p>
+        <p><a class="delete" href="#">위 사이즈 지우기</a></p>
     </div>
         {% endfor %}
     {% endif %}
@@ -91,7 +103,7 @@
     <button type="submit" class ="btn btn-success btn-lg">저장하기</button>
     </form>
       </div>
-    <div class="col-md-3">
+    <div class="col-md-5 col-lg-4">
         <h2 class="bodyCategory"> 치수 입력 기준 </h2>
         {% if types == "top" %}
         <img src="{% static 'pic/top.png' %}">

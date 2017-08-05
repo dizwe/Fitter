@@ -35,12 +35,9 @@ $(document).ready(function(){
 
         if (formCount < 4){
             //첫번째 formset에서 복사ㅏ
-            var row = $(".item:first").clone(false).get(0) //처음거 가져오기
+            var row = $(".item:eq(1)").clone(false).get(0) //처음거 가져오기
             $(row).removeAttr('id').hide().insertAfter(".item:last").slideDown(300);
 
-            //필요없는거 지우기
-//            $(".errorlist", row).remove();
-//            $(row).children().removeClass("error");
 
             $(row).children().children().each(function(){
                 updateElementIndex(this, prefix, formCount);
@@ -63,7 +60,7 @@ $(document).ready(function(){
             $("#id_" + prefix + "-TOTAL_FORMS").val(formCount + 1);
 
         }else{
-            alert("이미 많이 만들었쟈나~ 한계야!");
+            alert("S...T....O..P");
         }
         return false;
     }
@@ -77,23 +74,23 @@ $(document).ready(function(){
     });
 })
 
-$(document).ready(function(){
-$('#id_form-0-nick').change(function(){
-    var prefix = "form";
-    var param = "nick";
-    var formCount = parseInt($('#id_'+prefix+'-TOTAL_FORMS').val()); // total_form id의 val 값
-    for (i=1;i<formCount;i++){
-        console.log(i,formCount);
-        var changed_val = $(this).val()
-        var clone = $(this).clone(); // 첫번재 item 복사
-//        clone.attr('id','id_form-'+i+'-'+param);
-//        clone.attr('name','id_form-'+i+'-'+param);
-//        clone.val(changed_val);
-//        console.log(clone)
-//        $('#id_'+prefix+'-'+i+'-'+param).parent().html(clone);  //이렇게 하면 변동하는 값을 하는게 아니라 그냥 html만 복사
-        $('#id_'+prefix+'-'+i+'-'+param).val(changed_val);
-    }
-
-})
-})
+//$(document).ready(function(){
+//$('#id_form-0-nick').change(function(){
+//    var prefix = "form";
+//    var param = "nick";
+//    var formCount = parseInt($('#id_'+prefix+'-TOTAL_FORMS').val()); // total_form id의 val 값
+//    for (i=1;i<formCount;i++){
+//        console.log(i,formCount);
+//        var changed_val = $(this).val()
+//        var clone = $(this).clone(); // 첫번재 item 복사
+////        clone.attr('id','id_form-'+i+'-'+param);
+////        clone.attr('name','id_form-'+i+'-'+param);
+////        clone.val(changed_val);
+////        console.log(clone)
+////        $('#id_'+prefix+'-'+i+'-'+param).parent().html(clone);  //이렇게 하면 변동하는 값을 하는게 아니라 그냥 html만 복사
+//        $('#id_'+prefix+'-'+i+'-'+param).val(changed_val);
+//    }
+//
+//})
+//})
 //#('#id_form-0-photo')

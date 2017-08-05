@@ -125,6 +125,11 @@ input {
 
 input[type='checkbox']{
    width:20px;
+   margin-right:0.4em;
+   vertical-align:middle;
+}
+.greyer{
+    color:#777;
 }
 #hip-check{
    width: unset;
@@ -151,16 +156,20 @@ img{
 }
 
 .sharp{
-  color:red;
+  color:#f75656;
   font-weight:bold;
 }
 /*edit/add clothes*/
+.interim-block{
+    display:block;
+    margin-bottom:10px;
+}
 .item{
     border-bottom: 1px rgba(0, 0, 0, 0.2) dashed;
     margin-bottom: 30px;
     padding-bottom: 10px;
 }
-.item p{
+.item p .same-item p{
   width: 90%;
   display: block;
 }

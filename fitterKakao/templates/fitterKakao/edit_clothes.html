@@ -6,23 +6,34 @@
 
 <script src="{% static 'js/add_forms.js' %}"></script>
 <div class="row">
-  <div class="col-md-3 col-md-offset-3">
+  <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1">
 
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-
+    <div class="item">
+    <h2 class="bodyCategory"> <span class="sharp"># </span>공통 데이터 </h2>
+    <p><label for="id_same_nick">이름:</label>
+       <input id="id_same_nick" maxlength="80" name="same_nick" type="text" value="{{same_clothes_form.same_nick.value}}" required /></p>
+    <p class ="greyer"><input id="same_photo-stay" name="same_photo-stay" type="checkbox" />
+        <label for="same_photo-stay">원래 사진 유지하기</label></p>
+    <p class = "photo-change"><label for="id_same_photo">사진 바꾸기(선택):</label>
+        <input id="id_same_photo" name="same_photo" type="file" /></p>
+    <p><label for="id_same_url">링크(선택):</label>
+        <input id="id_same_url" maxlength="200" name="same_url" type="url" value="{{same_clothes_form.same_url.value}}" /></p>
+    </div>
     {{ clothes_formset.management_form }}
     {% if types == "top" %}
     <div class="item">
-        <label for="id_nick">이름:</label>
-        {{ clothes_form.nick.errors }}
-        <p><input id="id_nick" maxlength="50" name="nick" type="text" value="{{ clothes_form.nick.value }}" /></p>
+        <h2 class="bodyCategory"> <span class="sharp"># </span>사이즈 데이터 </h2>
+        <!--<label for="id_nick">이름:</label>-->
+        <!--{{ clothes_form.nick.errors }}-->
+        <!--<p><input id="id_nick" maxlength="50" name="nick" type="text" value="{{ clothes_form.nick.value }}" /></p>-->
         <label for="id_size">사이즈:</label>
         {{ clothes_form.size.errors }}
         <p><input id="id_size" maxlength="4" name="size" type="text" value="{{ clothes_form.size.value }}" /></p>
-        <label for="id_photo">사진(선택):</label>
-        {{ clothes_form.photo.errors }}
-        <p><input id="id_photo" name="photo" type="file" /></p>
+        <!--<label for="id_photo">사진(선택):</label>-->
+        <!--{{ clothes_form.photo.errors }}-->
+        <!--<p><input id="id_photo" name="photo" type="file" /></p>-->
         <label for="id_top_length">길이:</label>
          {{ clothes_form.top_length.errors }}
         <p><input id="id_top_length" name="top_length" step="any" type="number" value="{{ clothes_form.top_length.value }}" /><span class ="unit">cm</span></p>
@@ -38,15 +49,16 @@
     </div>
     {% elif types == "bot" %}
     <div class="item">
-        <label for="id_nick">이름:</label>
-        {{ clothes_form.nick.errors }}
-        <p><input id="id_nick" maxlength="20" name="nick" type="text" value="{{ clothes_form.nick.value }}" /></p>
+        <h2 class="bodyCategory"> <span class="sharp"># </span>사이즈 데이터 </h2>
+        <!--<label for="id_nick">이름:</label>-->
+        <!--{{ clothes_form.nick.errors }}-->
+        <!--<p><input id="id_nick" maxlength="20" name="nick" type="text" value="{{ clothes_form.nick.value }}" /></p>-->
         <label for="id_size">사이즈:</label>
         {{ clothes_form.size.errors }}
         <p><input id="id_size" maxlength="4" name="size" type="text" value="{{ clothes_form.size.value }}" /></p>
-        <label for="id_photo">사진(선택):</label>
-        {{ clothes_form.photo.errors }}
-        <p><input id="id_photo" name="photo" type="file" /></p>
+        <!--<label for="id_photo">사진(선택):</label>-->
+        <!--{{ clothes_form.photo.errors }}-->
+        <!--<p><input id="id_photo" name="photo" type="file" /></p>-->
         <label for="id_waist">허리:</label>
         {{ clothes_form.waist.errors }}
         <p><input id="id_waist" name="waist" step="any" type="number" value="{{ clothes_form.waist.value }}" /><span class ="unit">cm</span></p>
@@ -62,18 +74,19 @@
         <p><input id="id_thigh" name="thigh" step="any" type="number" value="{{ clothes_form.thigh.value }}" /><span class ="unit">cm</span></p>
         <label for="id_hem">밑단:</label>
         {{ clothes_form.hem.errors }}
-        <p><input id="id_hem" name="hem" step="any" type="number" value="{{ clothes_form.hem.value }}" /><span class ="unit">cm</span></p>
-        <label><input type="checkbox" id= "hip_check" name="hip_exist" value="no"> 엉덩이 부분은 몰라요</label><br/>
-        <label for="id_hip" id = "hip">엉덩이:</label>
-        {{ clothes_form.hip.errors }}
-        <p><input id="id_hip" name="hip" step="any" type="number" value="{{ clothes_form.hip.value }}" /><span class ="unit">cm</span></p>
+        <p class ="greyer"><input id="id_hem" name="hem" step="any" type="number" value="{{ clothes_form.hem.value }}" /><span class ="unit">cm</span></p>
+        <p class ="greyer"><label><input type="checkbox" id= "hip_check" name="hip_exist" value="no"> 엉덩이 부분은 몰라요</label></p>
+        <label for="id_form-0-hip" class = "hip">엉덩이:</label>
+        {{ form.hip.errors }}
+        <p><input id="id_form-0-hip" name="form-0-hip" step="any" type="number" value="{{ clothes_form.hip.value }}" /><span class ="unit">cm</span></p>
+
     </div>
     {% endif %}
 
     <button type="submit" class ="btn btn-success btn-lg">저장하기</button>
 </form>
      </div>
-    <div class="col-md-3">
+    <div class="col-md-5 col-lg-4">
         <h2 class="bodyCategory"> 치수 입력 기준 </h2>
         {% if types == "top" %}
         <img src="{% static 'pic/top.png' %}">

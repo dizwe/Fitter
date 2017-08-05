@@ -18,12 +18,13 @@ def index(request):
 
 def make_question_generator(whole_d):
     # data 과부하 줄이기
-    for sex in ['man']: #'man'
+    for sex in ['man','woman']:
         shw_filtered_sizes = whole_d[sex]
         height_key = list(shw_filtered_sizes.keys())
         height_key = list(map(int, height_key))  # 원래 문자니까
+        weight_range = range(15, 152) if sex =='man' else range(15, 105)
         for height in range(min(height_key), max(height_key)+10, 10):
-            for weight in range(15, 152): # (15, 105) # 해보니 그렇던데?/여자
+            for weight in weight_range: # 해보니 그렇던데?/여자
                 yield sex, height, weight
 
 
@@ -58,7 +59,7 @@ def data_add(request):
 
 @user_passes_test(lambda u: u.is_superuser)
 def data_del(request):
-    SizeInfo.objects.all().delete()
+    # SizeInfo.objects.all().delete()
     return HttpResponse("DEL DONE")
 
 
@@ -204,6 +205,7 @@ def add_clothes(request, kinds):
             for form in clothes_formset.forms:
                 clothes = form.save(commit=False)
                 clothes.nick = just_saved
+                clothes.url = just_saved
                 clothes.photo = just_saved
                 clothes.name = request.user
                 clothes.save()
@@ -234,6 +236,8 @@ def edit_clothes(request, kinds, tag_num):
         return render(request, 'fitterKakao/index.html')
 
     if request.method == "POST":
+        same_clothes_form = SameClothesForm(request.POST, request.FILES)
+
         if kinds == 'top':
             existing_clothes = TopClothes.objects.get(pk=tag_num)
             clothes_form = TopClothesForm(request.POST, request.FILES, instance=existing_clothes)
@@ -241,21 +245,34 @@ def edit_clothes(request, kinds, tag_num):
             existing_clothes = BottomClothes.objects.get(pk=tag_num)
             clothes_form = BottomClothesForm(request.POST, request.FILES, instance=existing_clothes)
         if clothes_form.is_valid():
+            same_clothes = same_clothes_form.save(commit=False)
+            same_clothes.save()
+            just_saved = SameClothes.objects.get(pk=same_clothes.pk)
+
             clothes = clothes_form.save(commit=False)
+            clothes.nick = just_saved
+            clothes.url = just_saved
+            if 'same_photo-stay' not in request.POST:
+                clothes.photo = just_saved
             clothes.name = request.user
             clothes.save()
 
             return redirect(reverse('fitterKakao:choose_clothes')+hashTag)
     else:
+
         if kinds == 'top':
             existing_clothes = TopClothes.objects.get(pk=tag_num)
             clothes_form = TopClothesForm(instance=existing_clothes)
         elif kinds == 'bot':
             existing_clothes = BottomClothes.objects.get(pk=tag_num)
             clothes_form = BottomClothesForm(instance=existing_clothes)
+        # 이미 있는 데이터의 foreignkey pk 구하기
+        existing_same = SameClothes.objects.get(pk=existing_clothes.nick.pk)
+        same_clothes_form = SameClothesForm(instance=existing_same)
 
     return render(request, 'fitterKakao/edit_clothes.html', {'types' : kinds,
-                                                             'clothes_form': clothes_form, })
+                                                             'clothes_form': clothes_form,
+                                                             'same_clothes_form': same_clothes_form,})
 
 
 @login_required

@@ -55,6 +55,18 @@ $(document).ready(function(){
             $('.hip').next().show();}
 
     });
+
+    $('#same_photo-stay').change(function(){
+        if(this.checked){
+            $('.same_photo-stay').attr('checked','checked');
+            $('.photo-change').hide();
+            }
+        else{
+            $('.same_photo-stay').attr('checked','false');
+            $('.photo-change').show();
+            }
+
+    });
 });
 
 
