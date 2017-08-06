@@ -277,6 +277,10 @@ def edit_clothes(request, kinds, tag_num):
 
 @login_required
 def choose_clothes(request):
+    try:
+        _ = Person.objects.get(name__username=request.user.username)
+    except Person.DoesNotExist:
+        return redirect('fitterKakao:post_new')
     top_clothes = TopClothes.objects.filter(name=request.user)
     bottom_clothes = BottomClothes.objects.filter(name=request.user)
 

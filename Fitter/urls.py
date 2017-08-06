@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^', include('fitterKakao.urls')),
     url(r'^admin/', admin.site.urls),
     url(
-        r'^accounts/login$',
+        r'^accounts/login/',
         auth_views.login,
         name='login',
         kwargs={
