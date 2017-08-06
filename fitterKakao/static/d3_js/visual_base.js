@@ -37,7 +37,7 @@ function realBroadToRatio(real_value){
 
 function manPart(value){
   if (sex==='man'){
-    return value - 80; // 그곳
+    return value - 70; // 그곳
   }else{
     return value
   }

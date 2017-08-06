@@ -5,9 +5,9 @@ function engToKor(param){
     return engKor[param]
 }
 
-function fitCal(calData, big_criteria=20, too_criteria=50){
-    var info = {'small': [] ,'fit': [],'big': [],'too':[],'exception':[]};
-        var excepts = ['길이','기장','소매','배','밑단'];
+function fitCal(calData,too_small_criteria=-30, big_criteria=20, too_criteria=50){
+    var info = {'too_small': [],'small': [] ,'fit': [],'big': [],'too':[],'exception':[]};
+    var excepts = ['길이','기장','소매','배','밑단'];
 
     function pushAndExcept(size,param){
         //클로저 자료는 넣고, except가 있다면 except size따로 파악
@@ -33,7 +33,9 @@ function fitCal(calData, big_criteria=20, too_criteria=50){
 
     for (param in calData){
         var value = calData[param];
-        if (value<0){
+        if (value<too_small_criteria){
+            pushAndExcept('too_small',param);
+        }else if (value<0){
             pushAndExcept('small',param);
         }else if(value>big_criteria && value<=too_criteria){
             pushAndExcept('big',param);
@@ -44,8 +46,10 @@ function fitCal(calData, big_criteria=20, too_criteria=50){
         }
     }
 
-    if (countWithExcept('small')>0){
-       conclusion = "작아요:(";
+    if(countWithExcept('too_small')>0){
+       conclusion = "작아요 :[";
+    }else if (countWithExcept('small')>0){
+       conclusion = "늘어나는 재질이 아니면 작아요";
     }else if(countWithExcept('too')>0){
        conclusion = "커요~";
     }else if(countWithExcept('big')>0){
@@ -71,9 +75,15 @@ else if(clothes_type ==='bot'){
 $(document).ready(function(){
     var target = document.getElementsByClassName('anal')[0];
     target.innerHTML += "<p class ='anal-head'>[FIT=해당 부위 옷 길이-몸 길이]</p>";
+    if(divided_param['too_small'].length>0){
+        target.innerHTML += "<p><span  class = 'anal-description'>"
+                            + "<span class ='anal-li block'>작은 부분</span>(FIT&lt;-3) : </span>"
+                            + divided_param['too_small']+"</p>";
+
+    }
     if(divided_param['small'].length>0){
         target.innerHTML += "<p><span  class = 'anal-description'>"
-                            + "<span class ='anal-li block'>옷이 작은 부분</span>(FIT&lt;0) : </span>"
+                            + "<span class ='anal-li block'>옷이 안 늘어나면 작은 부분</span>(-3&lt;FIT&lt;0) : </span>"
                             + divided_param['small']+"</p>";
 
     }
@@ -88,7 +98,7 @@ $(document).ready(function(){
 //        target.innerHTML += "<p class = 'anal-description'> 옷이 넉넉한 부분<span class ='block'>(2&lt;FIT&lt;5cm) :</span></p>";
 //        target.innerHTML += "<p>"+divided_param['big']+"</p>";
         target.innerHTML += "<p><span  class = 'anal-description'>"
-                            + "<span class ='anal-li block'>옷이 넉넉한 부분</span>(2&lt;FIT&lt;5cm) :  </span>"
+                            + "<span class ='anal-li block'>옷이 적당한 부분</span>(2&lt;FIT&lt;5cm) :  </span>"
                             + divided_param['big']+"</p>";
     }
     if(divided_param['too'].length>0){
