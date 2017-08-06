@@ -1,0 +1,18 @@
+{% extends 'fitterKakao/layout.html' %}
+{% block content %}
+<p>
+<h2>해당 키, 몸무게 데이터가 없어요. :[</h2>
+<br>
+<h4>아래는 우리가 가지고 있는 데이터 리스트에요.</h4>
+<br>
+<h4>검색(Ctrl+F)키를 눌러 키X10 몸무게 예를 들어, 키가 177, 몸무게가 70이라면 1770 70를 검색해보세요.</h4>
+<h4>그 키나 몸무게 주변 데이터를 입력해서 사용하면 되지만, 정확도가 높지 않아요 ㅜㅜ</h4>
+<br>
+</p>
+<p>
+    {% for one_d in sex_filtered %}
+        {{one_d}}
+    {% endfor %}
+</p>
+
+{% endblock %}

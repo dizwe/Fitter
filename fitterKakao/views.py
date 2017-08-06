@@ -139,11 +139,21 @@ def check_data(request):
         return redirect('fitterKakao:post_new')
 
 
+def check_data(d):
+    exist = SizeInfo.objects.filter(sex=d['sex']).filter(height=d['height']*10).filter(weight=d['weight']).exists()
+
+    return exist
+
 @login_required
 def post_new(request):
     if request.method == "POST": #이미 보낸거라면
         person_form = PersonForm(request.POST)
+
         if person_form.is_valid(): # 저장된 form 형식이 잘 맞는지
+            if not check_data(person_form.cleaned_data): # 없는 데이터라면,
+                sex_filtered = SizeInfo.objects.filter(sex=person_form.cleaned_data['sex'])
+                return render(request, 'fitterKakao/no_data.html', {'sex_filtered':sex_filtered,})
+
             person = person_form.save(commit=False) # False 바로 저장하지는 마
             person.name = request.user
             person.save()
@@ -166,6 +176,9 @@ def post_edit(request, user_name):
     if request.method == "POST":  # 이미 보낸거라면
         person_form = PersonForm(request.POST, instance=existing_data)
         if person_form.is_valid(): # 저장된 form 형식이 잘 맞는지
+            if not check_data(person_form.cleaned_data): # 없는 데이터라면,
+                sex_filtered = SizeInfo.objects.filter(sex=person_form.cleaned_data['sex'])
+                return render(request, 'fitterKakao/no_data.html', {'sex_filtered':sex_filtered,})
             person = person_form.save(commit=False) # False 바로 저장하지는 마
             person.name = request.user
             person.save()
@@ -277,10 +290,12 @@ def edit_clothes(request, kinds, tag_num):
 
 @login_required
 def choose_clothes(request):
+    """데이터 없으면 옷장이 아니라 데이터 입력으로 들어가기"""
     try:
         _ = Person.objects.get(name__username=request.user.username)
     except Person.DoesNotExist:
         return redirect('fitterKakao:post_new')
+
     top_clothes = TopClothes.objects.filter(name=request.user)
     bottom_clothes = BottomClothes.objects.filter(name=request.user)
 

@@ -23,7 +23,7 @@
             <div class="col-md-12">
             <a href = "{% url 'fitterKakao:add_clothes' kinds='top' %}"><h3>상의 추가하기</h3></a>
             </div>
-            {% for one_top in top_clothes %}
+            {% for one_top in top_clothes reversed%}
             <div class="col-lg-4 col-md-6 col-xs-12">
 					<div class="thumbnail">
 						<div class="caption">
@@ -82,7 +82,7 @@
             <div class="col-md-12">
             <a href = "{% url 'fitterKakao:add_clothes' kinds='bot' %}"><h3>하의 추가하기</h3></a>
             </div>
-            {% for one_bot in bottom_clothes %}
+            {% for one_bot in bottom_clothes reversed%}
             <div class="col-lg-4 col-md-6">
 					<div class="thumbnail">
 						<div class="caption">
