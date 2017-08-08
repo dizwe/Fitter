@@ -33,7 +33,7 @@ class SizeInfo(models.Model):
 
 class Person(models.Model):
     SMALL =0; AVG = 1; BIG = 2
-    CHOICES = [(SMALL, '많이 남는다'), (AVG, '별로 불편한 것이 없다'), (BIG, '낀다')]
+    CHOICES = [(SMALL, '작다'), (AVG, '보통'), (BIG, '크다')]
     MAN = 'man'; WOMAN = 'woman'
     SEX_CHOICES = [(MAN, '남자'), (WOMAN, '여자')]
     name = models.ForeignKey(settings.AUTH_USER_MODEL)
