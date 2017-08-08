@@ -24,6 +24,27 @@ function Pram2Zero(value,index){
     return !(value===0 && index%3===2)
 }
 
+//ie T/F 리턴
+function detectIE() {
+    var ua = window.navigator.userAgent;
+
+    var msie = ua.indexOf('MSIE ');
+    if (msie > 0) {
+        // IE 10 or older => return version number
+        return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+    }
+
+    var trident = ua.indexOf('Trident/');
+    if (trident > 0) {
+        // IE 11 => return version number
+        var rv = ua.indexOf('rv:');
+        return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+    }
+
+    // other browser
+    return false;
+}
+
 var numNoZero = zippedData.filter(Pram2Zero).length
 
 var chartHeight = barHeight * (numNoZero+2) + gapBetweenGroups * data.labels.length;
@@ -46,8 +67,16 @@ var widthSum = spaceForLabels + chartWidth + spaceRight;
 var chartLegendHeight = chartHeight + barHeight*2;// legend 자리 만들어주기
 var chart = d3.select("div.barChart")
             .append("svg")
-            .attr("class","chart")
-            .attr("viewBox","0 0 "+widthSum+" "+chartLegendHeight)
+            .attr("class","chart");
+
+if(detectIE()){
+    chart.attr("width", spaceForLabels + chartWidth)
+          .attr("height", chartHeight);
+
+}else{
+    chart.attr("viewBox","0 0 "+widthSum+" "+chartLegendHeight)
+}
+
 
 // Create bars
 var exceptZero =  0;

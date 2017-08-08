@@ -328,6 +328,11 @@ label{
 .visual{
     max-height : 100%;
 }
+
+canvas {
+  display: block;
+  height: 2rem;
+}
 @media screen and (min-width: 768px) {
   body{
   font-size:20px;
@@ -373,8 +378,6 @@ label{
     display: table-cell;
     vertical-align: middle;
 }
-
-
 
 }
 

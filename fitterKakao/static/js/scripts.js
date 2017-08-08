@@ -113,3 +113,41 @@ $('#top-tab').on('click', function(){
 $('#bot-tab').on('click', function(){
     document.location.hash = "bot-clothes";
 })
+
+function detectIE() {
+    var ua = window.navigator.userAgent;
+
+    var msie = ua.indexOf('MSIE ');
+    if (msie > 0) {
+        // IE 10 or older => return version number
+        return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+    }
+
+    var trident = ua.indexOf('Trident/');
+    if (trident > 0) {
+        // IE 11 => return version number
+        var rv = ua.indexOf('rv:');
+        return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+    }
+
+//    var edge = ua.indexOf('Edge/');
+//    if (edge > 0) {
+//       // Edge (IE 12+) => return version number
+//       return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+//    }
+
+    // other browser
+    return false;
+}
+$(document).ready(function(){
+    if(detectIE()){ //
+        var svg = $('div.visual svg').removeAttr('viewBox');
+
+        if (clothes_type ==='top'){
+            svg.attr('height','550px');
+            svg.attr('width','300px');
+        }else if(clothes_type ==='bot'){
+
+            svg.attr('height','500px');
+            svg.attr('width','100%');
+    }}})
