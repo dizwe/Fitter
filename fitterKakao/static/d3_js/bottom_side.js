@@ -117,9 +117,9 @@ var bottomSideClo = [
                   y: realTallToRatio(my['crotch_height'])},
                   // 발목 6 dynamic
                   {x: myBottomSide['invisible_line'] - realBroadToRatio(my['hem']*2+botCal['hem']/2*3),
-                  y: realTallToRatio(my['total_leg']-pant['length'])},
+                  y: realTallToRatio(my['total_leg']-pant['bot_length'])},
                   {x: myBottomSide['invisible_line'] + realBroadToRatio(botCal['hem']/2),
-                  y: realTallToRatio(my['total_leg']-pant['length'])},
+                  y: realTallToRatio(my['total_leg']-pant['bot_length'])},
                 ];
 
 var bottomClothesSideLinks = [

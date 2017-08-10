@@ -21,8 +21,6 @@
             {% for clo_param, clo_val in single_clothes_dict.items %}
                 {% if clo_param == 'size' %}
                     test_shirt['{{clo_param}}'] = "{{clo_val }}";
-                {% elif clo_param == 'top_length' %}
-                    test_shirt['len'] = {{clo_val }};
                 {% else %}
                     test_shirt['{{clo_param}}'] = {{clo_val }};
                 {% endif %}
@@ -34,8 +32,6 @@
             {% for clo_param, clo_val in single_clothes_dict.items %}
                 {% if clo_param == 'size' %}
                     test_pants['{{clo_param}}'] = "{{clo_val }}";
-                {% elif clo_param == 'bot_length' %}
-                    test_pants['length'] = {{clo_val }};
                 {% else %}
                     test_pants['{{clo_param}}'] = {{clo_val }};
                 {% endif %}

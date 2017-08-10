@@ -20,7 +20,7 @@
         var clothes_type = '{{types}}';
         if (clothes_type ==='top'){
             {% for one_clothes in clothes %}
-                var test_shirt = {"len":{{one_clothes.top_length|default:0}},
+                var test_shirt = {"top_length":{{one_clothes.top_length|default:0}},
                              "shoulder":{{one_clothes.shoulder|default:0}},
                              "chest":{{one_clothes.chest|default:0}},
                              "sleeve":{{one_clothes.sleeve|default:0}},
@@ -31,7 +31,7 @@
         }else if(clothes_type ==='bot'){
             {% for one_clothes in clothes %}
                 var test_pants = {"waist":{{one_clothes.waist|default:0}},
-                             "length":{{one_clothes.bot_length|default:0}},
+                             "bot_length":{{one_clothes.bot_length|default:0}},
                              "hip":{{one_clothes.hip|default:0}},
                              "crotch":{{one_clothes.crotch|default:0}},
                              "thigh":{{one_clothes.thigh|default:0}},

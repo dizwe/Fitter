@@ -27,10 +27,10 @@ var myBottomSide = {'visual_waist':my['bottom_waist']/3*2, // thigh랑 길이가
                     };
 
 var botCal = {'bot_waist':(myBottomSide['visual_pant_waist']-myBottomSide['visual_waist'])/2,
-//              'bot_length':pant['length']-suggest_body['length'],
+//              'bot_length':pant['bot_length-suggest_body['length'],
               'crotch':pant['crotch']-suggest_body['crotch'],
               'thigh':(pant['thigh']-my['thigh'])/2,
-              'hem' : pant['hem']-dynamic_hem(pant['length']),
+              'hem' : pant['hem']-dynamic_hem(pant['bot_length']),
               'hip' :(pant['hip']!=0)?(myBottomSide['visual_pant_hip']-myBottomSide['visual_hip']):0,
               };
 
@@ -139,14 +139,14 @@ myBottom = {'bottom_waist' : suggest_body};
 var bottomClothesDot = [
               //기장 0
               {x: broad/2-realBroadToRatio(my['chest']/2),
-               y: realTallToRatio(my['total_leg']-pant['length'])},//왼쪽
+               y: realTallToRatio(my['total_leg']-pant['bot_length'])},//왼쪽
               {x: broad/2+realBroadToRatio(my['chest']/2),
-               y: realTallToRatio(my['total_leg']-pant['length'])},//오른쪽
+               y: realTallToRatio(my['total_leg']-pant['bot_length'])},//오른쪽
               //기장 안쪽 2
               {x: broad/2-realBroadToRatio(my['between_leg']/2),
-               y: realTallToRatio(my['total_leg']-pant['length'])},//왼쪽
+               y: realTallToRatio(my['total_leg']-pant['bot_length'])},//왼쪽
               {x: broad/2+realBroadToRatio(my['between_leg']/2),
-               y: realTallToRatio(my['total_leg']-pant['length'])},//오른쪽
+               y: realTallToRatio(my['total_leg']-pant['bot_length'])},//오른쪽
               //밑위 4
               {x: broad/2-realBroadToRatio(my['between_leg']/2),
                y: realTallToRatio(my['total_leg']-pant['crotch'])},//밑위 왼쪽

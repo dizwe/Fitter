@@ -20,7 +20,7 @@ var topCal = {
               'shoulder':shirt['shoulder']-suggest_body['shoulder'],
               'chest':shirt['chest']-suggest_body['chest']/2,
               'waist':shirt['chest']-suggest_body['waist']/2,
-//              'length':shirt['len']-(real_tall-suggest_body['crotch_height']),
+//              'length':shirt['top_length']-(real_tall-suggest_body['crotch_height']),
 //              'sleeve':shirt['sleeve']-suggest_body['arm'],
         };
 
@@ -199,9 +199,9 @@ var topDot = [
           shoulder_data[1],//어깨오른쪽
           // 기장2 V
           {x: broad/2-realBroadToRatio(my['chest']/2),
-          y: realTallToRatio(my['trunk_leg']-shirt['len'])},//기장 오른쪽
+          y: realTallToRatio(my['trunk_leg']-shirt['top_length'])},//기장 오른쪽
           {x: broad/2+realBroadToRatio(my['chest']/2),
-          y: realTallToRatio(my['trunk_leg']-shirt['len'])},//기장 오른쪽
+          y: realTallToRatio(my['trunk_leg']-shirt['top_length'])},//기장 오른쪽
           // 소매4 V
           {x: broad/2-realBroadToRatio(my['shoulder']/2),
           y: realTallToRatio(my['trunk_leg']-(myTop['remain_shoulder']/2+shirt['sleeve']))},//소매 왼쪽 -어깨연결

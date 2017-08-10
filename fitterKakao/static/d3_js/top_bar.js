@@ -13,7 +13,7 @@ var data = {
     },
     {
       label: '옷 길이',
-      values: [test_shirt['len'], test_shirt['shoulder'], test_shirt['chest'], test_shirt['sleeve']].map(mmToCm)
+      values: [test_shirt['top_length'], test_shirt['shoulder'], test_shirt['chest'], test_shirt['sleeve']].map(mmToCm)
     },
     {
       label: '몸 길이2',
