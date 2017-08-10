@@ -1,0 +1,103 @@
+{% extends "fitterKakao/layout.html"%}
+{% block title %}추측결과 | Fitter{% endblock %}
+
+{%block content%}
+    {% load staticfiles %}
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+
+    <script>
+        // 신체 사이즈
+        var real_tall = {{ height }};
+        var sex = "{{ sex }}";
+        var suggest_body = {};
+        {% for body_part, survey in suggest_size.items %}
+            suggest_body['{{body_part}}'] = {{survey}};
+        {% endfor %}
+
+        //옷 사이즈
+        var clothes_type = '{{types}}';
+        if (clothes_type ==='top'){
+            var test_shirt  = {};
+            {% for clo_param, clo_val in single_clothes_dict.items %}
+                {% if clo_param == 'size' %}
+                    test_shirt['{{clo_param}}'] = "{{clo_val }}";
+                {% elif clo_param == 'top_length' %}
+                    test_shirt['len'] = {{clo_val }};
+                {% else %}
+                    test_shirt['{{clo_param}}'] = {{clo_val }};
+                {% endif %}
+            {% empty %}
+                var a = 0;
+            {% endfor %}
+        }else if(clothes_type ==='bot'){
+            var test_pants  = {};
+            {% for clo_param, clo_val in single_clothes_dict.items %}
+                {% if clo_param == 'size' %}
+                    test_pants['{{clo_param}}'] = "{{clo_val }}";
+                {% elif clo_param == 'bot_length' %}
+                    test_pants['length'] = {{clo_val }};
+                {% else %}
+                    test_pants['{{clo_param}}'] = {{clo_val }};
+                {% endif %}
+            {% empty %}
+                 var a = 0;
+            {% endfor %}
+       };
+    </script>
+    <!--<span class="glyphicon glyphicon-chevron-left btn-lg"></span>-->
+    <div class ="row row-eq-height">
+    <div class ="col-md-12">
+        {% if types == 'top' %}
+        <a href="/clothes/#top-clothes" class = "back">← 옷s로 돌아가기</a>
+        {% elif types == 'bot' %}
+        <a href="/clothes/#bot-clothes" class = "back">← 옷s로 돌아가기</a>
+        {% endif %}
+    </div>
+    </div>
+    <div class ="col-md-6">
+
+    <div class ="card card-outline-success mb-3">
+        <h1 class = "text-center"><span class="block">{{clothes_nick}}</span>({{clothes.0.size}}) 분석 결과</h1>
+        <div class = "anal"></div>
+        {% if types == 'top' %}
+        <p class = "text-center"><span class="block">길이, 소매는</span> 그래프나 그림을 참고해주세요!</p>
+        {% elif types == 'bot' %}
+        <p class = "text-center"><span class="block">기장은</span> 그래프나 그림을 참고해주세요!</p>
+        <p class = "text-center"><span class="block">기장이 길다면</span> 롤업을 하면 되겠죠?</p>
+        {% endif %}
+    </div>
+    <div class ="barChart card card-outline-success mb-3 text-center">
+
+    </div>
+    </div>
+    <div class ="col-md-6">
+    <div class ="card card-outline-success mb-3 text-center">
+        <div class ="row">
+            <div class = "visual frontVisual col-xs-6">
+                <h1>앞모습</h1>
+            </div>
+            <div class = "visual sideVisual col-xs-6">
+                <h1>옆모습</h1>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <script src="{% static 'd3_js/visual_base.js' %}"></script>
+    {% if types == 'top' %}
+    <script src="{% static 'd3_js/top_front.js' %}"></script>
+    <script src="{% static 'd3_js/top_side.js' %}"></script>
+    <script src="{% static 'd3_js/top_bar.js' %}"></script>
+
+    {% elif types == 'bot' %}
+    <script src="{% static 'd3_js/bottom_front.js' %}"></script>
+    <script src="{% static 'd3_js/bottom_side.js' %}"></script>
+    <script src="{% static 'd3_js/bottom_bar.js' %}"></script>
+
+    {% endif %}
+    <script type="text/javascript" src="{% static 'js/anal.js' %}"></script>
+    <script src="{% static 'd3_js/bar_draw.js' %}"></script>
+
+{% endblock %}
+
+

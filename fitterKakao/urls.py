@@ -11,11 +11,12 @@ urlpatterns = [
     url(r'^result/(?P<kinds>[a-z]+)/(?P<tag_num>[0-9]+)/$', views.suppose_size, name='suppose_size'),
     url(r'^new/$', views.post_new, name='post_new'),
     url(r'^edit/(?P<user_name>[a-zA-Z0-9@.+-_]+)/$', views.post_edit, name='post_edit'),
-    url(r'^check/$', views.check_data, name='check_data'),
     url(r'^clothes/$', views.choose_clothes, name='choose_clothes'),
     url(r'^clothes/new/(?P<kinds>[a-z]+)/$', views.add_clothes, name='add_clothes'),
     url(r'^clothes/del/(?P<kinds>[a-z]+)/(?P<tag_num>[0-9]+)/$', views.delete_clothes, name='delete_clothes'),
     url(r'^clothes/edit/(?P<kinds>[a-z]+)/(?P<tag_num>[0-9]+)/$', views.edit_clothes, name='edit_clothes'),
+    url(r'^singleUse/type/$', views.single_type, name='single_type'),
+    url(r'^singleUse/(?P<kinds>[a-z]+)/$', views.single_post, name='single_post'),
     url(r'^queer/$', views.data_add, name='data_add'),
     url(r'^gaaay/$', views.data_del, name='data_del'),
     # url(r'^keyboard/', views.keyboard), # 카톡

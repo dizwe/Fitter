@@ -73,7 +73,6 @@ $(document).ready(function(){
 //clothes
 //삭제하기
 $(document).ready(function(){
-    console.log('check!');
     $('.deleteClothes').on('click',function(e){
         var returnValue = confirm("진짜 지울거에요?");
         if (!returnValue){
@@ -86,7 +85,6 @@ $(document).ready(function(){
 //$(document).ready(function() {
 //    $('.nailthumb-container').nailthumb();
 //});
-console.log('check!');
 // 해시태그 보고 버튼 들어가기
 $(document).ready(function(){
     var hash = window.location.hash;
