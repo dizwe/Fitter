@@ -42,18 +42,10 @@
     </script>
     <!--<span class="glyphicon glyphicon-chevron-left btn-lg"></span>-->
     <div class ="row row-eq-height">
-    <div class ="col-md-12">
-        {% if types == 'top' %}
-        <a href="/clothes/#top-clothes" class = "back">← 옷s로 돌아가기</a>
-        {% elif types == 'bot' %}
-        <a href="/clothes/#bot-clothes" class = "back">← 옷s로 돌아가기</a>
-        {% endif %}
-    </div>
-    </div>
     <div class ="col-md-6">
 
     <div class ="card card-outline-success mb-3">
-        <h1 class = "text-center"><span class="block">{{clothes_nick}}</span>({{clothes.0.size}}) 분석 결과</h1>
+        <h1 class = "text-center"><span class="block">{{clothes_nick}}</span>({{single_clothes_dict.size}}) 분석 결과</h1>
         <div class = "anal"></div>
         {% if types == 'top' %}
         <p class = "text-center"><span class="block">길이, 소매는</span> 그래프나 그림을 참고해주세요!</p>
@@ -76,6 +68,13 @@
                 <h1>옆모습</h1>
             </div>
         </div>
+    </div>
+    <div class="wanna-signin">
+        <p class = "text-center">분석 결과가 어땠나요?</p>
+        <p class = "text-center">가입해서 편하게 관리해보세요. </p>
+        <p class = "text-center">신체 데이터를 여러번 입력할 필요 없고</p>
+        <p class = "text-center">옷장처럼 여러 옷 데이터를 저장할 수 있어요!</p>
+        <p class = "text-center"><a href="/accounts/signup">회원가입 하기</a></p>
     </div>
     </div>
     </div>

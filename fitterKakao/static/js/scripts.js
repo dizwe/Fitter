@@ -149,3 +149,14 @@ $(document).ready(function(){
             svg.attr('height','500px');
             svg.attr('width','100%');
     }}})
+
+//single_post
+$(document).ready(function(){
+    var url = location.pathname;
+    if(url.indexOf('top')>-1){//top 있으면
+        $('.single-bot').hide()
+    }else if(url.indexOf('bot')>-1){//bot 있으면
+        $('.single-top').hide()
+    }
+
+});

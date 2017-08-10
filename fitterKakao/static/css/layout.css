@@ -313,9 +313,14 @@ label{
   color:rgba(103, 38, 0, 0.57);
 }
 
-.back{
-    font-size: 40px;
-    color: #f79256;
+.back {
+    font-size: 25px;
+    color: #777;
+}
+
+.wanna-signin{
+  margin-top:30px;
+  font-weight:bold;
 }
 /*chart*/
 .chart .label {

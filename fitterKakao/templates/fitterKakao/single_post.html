@@ -1,18 +1,29 @@
 {% extends "fitterKakao/layout.html"%}
 {% block title %}
-나의 사이즈 정보 입력 | Fitter
+일회용 추정 | Fitter
 {% endblock %}
 {%block content%}
+<div class ="row">
+<div class ="col-md-12">
+    {% if types == 'top' %}
+    <a href="{% url 'fitterKakao:single_post' kinds='bot' %}" class = "back">◄ 상의 말고 하의 입력하기 </a>
+    {% elif types == 'bot' %}
+    <a href="{% url 'fitterKakao:single_post' kinds='top' %}" class = "back">◄ 하의 말고 상의 입력하기</a>
+    {% endif %}
+</div>
+    </div>
 
 
 <form method="POST">
     {% csrf_token %}
-    <div class="body-part col-lg-4">
-    <h2 class="bodyCategory"> 기본 정보 </h2>
+<div class ="row">
+<div class="col-md-offset-1 col-md-5">
+  <div class="body-part">
+    <h1 class="bodyCategory"> [신체 정보] </h1>
     <div class="fieldWrapper">
-        <h class="sharp"># </h><label for="{{ person_form.sex.id_for_label }}">성별</label>
+        <span class="sharp"># </span><label for="{{ person_form.sex.id_for_label }}">성별</label>
         <div class="input-group">
-        <div id="radioBtn" class="btn-group">
+        <div id = "radioBtn" class="btn-group">
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="sex" data-title="man">남자</a>
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="sex" data-title="woman">여자</a>
         </div>
@@ -22,12 +33,12 @@
         <p class ="info"> 키와 몸무게는 반올림한 값을 적어주세요.</p>
     <div class="fieldWrapper form-group">
         {{ person_form.height.errors }}
-        <h class="sharp"># </h><label for="{{ person_form.height.id_for_label }}">키</label>
+        <span class="sharp"># </span><label for="{{ person_form.height.id_for_label }}">키</label>
         <p class = "input-text">{{ person_form.height }}<span class ="unit">cm</span></p>
     </div>
     <div class="fieldWrapper">
         {{ person_form.weight.errors }}
-        <h class="sharp"># </h><label for="{{ person_form.weight.id_for_label }}">몸무게</label>
+        <span class="sharp"># </span><label for="{{ person_form.weight.id_for_label }}">몸무게</label>
         <p class = "input-text">{{ person_form.weight }}<span class ="unit">kg</span></p>
     </div>
 
@@ -39,13 +50,11 @@
         <p> <span class ="block">예를들어, 바지를 입었을 때 </span> <span class ="block">다른 부분은 괜찮았는데 </span> <span class="block"><span class ="impInfo">허벅지가 끼여서 안맞은 적이 </span>있다면</span>  <span class ="impInfo">작다</span>를 누르면 돼요.</p>
     </div>
     </div>
-
-    <div class="col-lg-4">
-    <h2 class="bodyCategory"> 상체 정보 </h2>
+  <div class="single-top">
     <div class="fieldWrapper">
-        <h class="sharp"># </h><label for="{{ person_form.shoulder_a.id_for_label }}">옷을 입으면 어깨부분이 </label>
+        <span class="sharp"># </span><label for="{{ person_form.shoulder_a.id_for_label }}">옷을 입으면 어깨부분이 </label>
         <div class="input-group">
-        <div id="radioBtn" class="btn-group">
+        <div id = "radioBtn" class="btn-group">
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="shoulder_a" data-title="0">크다</a>
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="shoulder_a" data-title="1">보통이다</a>
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="shoulder_a" data-title="2">작다</a>
@@ -55,9 +64,9 @@
     </div>
 
     <div class="fieldWrapper">
-        <h class="sharp"># </h><label for="{{ person_form.chest_a.id_for_label }}">옷을 입으면 가슴부분이</label>
+        <span class="sharp"># </span><label for="{{ person_form.chest_a.id_for_label }}">옷을 입으면 가슴부분이</label>
         <div class="input-group">
-        <div id="radioBtn" class="btn-group">
+        <div id = "radioBtn" class="btn-group">
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="chest_a" data-title="0">크다</a>
             <a class="btn btn-outline-secondary btn-lg active" data-toggle="chest_a" data-title="1">보통이다</a>
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="chest_a" data-title="2">작다</a>
@@ -67,9 +76,9 @@
     </div>
 
     <div class="fieldWrapper">
-        <h class="sharp"># </h><label for="{{ person_form.shoulder_a.id_for_label }}">긴 옷을 입으면, 소매 길이가</label>
+        <span class="sharp"># </span><label for="{{ person_form.shoulder_a.id_for_label }}">긴 옷을 입으면, 소매 길이가</label>
         <div class="input-group">
-        <div id="radioBtn" class="btn-group">
+        <div id = "radioBtn" class="btn-group">
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="sleeve_a" data-title="0">크다</a>
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="sleeve_a" data-title="1">보통이다</a>
             <a class="btn btn-outline-secondary btn-lg active" data-toggle="sleeve_a" data-title="2">작다</a>
@@ -78,10 +87,12 @@
         </div>
     </div>
 
+  </div>
+  <div class="single-waist">
     <div class="fieldWrapper">
-        <h class="sharp"># </h><label for="{{ person_form.shoulder_a.id_for_label }}">옷을 입으면 배부분이</label>
+        <span class="sharp"># </span><label for="{{ person_form.shoulder_a.id_for_label }}">옷을 입으면 배부분이</label>
         <div class="input-group">
-        <div id="radioBtn" class="btn-group">
+        <div id = "radioBtn" class="btn-group">
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="waist_a" data-title="0">크다</a>
             <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="waist_a" data-title="1">보통이다</a>
             <a class="btn btn-outline-secondary btn-lg active" data-toggle="waist_a" data-title="2">작다</a>
@@ -89,14 +100,13 @@
         <input type="hidden" name="waist_a" id="waist_a"  value ="{{ person_form.waist_a.value }}">
         </div>
     </div>
-    </div>
-    <div class="col-lg-4">
-    <h2 class="bodyCategory"> 하체 정보 </h2>
+  </div>
+  <div class="single-bot">
 
     <div class="fieldWrapper">
-    <h class="sharp"># </h><label for="{{ person_form.hip_a.id_for_label }}">옷을 입으면 엉덩이 부분이</label>
+    <span class="sharp"># </span><label for="{{ person_form.hip_a.id_for_label }}">옷을 입으면 엉덩이 부분이</label>
     <div class="input-group">
-        <div id="radioBtn" class="btn-group">
+        <div id = "radioBtn" class="btn-group">
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="hip_a" data-title="0">크다</a>
         <a class="btn btn-outline-secondary btn-lg active" data-toggle="hip_a" data-title="1">보통이다</a>
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="hip_a" data-title="2">작다</a>
@@ -106,9 +116,9 @@
     </div>
 
     <div class="fieldWrapper">
-    <h class="sharp"># </h><label for="{{ person_form.crotch_a.id_for_label }}">옷을 입으면 가랑이 부분이</label>
+    <span class="sharp"># </span><label for="{{ person_form.crotch_a.id_for_label }}">옷을 입으면 가랑이 부분이</label>
     <div class="input-group">
-        <div id="radioBtn" class="btn-group">
+        <div id = "radioBtn" class="btn-group">
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="crotch_a" data-title="0">크다</a>
         <a class="btn btn-outline-secondary btn-lg active" data-toggle="crotch_a" data-title="1">보통이다</a>
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="crotch_a" data-title="2">작다</a>
@@ -118,9 +128,9 @@
     </div>
 
     <div class="fieldWrapper">
-    <h class="sharp"># </h><label for="{{ person_form.thigh_a.id_for_label }}">옷을 입으면 허벅지 부분이</label>
+    <span class="sharp"># </span><label for="{{ person_form.thigh_a.id_for_label }}">옷을 입으면 허벅지 부분이</label>
     <div class="input-group">
-        <div id="radioBtn" class="btn-group">
+        <div id = "radioBtn" class="btn-group">
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="thigh_a" data-title="0">크다</a>
         <a class="btn btn-outline-secondary btn-lg active" data-toggle="thigh_a" data-title="1">보통이다</a>
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="thigh_a" data-title="2">작다</a>
@@ -131,9 +141,9 @@
 
 
     <div class="fieldWrapper">
-    <h class="sharp"># </h><label for="{{ person_form.length_a.id_for_label }}">옷을 입으면 바지가</label>
+    <span class="sharp"># </span><label for="{{ person_form.length_a.id_for_label }}">옷을 입으면 바지가</label>
     <div class="input-group">
-        <div id="radioBtn" class="btn-group">
+        <div id = "radioBtn" class="btn-group">
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="length_a" data-title="0">길다</a>
         <a class="btn btn-outline-secondary btn-lg active" data-toggle="length_a" data-title="1">보통이다</a>
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="length_a" data-title="2">짧다</a>
@@ -143,9 +153,9 @@
     </div>
 
     <div class="fieldWrapper">
-    <h class="sharp"># </h><label for="{{ person_form.hem_a.id_for_label }}">내 발목은</label>
+    <span class="sharp"># </span><label for="{{ person_form.hem_a.id_for_label }}">내 발목은</label>
     <div class="input-group">
-        <div id="radioBtn" class="btn-group">
+        <div id = "radioBtn" class="btn-group">
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="hem_a" data-title="0">얇다</a>
         <a class="btn btn-outline-secondary btn-lg active" data-toggle="hem_a" data-title="1">보통이다</a>
         <a class="btn btn-outline-secondary btn-lg notActive" data-toggle="hem_a" data-title="2">굵다</a>
@@ -155,31 +165,32 @@
     </div>
 
     </div>
-
 </div>
 
-<div class="row">
-  <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1">
-
-
-    <div class="item">
-    <h2 class="bodyCategory"> <span class="sharp"># </span>공통 데이터 </h2>
-    <p><label for="id_same_nick">이름:</label>
-       <input id="id_same_nick" maxlength="80" name="same_nick" type="text" value="{{same_clothes_form.same_nick.value}}" required /></p>
+<div class="col-md-offset-1 col-md-4">
+  <div>
+        <h1 class="bodyCategory"> [옷 정보] </h1>
+        {% if types == "top" %}
+        <img src="{% static 'pic/top.png' %}">
+        <p>옷을 바닥에 눕혀서 잰 길이로 입력해주세요.</p>
+        <p>만약 가슴이라면 옷 앞부분 가슴길이만 잽니다.</p>
+        {% elif types == "bot" %}
+        <img src="{% static 'pic/bottom.png' %}">
+        <br/>
+        <p>옷을 바닥에 눕혀서 잰 길이로 입력해주세요.</p>
+        <p>만약 허리라면 바지 앞부분 허리길이만 잽니다.</p>
+        {% endif %}
     </div>
+  <div>
 
     {% if types == "top" %}
     <div class="item">
-        <h2 class="bodyCategory"> <span class="sharp"># </span>사이즈 데이터 </h2>
-        <!--<label for="id_nick">이름:</label>-->
-        <!--{{ clothes_form.nick.errors }}-->
-        <!--<p><input id="id_nick" maxlength="50" name="nick" type="text" value="{{ clothes_form.nick.value }}" /></p>-->
+
+        <p><label for="id_same_nick">이름:</label>
+       <input id="id_same_nick" maxlength="80" name="same_nick" type="text" value="{{same_clothes_form.same_nick.value}}" required /></p>
         <label for="id_size">사이즈:</label>
         {{ clothes_form.size.errors }}
         <p><input id="id_size" maxlength="4" name="size" type="text" value="{{ clothes_form.size.value }}" /></p>
-        <!--<label for="id_photo">사진(선택):</label>-->
-        <!--{{ clothes_form.photo.errors }}-->
-        <!--<p><input id="id_photo" name="photo" type="file" /></p>-->
         <label for="id_top_length">길이:</label>
          {{ clothes_form.top_length.errors }}
         <p><input id="id_top_length" name="top_length" step="any" type="number" value="{{ clothes_form.top_length.value }}" /><span class ="unit">cm</span></p>
@@ -195,16 +206,12 @@
     </div>
     {% elif types == "bot" %}
     <div class="item">
-        <h2 class="bodyCategory"> <span class="sharp"># </span>사이즈 데이터 </h2>
-        <!--<label for="id_nick">이름:</label>-->
-        <!--{{ clothes_form.nick.errors }}-->
-        <!--<p><input id="id_nick" maxlength="20" name="nick" type="text" value="{{ clothes_form.nick.value }}" /></p>-->
+
+        <p><label for="id_same_nick">이름:</label>
+        <input id="id_same_nick" maxlength="80" name="same_nick" type="text" value="{{same_clothes_form.same_nick.value}}" required /></p>
         <label for="id_size">사이즈:</label>
         {{ clothes_form.size.errors }}
         <p><input id="id_size" maxlength="4" name="size" type="text" value="{{ clothes_form.size.value }}" /></p>
-        <!--<label for="id_photo">사진(선택):</label>-->
-        <!--{{ clothes_form.photo.errors }}-->
-        <!--<p><input id="id_photo" name="photo" type="file" /></p>-->
         <label for="id_waist">허리:</label>
         {{ clothes_form.waist.errors }}
         <p><input id="id_waist" name="waist" step="any" type="number" value="{{ clothes_form.waist.value }}" /><span class ="unit">cm</span></p>
@@ -220,7 +227,7 @@
         <p><input id="id_thigh" name="thigh" step="any" type="number" value="{{ clothes_form.thigh.value }}" /><span class ="unit">cm</span></p>
         <label for="id_hem">밑단:</label>
         {{ clothes_form.hem.errors }}
-        <p class ="greyer"><input id="id_hem" name="hem" step="any" type="number" value="{{ clothes_form.hem.value }}" /><span class ="unit">cm</span></p>
+        <p><input id="id_hem" name="hem" step="any" type="number" value="{{ clothes_form.hem.value }}" /><span class ="unit">cm</span></p>
         <p class ="greyer"><label><input type="checkbox" id= "hip_check" name="hip_exist" value="no"> 엉덩이 부분은 몰라요</label></p>
         <label for="id_hip" class = "hip">엉덩이:</label>
         {{ clothes_form.hip.errors }}
@@ -229,21 +236,11 @@
     </div>
     {% endif %}
 
-    <button type="submit" class ="btn btn-success btn-lg">저장하기</button>
-</form>
+    <button type="submit" class ="btn btn-success btn-lg">결과보기</button>
+
      </div>
-    <div class="col-md-5 col-lg-4">
-        <h2 class="bodyCategory"> 치수 입력 기준 </h2>
-        {% if types == "top" %}
-        <img src="{% static 'pic/top.png' %}">
-        <p>옷을 바닥에 눕혀서 잰 길이로 입력해주세요.</p>
-        <p>만약 가슴이라면 옷 앞부분 가슴길이만 잽니다.</p>
-        {% elif types == "bot" %}
-        <img src="{% static 'pic/bottom.png' %}">
-        <br/>
-        <p>옷을 바닥에 눕혀서 잰 길이로 입력해주세요.</p>
-        <p>만약 허리라면 바지 앞부분 허리길이만 잽니다.</p>
-        {% endif %}
-    </div>
+
 </div>
+</div>
+</form>
 {% endblock %}

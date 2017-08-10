@@ -63,6 +63,9 @@
         </li>
         {% else %}
         <li>
+            <a href="{% url 'fitterKakao:single_post' kinds='top' %}">일회용 추정</a>
+        </li>
+        <li>
             <a href="/accounts/signup">회원가입</a>
         </li>
         {% endif %}
@@ -81,10 +84,11 @@
 
   <!-- MAIN -->
   <div class="cover col-md-offset-1 col-md-10 col-xs-12">
-    <div class="lead cover-heading">
+    <div class="col-md-12 cover-heading">
     <p class="display">기본적인 정보와 몇가지 질문으로 옷 사이즈를 추정해 보세요!</p>
     </div>
-    <div class="lead">
+    <div class="col-md-12">
+      <div class ="row">
       <div class ="col-md-4">
         <svg version="1.1" id="input" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16">
         <path fill="#444444" d="M16 5c0-0.6-0.4-1-1-1h-14c-0.6 0-1 0.4-1 1v6c0 0.6 0.4 1 1 1h14c0.6 0 1-0.4 1-1v-6zM15 11h-14v-6h14v6z"></path>
@@ -131,13 +135,19 @@ viewBox="0 0 425.336 425.336" style="enable-background:new 0 0 425.336 425.336;"
         </g>
         </svg>
         <p class = "description"> <span class="block">옷 실측 사이즈와</span> 비교해보세요</p>
+        </div>
       </div>
    </div>
-    <div class="lead">
-
+    <div class ="col-md-12">
+      <div class ="col-md-12">
       <a href="/clothes" class="btn btn-lg btn-default">  로그인하고 사이즈 추정하기  </a>
-        <!--<a href="/singleUse/type" class="btn btn-lg btn-default">  바로  </a>-->
+      </div>
+      <div class ="col-md-12">
+      <a href="{% url 'fitterKakao:single_post' kinds='top' %}" class="without-login"> + <span class="display">또는</span> 로그인 없이 한번만 추정하기 </a>
+      </div>
     </div>
+
+
   </div>
 </body>
 <script src="{% static 'js/scripts.js' %}"></script>

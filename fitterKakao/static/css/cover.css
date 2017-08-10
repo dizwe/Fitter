@@ -33,6 +33,7 @@ a:hover {
   border: 1px solid #fff;
 }
 
+
 /*
  * Header
  */
@@ -130,11 +131,23 @@ body{
 .btn-lg {
   padding: 10px 20px;
   margin-top:40px;
+   margin-bottom:7px;
   float :right;
   height: 50px;
   font-size : 20px;
   font-weight:bold;
   color:#f79256;
+
+}
+
+.without-login,
+.without-login:hover,
+.without-login:focus{
+  margin-right: 20px;
+  color:#ffede2;
+  font-size : 18px;
+  font-weight:bold;
+  float :right;
 }
 
 .description{
@@ -184,12 +197,22 @@ svg{
   /* Body part */
   .btn-lg {
         margin-top:40px;
+        margin-bottom:10px;
         float :right;
-        height: 70px;
+        height: 60px;
         font-size : 30px;
         font-weight:bold;
         color:#f79256;
   }
+  .without-login,
+.without-login:hover,
+.without-login:focus{
+  margin-right: 20px;
+  color:#ffede2;
+  font-size : 23px;
+  font-weight:bold;
+  float :right;
+}
   .description{
     text-align: center;
     font-size: 22px;
