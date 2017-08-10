@@ -172,12 +172,13 @@
         <h1 class="bodyCategory"> [옷 정보] </h1>
         {% if types == "top" %}
         <img src="{% static 'pic/top.png' %}">
-        <p>옷을 바닥에 눕혀서 잰 길이로 입력해주세요.</p>
+        <p><span class ="impInfo">인터넷 쇼핑몰의 치수 데이터</span>를 입력해주세요.</p>
+        <p>옷을 바닥에 <span class ="impInfo">눕혀서 잰 길이</span>로 계산해주세요.</p>
         <p>만약 가슴이라면 옷 앞부분 가슴길이만 잽니다.</p>
         {% elif types == "bot" %}
         <img src="{% static 'pic/bottom.png' %}">
-        <br/>
-        <p>옷을 바닥에 눕혀서 잰 길이로 입력해주세요.</p>
+        <p><span class ="impInfo">인터넷 쇼핑몰의 치수 데이터</span>를 입력해주세요.</p>
+        <p>옷을 바닥에 <span class ="impInfo">눕혀서 잰 길이</span>로 계산해주세요.</p>
         <p>만약 허리라면 바지 앞부분 허리길이만 잽니다.</p>
         {% endif %}
     </div>
