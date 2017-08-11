@@ -216,7 +216,7 @@ def add_clothes(request, kinds):
                 clothes.name = request.user
                 clothes.save()
 
-            return redirect(reverse('fitterKakao:choose_clothes')+hashTag)
+            return redirect('fitterKakao:suppose_size', kinds=kinds, tag_num=clothes.id)
     else:
         same_clothes_form = SameClothesForm()
         if kinds == 'top':
