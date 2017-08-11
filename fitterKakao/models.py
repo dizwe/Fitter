@@ -76,9 +76,9 @@ class TopClothes(models.Model):
     chest = models.FloatField(default=0)
     sleeve = models.FloatField(default=0)
 
-    # def __str__(self):  # Change title as name(메소드처럼)
-    #     print(self.nick.same_nick)
-    #     return str(self.nick.same_nick)
+    def __str__(self):  # Change title as name(메소드처럼)
+        print(self.nick.same_nick)
+        return str(self.nick.same_nick)
 
 
 class BottomClothes(models.Model):
@@ -94,7 +94,15 @@ class BottomClothes(models.Model):
     thigh = models.FloatField(default=0)
     hem = models.FloatField(default=0)
 
-    # def __str__(self):  # Change title as name(메소드처럼)
-    #     return str(self.nick.same_nick)
+    def __str__(self):  # Change title as name(메소드처럼)
+        return str(self.nick.same_nick)
 
-# Create your models here.
+
+class SingleDataList(models.Model):
+    suggested_size = models.CharField(max_length=250, default='{}')
+    single_person_dict = models.CharField(max_length=250, default='{}')
+    clothes_dict = models.CharField(max_length=300, default='{}')
+    created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+    def __str__(self):  # Change title as name(메소드처럼)
+        return str(self.created)

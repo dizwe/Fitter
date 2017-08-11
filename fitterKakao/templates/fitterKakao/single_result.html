@@ -45,7 +45,12 @@
     <div class ="col-md-6">
 
     <div class ="card card-outline-success mb-3">
+        {% if clothes_link != '' %}
+        <h1 class = "text-center"><a href ="{{clothes_link}}"><span class="block">{{clothes_nick}}</span></a>({{single_clothes_dict.size}}) 분석 결과</h1>
+        {% else %}
         <h1 class = "text-center"><span class="block">{{clothes_nick}}</span>({{single_clothes_dict.size}}) 분석 결과</h1>
+        {% endif %}
+
         <div class = "anal"></div>
         {% if types == 'top' %}
         <p class = "text-center"><span class="block">길이, 소매는</span> 그래프나 그림을 참고해주세요!</p>

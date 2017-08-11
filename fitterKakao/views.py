@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import Http404, JsonResponse, HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
-from .models import Person, TopClothes, BottomClothes, SizeInfo, SameClothes
+from .models import Person, TopClothes, BottomClothes, SizeInfo, SameClothes, SingleDataList
 import os
 
 from django.conf import settings
@@ -324,7 +324,9 @@ def single_post(request, kinds):
         if person_form.is_valid() and clothes_form.is_valid() and same_clothes_form.is_valid(): # 저장된 form 형식이 잘 맞는지
             single_person_dict = person_form.cleaned_data
             single_clothes_dict = clothes_form.cleaned_data
-            clothes_nick = same_clothes_form.cleaned_data['same_nick']
+            same_clothes_dict = same_clothes_form.cleaned_data
+            clothes_nick = same_clothes_dict['same_nick']
+            clothes_link = same_clothes_dict['same_url']
 
             if not check_data(single_person_dict): # 없는 데이터라면,
                 sex_filtered = SizeInfo.objects.filter(sex=person_form.cleaned_data['sex'])
@@ -333,8 +335,6 @@ def single_post(request, kinds):
             # ['shoulder', 'chest', 'arm', 'waist'
             # 'bottom_waist', 'crotch', 'thigh', 'length', 'hem', 'hip',
             # 'crotch_height', 'middle_thigh', 'knee', 'calf', 'nipple'] 순서
-
-
             question = []
             for answer in ['shoulder_a', 'chest_a', 'sleeve_a', 'waist_a',
                            'waist_a', 'crotch_a', 'thigh_a', 'length_a', 'hem_a', 'hip_a',
@@ -366,8 +366,17 @@ def single_post(request, kinds):
 
             suggested_size = size_list_to_dict(suggested_size)
 
+            # 데이터 따로 저장하기
+            clothes_dict = single_clothes_dict.copy()
+            clothes_dict.update(same_clothes_dict)
+            clothes_dict.pop('same_photo', None)
+            SingleDataList.objects.create(suggested_size=suggested_size,
+                                          clothes_dict=clothes_dict,
+                                          single_person_dict=single_person_dict,)
+
             return render(request, 'fitterKakao/single_result.html', {'types': kinds,
                                                                       'single_clothes_dict': single_clothes_dict,
+                                                                      'clothes_link' : clothes_link,
                                                                       'clothes_nick': clothes_nick,
                                                                       'sex': user_sex,
                                                                       'height': user_height/10,
