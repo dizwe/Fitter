@@ -15,9 +15,10 @@ var myTopSide = {'base_up' : [sideBroad/3, realSideTallToRatio(real_sideTall)+10
                  'base_down' : [sideBroad/3, realSideTallToRatio(100)]};
 
 
-var topCloCal = {'chest': (shirt['chest'] - my['chest_half'])/2,
-              'nipple': (shirt['chest'] - my['nipple_half'])/2,
-              'waist': (shirt['chest'] - my['waist_half'])/2};
+var topCloCal = {'chest': (shirt['chest'] - my['chest_half']),
+                'nipple': (shirt['chest'] - my['nipple_half']),
+                'waist': (shirt['chest'] - my['waist_half'])};
+
 function realSideTallToRatio(real_value){
   return sideTall - sideTall*real_value/real_sideTall;
 }
@@ -81,9 +82,10 @@ var topSideClo = [
               {x: myTopSide['base_up'][0] + realSideBroadToRatio(my['chest_half']+topCloCal['chest']/2),
               y: myTopSide['base_up'][1]},
               // 젖가슴 2
-              {x: myTopSide['base_middle'][0] + realSideBroadToRatio(my['nipple_half']+topCloCal['nipple']/2),
+              // 젖가슴에서 남는 양 더하고 + (등부분이 가슴 남는 양이니까) 더 많이 남는 젖가슴에서 가슴을 빼면 더 필요한 양 나옴
+              {x: myTopSide['base_middle'][0] + realSideBroadToRatio(my['nipple_half']+topCloCal['nipple']/2+(topCloCal['nipple']/2-topCloCal['chest']/2)),
               y: myTopSide['base_middle'][1]},
-              {x: myTopSide['base_middle'][0] + realSideBroadToRatio(my['nipple_half']+topCloCal['nipple']/2),
+              {x: myTopSide['base_middle'][0] + realSideBroadToRatio(my['nipple_half']+topCloCal['nipple']/2+(topCloCal['nipple']/2-topCloCal['chest']/2)),
               y: myTopSide['base_middle'][1]},
               //배 4
               {x: myTopSide['base_down'][0] - realSideBroadToRatio(topCloCal['chest']/2),
@@ -91,6 +93,9 @@ var topSideClo = [
               {x: myTopSide['base_down'][0] + realSideBroadToRatio(my['waist_half']+topCloCal['waist']/2+(topCloCal['waist']/2-topCloCal['chest']/2)),
               y: myTopSide['base_down'][1]},
             ];
+console.log(topCloCal['chest']/2);
+console.log(my['nipple_half']+topCloCal['nipple']/2);
+console.log(topCloCal['chest']/2-topCloCal['nipple']/2);
 
 var topClothesSideLinks = [
               {source : topSideClo[0], target : topSideClo[4]},

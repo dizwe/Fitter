@@ -15,11 +15,11 @@ function realBroadToRatio(real_value){
   return broad * real_value/real_broad;
 }
 
-
+// anal에서 사용
 var topCal = {
               'shoulder':shirt['shoulder']-suggest_body['shoulder'],
-              'chest':shirt['chest']-suggest_body['chest']/2,
-              'waist':shirt['chest']-suggest_body['waist']/2,
+              'chest':shirt['chest']-my['chest_half'],
+              'waist':shirt['chest']-my['waist_half'],
 //              'length':shirt['top_length']-(real_tall-suggest_body['crotch_height']),
 //              'sleeve':shirt['sleeve']-suggest_body['arm'],
         };
