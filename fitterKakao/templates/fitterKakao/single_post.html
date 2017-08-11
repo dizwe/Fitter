@@ -47,7 +47,7 @@
         <p> <span class ="block">보통 옷을 샀을때에</span> 어떤 어려움을 겪는지 생각해 보세요.</p>
         <p> <span class ="block">입력한 키와 몸무게 데이터에서</span> <span class ="impInfo">보통</span>이면  <span class ="impInfo">중간값</span>을 추정해요.</p>
         <p> <span class ="block">옷이 <span class ="impInfo">작다</span>면 오차범위 내  <span class ="impInfo">최대값</span>을,</span>  <span class ="impInfo">크다</span>면  <span class ="impInfo">최소값</span>을 추정해요.</p>
-        <p> <span class ="block">예를들어, 바지를 입었을 때 </span> <span class ="block">다른 부분은 괜찮았는데 </span> <span class="block"><span class ="impInfo">허벅지가 끼여서 안맞은 적이 </span>있다면</span>  <span class ="impInfo">작다</span>를 누르면 돼요.</p>
+        <p> <span class ="block">예를들어, 바지를 입었을 때 </span> 다른 부분은 괜찮았는데 <span class ="impInfo">허벅지가 끼여서 안맞은 적이 </span>있다면  <span class ="impInfo">작다</span>를 누르면 돼요.</p>
     </div>
     </div>
   <div class="single-top">
@@ -168,26 +168,11 @@
 </div>
 
 <div class="col-md-offset-1 col-md-4">
-  <div>
-        <h1 class="bodyCategory"> [옷 정보] </h1>
-        {% if types == "top" %}
-        <img src="{% static 'pic/top.png' %}">
-        <p><span class ="impInfo">인터넷 쇼핑몰의 치수 데이터</span>를 입력해주세요.</p>
-        <p>옷을 바닥에 <span class ="impInfo">눕혀서 잰 길이</span>로 계산해주세요.</p>
-        <p>만약 가슴이라면 옷 앞부분 가슴길이만 잽니다.</p>
-        {% elif types == "bot" %}
-        <img src="{% static 'pic/bottom.png' %}">
-        <p><span class ="impInfo">인터넷 쇼핑몰의 치수 데이터</span>를 입력해주세요.</p>
-        <p>옷을 바닥에 <span class ="impInfo">눕혀서 잰 길이</span>로 계산해주세요.</p>
-        <p>만약 허리라면 바지 앞부분 허리길이만 잽니다.</p>
-        {% endif %}
-    </div>
-  <div>
-
+    <h1 class="bodyCategory"> [옷 정보] </h1>
     {% if types == "top" %}
     <div class="item">
 
-        <p><label for="id_same_nick">이름:</label>
+        <p><label for="id_same_nick">옷 이름:</label>
        <input id="id_same_nick" maxlength="80" name="same_nick" type="text" value="{{same_clothes_form.same_nick.value}}" required /></p>
         <label for="id_size">사이즈:</label>
         {{ clothes_form.size.errors }}
@@ -208,7 +193,7 @@
     {% elif types == "bot" %}
     <div class="item">
 
-        <p><label for="id_same_nick">이름:</label>
+        <p><label for="id_same_nick">옷 이름:</label>
         <input id="id_same_nick" maxlength="80" name="same_nick" type="text" value="{{same_clothes_form.same_nick.value}}" required /></p>
         <label for="id_size">사이즈:</label>
         {{ clothes_form.size.errors }}
@@ -236,12 +221,24 @@
 
     </div>
     {% endif %}
+    <div class = "info">
 
+        {% if types == "top" %}
+        <img src="{% static 'pic/top.png' %}">
+        <p><span class ="impInfo">인터넷 쇼핑몰의 치수 데이터</span>를 입력해주세요.</p>
+        <p>옷을 바닥에 <span class ="impInfo">눕혀서 잰 길이</span>로 계산해주세요.</p>
+        <p>만약 가슴이라면 옷 앞부분 가슴길이만 잽니다.</p>
+        {% elif types == "bot" %}
+        <img src="{% static 'pic/bottom.png' %}">
+        <p><span class ="impInfo">인터넷 쇼핑몰의 치수 데이터</span>를 입력해주세요.</p>
+        <p>옷을 바닥에 <span class ="impInfo">눕혀서 잰 길이</span>로 계산해주세요.</p>
+        <p>만약 허리라면 바지 앞부분 허리길이만 잽니다.</p>
+        {% endif %}
+    </div>
     <button type="submit" class ="btn btn-success btn-lg">결과보기</button>
 
-     </div>
-
 </div>
+
 </div>
 </form>
 {% endblock %}

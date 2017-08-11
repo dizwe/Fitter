@@ -5,7 +5,7 @@
 {%block content%}
 <form method="POST">
     {% csrf_token %}
-    <div class="body-part col-lg-4">
+    <div class="body-part col-md-4">
     <h2 class="bodyCategory"> 기본 정보 </h2>
     <div class="fieldWrapper">
         <span class="sharp"># </span><label for="{{ person_form.sex.id_for_label }}">성별</label>
@@ -34,11 +34,11 @@
         <p> <span class ="block">보통 옷을 샀을때에</span> 어떤 어려움을 겪는지 생각해 보세요.</p>
         <p> <span class ="block">입력한 키와 몸무게 데이터에서</span> <span class ="impInfo">보통</span>이면  <span class ="impInfo">중간값</span>을 추정해요.</p>
         <p> <span class ="block">옷이 <span class ="impInfo">작다</span>면 오차범위 내  <span class ="impInfo">최대값</span>을,</span>  <span class ="impInfo">크다</span>면  <span class ="impInfo">최소값</span>을 추정해요.</p>
-        <p> <span class ="block">예를들어, 바지를 입었을 때 </span> <span class ="block">다른 부분은 괜찮았는데 </span> <span class="block"><span class ="impInfo">허벅지가 끼여서 안맞은 적이 </span>있다면</span>  <span class ="impInfo">작다</span>를 누르면 돼요.</p>
+        <p> <span class ="block">예를들어, 바지를 입었을 때 </span> 다른 부분은 괜찮았는데 <span class ="impInfo">허벅지가 끼여서 안맞은 적이 </span>있다면  <span class ="impInfo">작다</span>를 누르면 돼요.</p>
     </div>
     </div>
 
-    <div class="col-lg-4">
+    <div class="col-md-4">
     <h2 class="bodyCategory"> 상체 정보 </h2>
     <div class="fieldWrapper">
         <span class="sharp"># </span><label for="{{ person_form.shoulder_a.id_for_label }}">옷을 입으면 어깨부분이 </label>
@@ -88,7 +88,7 @@
         </div>
     </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-md-4">
     <h2 class="bodyCategory"> 하체 정보 </h2>
 
     <div class="fieldWrapper">

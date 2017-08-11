@@ -76,9 +76,10 @@ body{
  color: #e8e8e8;
 }
 /*post_new-버튼의 향연*/
+.info,
 .info p{
-  font-size:18px;
-  margin-bottom:10px;
+  font-size:16px;
+  color:#555;
 }
 
 .impInfo{
@@ -161,6 +162,7 @@ img{
   font-weight:bold;
 }
 /*edit/add clothes*/
+
 .interim-block{
     display:block;
     margin-bottom:10px;
@@ -354,9 +356,9 @@ canvas {
     font-size:20px;
     padding: 9px 18px;
 }
+.info,
 .info p{
-  font-size:22px;
-  margin-bottom:10px;
+  font-size:15px;
 }
 .anal-head{
   color:grey;
