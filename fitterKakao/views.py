@@ -9,10 +9,16 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.forms.formsets import formset_factory, BaseFormSet
 import json
 from .forms import PersonForm, TopClothesForm, BottomClothesForm, SameClothesForm
+import logging
+from raven.contrib.django.raven_compat.models import client
+
+
+logger = logging.getLogger('raven')
 
 
 def index(request):
     # reverse 는 url 하드코딩 피할수 있도록 해줌
+
     return render(request, 'fitterKakao/index.html')
 
 
