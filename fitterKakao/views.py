@@ -10,10 +10,7 @@ from django.forms.formsets import formset_factory, BaseFormSet
 import json
 from .forms import PersonForm, TopClothesForm, BottomClothesForm, SameClothesForm
 import logging
-from raven.contrib.django.raven_compat.models import client
 
-
-logger = logging.getLogger('raven')
 
 
 def index(request):

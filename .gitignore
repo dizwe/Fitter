@@ -10,3 +10,4 @@ staticfiles/d3/man_size.json
 /staticfiles
 site.log
 file_name.log
+error.log
