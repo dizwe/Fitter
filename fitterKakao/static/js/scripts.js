@@ -160,3 +160,15 @@ $(document).ready(function(){
     }
 
 });
+
+// input text 누르면 내용 사라지게 하기
+
+    $('input:text').focus(
+        function(){
+            $(this).val('');
+        });
+    $('input[type="number"]').focus(
+    function(){
+        $(this).val('');
+    });
+//number는 안됨
