@@ -168,7 +168,7 @@ LOGGING = {
 
         'django.request': {
 
-            'handlers': ['mail_admins'],
+            'handlers': ['error_admin'],
 
             'level': 'ERROR',
 
