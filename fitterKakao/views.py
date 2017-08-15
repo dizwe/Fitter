@@ -15,7 +15,6 @@ import logging
 
 def index(request):
     # reverse 는 url 하드코딩 피할수 있도록 해줌
-    a = 2/0
     return render(request, 'fitterKakao/index.html')
 
 
