@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'o&rlad@n6%*=#+clc2sc7$zt+)h0)jq1m*(uy^*!x=f4s3bm-l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost',
                  'dizwe.pythonanywhere.com',
@@ -173,7 +173,6 @@ LOGGING = {
     },
 }
 
-from raven.contrib.django.raven_compat.models import client
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
