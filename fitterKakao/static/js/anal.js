@@ -73,7 +73,6 @@ else if(clothes_type ==='bot'){
 };
 
 $(document).ready(function(){
-    console.log('check!');
 
     var target = document.getElementsByClassName('anal')[0];
     target.innerHTML += "<p class ='anal-head'>[FIT=해당 부위 옷 길이-몸 길이]</p>";

@@ -93,9 +93,6 @@ var topSideClo = [
               {x: myTopSide['base_down'][0] + realSideBroadToRatio(my['waist_half']+topCloCal['waist']/2+(topCloCal['waist']/2-topCloCal['chest']/2)),
               y: myTopSide['base_down'][1]},
             ];
-console.log(topCloCal['chest']/2);
-console.log(my['nipple_half']+topCloCal['nipple']/2);
-console.log(topCloCal['chest']/2-topCloCal['nipple']/2);
 
 var topClothesSideLinks = [
               {source : topSideClo[0], target : topSideClo[4]},

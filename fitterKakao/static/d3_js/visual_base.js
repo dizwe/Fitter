@@ -83,7 +83,7 @@ function dynamic_hem(pant){
             else if (noPantLen<hem_criteria[i][1]){
                 var a = (hem_criteria[i][1]-hem_criteria[i-1][1])/(hem_criteria[i][0]-hem_criteria[i-1][0]);
                 var b = hem_criteria[i][1] - a*hem_criteria[i][0]; // y-ax = b
-                console.log(i,a,b)
+
                 return (noPantLen - b)/a }//x 구하기
             else {continue;}
             }};
