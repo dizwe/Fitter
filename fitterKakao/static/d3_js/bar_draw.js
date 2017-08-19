@@ -15,7 +15,7 @@ for (var i=0; i<data.labels.length; i++) {
 
 // Color scale
 function colores_google(n) {
-  var colores_g = [ "#ff9900","#31a354","#fdae6b"];
+  var colores_g = ["#FF834B","#8782B2","#fdae6b"];
   return colores_g[n % colores_g.length];
 }
 

@@ -12,7 +12,6 @@ from .forms import PersonForm, TopClothesForm, BottomClothesForm, SameClothesFor
 import logging
 
 
-
 def index(request):
     # reverse 는 url 하드코딩 피할수 있도록 해줌
     return render(request, 'fitterKakao/index.html')
@@ -209,7 +208,6 @@ def add_clothes(request, kinds):
             same_clothes = same_clothes_form.save(commit=False)
             same_clothes.save()
             just_saved = SameClothes.objects.get(pk=same_clothes.pk)
-            # print(same_clothes.pk)
             for form in clothes_formset.forms:
                 clothes = form.save(commit=False)
                 clothes.nick = just_saved
