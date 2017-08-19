@@ -11,10 +11,13 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from os.path import abspath, dirname, join
 import raven
+import debug_toolbar
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# settings.py를 폴더에 넣어서 dirname 한번더 더 씀.
+BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'o&rlad@n6%*=#+clc2sc7$zt+)h0)jq1m*(uy^*!x=f4s3bm-l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost',
                  'dizwe.pythonanywhere.com',
@@ -275,6 +278,7 @@ STATICFILES_DIRS = (
 )
 # 배포할 때 필요한것
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #C:\Django\Fitter\staticfiles 이런식으로 만들어짐
+
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 LOGOUT_REDIRECT_URL = '/'
