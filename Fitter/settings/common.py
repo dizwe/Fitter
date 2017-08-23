@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 from os.path import abspath, dirname, join
 import raven
-import debug_toolbar
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # settings.py를 폴더에 넣어서 dirname 한번더 더 씀.
@@ -30,7 +29,6 @@ SECRET_KEY = 'o&rlad@n6%*=#+clc2sc7$zt+)h0)jq1m*(uy^*!x=f4s3bm-l'
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost',
-                 'dizwe.pythonanywhere.com',
                  ]
 
 

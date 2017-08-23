@@ -1,4 +1,5 @@
 from .common import *
+import debug_toolbar
 
 INSTALLED_APPS += ['debug_toolbar']
 
