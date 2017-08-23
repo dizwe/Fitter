@@ -2,4 +2,4 @@ from .common import *
 
 DEBUG = False
 
-ALLOWED_HOSTS += ['fittingcal.ap-northeast-2.elasticbeanstalk.com']
+ALLOWED_HOSTS += ['fitter.ap-northeast-2.elasticbeanstalk.com']
