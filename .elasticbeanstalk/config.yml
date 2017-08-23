@@ -1,7 +1,10 @@
 branch-defaults:
   master:
-    environment: null
+    environment: Fitter-env
 environment-defaults:
+  Fitter-env:
+    branch: null
+    repository: null
   fittingcal:
     branch: null
     repository: null
