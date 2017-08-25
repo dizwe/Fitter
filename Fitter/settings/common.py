@@ -277,10 +277,10 @@ STATICFILES_DIRS = (
 # 배포할 때 필요한것
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #C:\Django\Fitter\staticfiles 이런식으로 만들어짐
 
+MEDIA_URL = '/media/' # 항상 / 로 끝나도록 설정
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/clothes'
-
-MEDIA_URL = '/media/' # 항상 / 로 끝나도록 설정
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

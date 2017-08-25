@@ -2,3 +2,7 @@
 gunicorn
 uwsgi
 psycopg2
+
+django-storages
+boto3
+pymysql
