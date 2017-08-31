@@ -185,6 +185,7 @@ def post_edit(request, user_name):
 
 @login_required
 def add_clothes(request, kinds):
+    """한꺼번에 여러 옷들까지 추가할수 있는 기능(공통된 부분은 same_clothes 로)"""
     class RequiredFormSet(BaseFormSet):
         def __init__(self, *args, **kwargs):
             super(RequiredFormSet, self).__init__(*args, **kwargs)
@@ -192,11 +193,12 @@ def add_clothes(request, kinds):
                 form.empty_permitted = False
 
     top_clothes_formset = formset_factory(TopClothesForm, max_num=3,
-                                     formset=RequiredFormSet)
+                                          formset=RequiredFormSet)
     bottom_clothes_formset = formset_factory(BottomClothesForm, max_num=3,
-                                        formset=RequiredFormSet)
+                                             formset=RequiredFormSet)
 
     if request.method == "POST":
+        # 공통되는 부분 form
         same_clothes_form = SameClothesForm(request.POST, request.FILES)
         if kinds == 'top':
             clothes_formset = top_clothes_formset(request.POST, request.FILES)
@@ -204,6 +206,7 @@ def add_clothes(request, kinds):
         elif kinds == 'bot':
             clothes_formset = bottom_clothes_formset(request.POST, request.FILES)
             hashTag = '#bottom-clothes'
+
         if clothes_formset.is_valid():
             same_clothes = same_clothes_form.save(commit=False)
             same_clothes.save()
@@ -258,14 +261,14 @@ def edit_clothes(request, kinds, tag_num):
             clothes = clothes_form.save(commit=False)
             clothes.nick = just_saved
             clothes.url = just_saved
-            if 'same_photo-stay' not in request.POST:
+            if 'same_photo-stay' not in request.POST: # 사진을 유지하라고 하지 않았으면
                 clothes.photo = just_saved
             clothes.name = request.user
             clothes.save()
 
             return redirect(reverse('fitterKakao:choose_clothes')+hashTag)
     else:
-
+        # pk는 TopClothes밖에 없으므로 그 저장된 데이터의 foreignkey pk를 다시 구해야함
         if kinds == 'top':
             existing_clothes = TopClothes.objects.get(pk=tag_num)
             clothes_form = TopClothesForm(instance=existing_clothes)
