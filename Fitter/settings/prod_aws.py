@@ -20,7 +20,6 @@ DATABASES = {
     },
 }
 
-
 """S3"""
 INSTALLED_APPS += ['storages']
 
