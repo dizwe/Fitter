@@ -6,7 +6,8 @@ DEBUG = False
 
 ALLOWED_HOSTS += ['fitter.ap-northeast-2.elasticbeanstalk.com',
                   '52.78.12.85',
-                  'fittingcal.com',]
+                  'fittingcal.com',
+                  'www.fittingcal.com',]
 
 """DB"""
 pymysql.install_as_MySQLdb() # pymysql이 MySQLdb처럼 동작토록 세팅
