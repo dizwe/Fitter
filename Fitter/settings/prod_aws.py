@@ -4,7 +4,7 @@ import pymysql
 
 DEBUG = False
 
-ALLOWED_HOSTS += ['fitter.ap-northeast-2.elasticbeanstalk.com']
+ALLOWED_HOSTS += ['fitter.ap-northeast-2.elasticbeanstalk.com',]
 
 """DB"""
 pymysql.install_as_MySQLdb() # pymysql이 MySQLdb처럼 동작토록 세팅

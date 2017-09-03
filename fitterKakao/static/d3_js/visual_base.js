@@ -42,8 +42,8 @@ function manPart(value){
     return value
   }
 }
-var bodyColor = "#fdae6b"
-var clothes_color = "#74c476"
+var bodyColor = "#F09E56"
+var clothes_color = "#64899C"
 var my = {
   'trunk_leg' : real_tall-real_tall/6, //180-30(목까지) 정도로 계산
   'shoulder' : suggest_body['shoulder'],
@@ -57,6 +57,7 @@ var my = {
   'belly_from_top' : (real_tall-real_tall/6-manPart(suggest_body['crotch_height']))/10*7,
     //아래도리 - 옆모양으로 대부분 한거임
   'crotch_height' : manPart(suggest_body['crotch_height']),
+  'foot' : (suggest_body['length']/10*11)/13, //복숭아뼈 밑(/11)이 아니라 적당히 더빼지(/13)
   'total_leg' : suggest_body['length']/10*11, // 복숭아뼈 위부터였는데 다시 전체길이로
   'bottom_waist' : suggest_body['bottom_waist']/2, // 1:2인 타원 계산하면 짧은부분 반지름
   'hip' : suggest_body['hip']/2, //3:4 타원 짧은 반지름
@@ -66,7 +67,7 @@ var my = {
   'calf' : suggest_body['calf']/2,
   'hem' : suggest_body['hem']/2,
   'between_leg' : suggest_body['chest']/3.14/10,
-  'foot_len' : suggest_body['chest']/3.14/1.8,
+  'foot_len' : suggest_body['chest']/3.14/1.8, // 발 길이
 };
 
 // 바지길이가 달라질때마다 달라지는 hem 길이 반영

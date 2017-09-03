@@ -5,7 +5,7 @@ var real_broad = my['thigh']*4;
 
 var shape = d3.select("div.sideVisual")
             .append("svg")
-            .attr("viewBox","0 -5 250 500")
+            .attr("viewBox","0 -5 250 530")
 //            .attr("width", broad)
 //            .attr("height", tall);
 
@@ -45,13 +45,13 @@ var bottomSide = [
               y: realTallToRatio(my['total_leg']/3)},
               // 발목 12
               {x: myBottomSide['invisible_line'] - realBroadToRatio(my['hem'])*2,
-              y: realTallToRatio(my['total_leg']/11)},
+              y: realTallToRatio(my['foot'])},
               {x: myBottomSide['invisible_line'] ,
-              y: realTallToRatio(my['total_leg']/11)},
+              y: realTallToRatio(my['foot'])},
               // 발 14
               {x: myBottomSide['invisible_line'] - realBroadToRatio(my['hem'])*2,
               y: realTallToRatio(20)},
-              {x: myBottomSide['invisible_line'] + realBroadToRatio(my['hem'])*2,
+              {x: myBottomSide['invisible_line'] + realBroadToRatio(my['hem'])*1.7,
               y: realTallToRatio(20)},
             ];
 

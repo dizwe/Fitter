@@ -5,7 +5,7 @@ var real_broad = suggest_body['shoulder'];
 
 var shape = d3.select("div.frontVisual")
             .append("svg")
-            .attr("viewBox","0 -10 250 520");
+            .attr("viewBox","0 -10 250 530");
 
 function realTallToRatio(real_value){
     return tall- tall*real_value/real_tall;
@@ -48,14 +48,14 @@ var bottomDotData = [
                y: realTallToRatio(my['total_leg']/2)},//무릎 오른쪽
               //발목 끝 4
               {x: broad/2-realBroadToRatio(my['chest']/2),
-               y: realTallToRatio(my['total_leg']/11)},//발목 왼쪽 - 발목이 11정도라 파악
+               y: realTallToRatio(my['foot'])},//발목 왼쪽
               {x: broad/2+realBroadToRatio(my['chest']/2),
-               y: realTallToRatio(my['total_leg']/11)},//발목 오른쪽
+               y: realTallToRatio(my['foot'])},//발목 오른쪽
                // 발목 가운데 6
                {x: broad/2-realBroadToRatio(my['between_leg']/2),
-               y: realTallToRatio(my['total_leg']/11)},
+               y: realTallToRatio(my['foot'])},
                {x: broad/2+realBroadToRatio(my['between_leg']/2),
-               y: realTallToRatio(my['total_leg']/11)},
+               y: realTallToRatio(my['foot'])},
                // 무릎 가운데 8
               {x: broad/2-realBroadToRatio(my['between_leg']/2),
                y: realTallToRatio(my['total_leg']/2)},
@@ -68,19 +68,19 @@ var bottomDotData = [
                y: realTallToRatio(my['total_leg']-suggest_body['crotch'])},//밑위 오른쪽
                //발 12
                {x:broad/2-realBroadToRatio(my['foot_len']),
-               y: tall-5},
+               y: tall-4},
                {x:broad/2+realBroadToRatio(my['foot_len']),
-               y: tall-5},
+               y: tall-4},
                //발 안쪽 14
                {x: broad/2-realBroadToRatio(my['between_leg']/2),
-               y: tall-5},
+               y: tall-4},
                {x: broad/2+realBroadToRatio(my['between_leg']/2),
-               y: tall-5},
+               y: tall-4},
                // 발등 16
                {x:broad/2-realBroadToRatio(my['foot_len']),
-               y: realTallToRatio(my['total_leg']/11)},
+               y: realTallToRatio(my['foot'])},
                {x:broad/2+realBroadToRatio(my['foot_len']),
-               y: realTallToRatio(my['total_leg']/11)},
+               y: realTallToRatio(my['foot'])},
             ];
 
 

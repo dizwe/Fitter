@@ -28,6 +28,7 @@ def make_question_generator(whole_d):
             for weight in weight_range: # 해보니 그렇던데?/여자
                 yield sex, height, weight
 
+
 def read_json(fname, encoder):
     with open(fname, encoding=encoder) as data_file:
         json_data = json.load(data_file)
@@ -112,7 +113,6 @@ def suppose_size(request, kinds, tag_num):
             # size info 에서 신체 부위별로 데이터 얻어오기
             parameter_dict = suggested_size_filter.values(parameter).first()[parameter]
             # 데이터가 dict 형식이므로 dict로 바꾸기
-            print(parameter_dict.replace("'", '"'))
             parameter_dict = json.loads(parameter_dict.replace("'", '"'))
             suggested_size.append(parameter_dict[str(q)])
 

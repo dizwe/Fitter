@@ -172,3 +172,4 @@ $(document).ready(function(){
             $(this).val('');}
     });
 //number는 안됨
+
