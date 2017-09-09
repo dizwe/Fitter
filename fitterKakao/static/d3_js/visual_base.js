@@ -43,7 +43,7 @@ function manPart(value){
   }
 }
 var bodyColor = "#F09E56"
-var clothes_color = "#64899C"
+var clothes_color = "#1A8AA3"
 var my = {
   'trunk_leg' : real_tall-real_tall/6, //180-30(목까지) 정도로 계산
   'shoulder' : suggest_body['shoulder'],

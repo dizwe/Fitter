@@ -34,9 +34,9 @@ var topSide = [
               {x: myTopSide['base_up'][0] + realSideBroadToRatio(my['chest_half']),
               y: myTopSide['base_up'][1]},
               // 젖가슴 2
-              {x: myTopSide['base_middle'][0] + realSideBroadToRatio(my['nipple_half']),
+              {x: myTopSide['base_middle'][0] + realSideBroadToRatio(my['nipple_half']/10),
               y: myTopSide['base_middle'][1]},
-              {x: myTopSide['base_middle'][0] + realSideBroadToRatio(my['nipple_half']),
+              {x: myTopSide['base_middle'][0] + realSideBroadToRatio(my['nipple_half'] + my['nipple_half']/10),
               y: myTopSide['base_middle'][1]},
               //배 4
               {x: myTopSide['base_down'][0],
@@ -47,7 +47,8 @@ var topSide = [
 
 
 var topSideLinks = [
-              {source : topSide[0], target : topSide[4]},
+              {source : topSide[0], target : topSide[2]},
+              {source : topSide[2], target : topSide[4]},
               {source : topSide[1], target : topSide[3]},
               {source : topSide[3], target : topSide[5]},
             ];
@@ -83,7 +84,7 @@ var topSideClo = [
               y: myTopSide['base_up'][1]},
               // 젖가슴 2
               // 젖가슴에서 남는 양 더하고 + (등부분이 가슴 남는 양이니까) 더 많이 남는 젖가슴에서 가슴을 빼면 더 필요한 양 나옴
-              {x: myTopSide['base_middle'][0] + realSideBroadToRatio(),
+              {x: myTopSide['base_middle'][0] + realSideBroadToRatio(my['nipple_half']+topCloCal['nipple']/2+(topCloCal['nipple']/2-topCloCal['chest']/2)),
               y: myTopSide['base_middle'][1]},
               {x: myTopSide['base_middle'][0] + realSideBroadToRatio(my['nipple_half']+topCloCal['nipple']/2+(topCloCal['nipple']/2-topCloCal['chest']/2)),
               y: myTopSide['base_middle'][1]},
