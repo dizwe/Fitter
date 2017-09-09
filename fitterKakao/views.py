@@ -75,48 +75,54 @@ def size_list_to_dict(suggested_size):
     return each_par_dict
 
 
+def anticipate_size(user_name):
+    """개인 답변으로 사이즈 추정하기"""
+    person = Person.objects.filter(name=user_name)
+    # 나중에 이거 [0]하는 부분 바꿔야함!
+    person_info_dict = person.values('sex', 'height', 'weight', 'shoulder_a', 'chest_a', 'sleeve_a', 'waist_a',
+                                     'hip_a', 'crotch_a', 'length_a', 'thigh_a', 'hem_a')[0]  # queryset
+    # 키는 1770 이런 형식으로 되어있으므로 10 곱해야함
+    user_sex = person_info_dict['sex']
+    user_height, user_weight = person_info_dict['height'] * 10, person_info_dict['weight']
+
+    # ['shoulder', 'chest', 'arm', 'waist'
+    # 'bottom_waist', 'crotch', 'thigh', 'length', 'hem', 'hip',
+    # 'crotch_height', 'middle_thigh', 'knee', 'calf', 'nipple'] 순서 질문지
+    question = []
+    for answer in ['shoulder_a', 'chest_a', 'sleeve_a', 'waist_a',
+                   'waist_a', 'crotch_a', 'thigh_a', 'length_a', 'hem_a', 'hip_a',
+                   'length_a', 'thigh_a', '', '', 'chest_a']:
+        if len(answer) == 0:
+            question.append(1)
+        else:
+            question.append(person_info_dict[answer])
+
+    """DB 에서 데이터 찾기"""
+    suggested_size_filter = \
+        SizeInfo.objects.filter(sex=user_sex).filter(height=user_height).filter(weight=user_weight)
+
+    """예상 사이즈 추천하고 실측 데이터로 바꾸기"""
+    parameter_list = ['shoulder', 'chest', 'arm', 'waist',
+                      'bottom_waist', 'crotch', 'thigh', 'length', 'hem', 'hip',
+                      'crotch_height', 'middle_thigh', 'knee', 'calf', 'nipple']
+
+    suggested_size = []
+    for parameter, q in zip(parameter_list, question):
+        # size info 에서 신체 부위별로 데이터 얻어오기
+        parameter_dict = suggested_size_filter.values(parameter).first()[parameter]
+        # 데이터가 dict 형식이므로 dict 로 바꾸기
+        parameter_dict = json.loads(parameter_dict.replace("'", '"'))
+        suggested_size.append(parameter_dict[str(q)])
+
+    suggested_size = size_list_to_dict(suggested_size)
+
+    return suggested_size
+
 @login_required
 def suppose_size(request, kinds, tag_num):
     try:
-        """개인의 데이터 읽어오기"""
         person = Person.objects.filter(name=request.user)
-        # 나중에 이거 [0]하는 부분 바꿔야함!
-        person_info_dict = person.values('sex', 'height', 'weight', 'shoulder_a', 'chest_a', 'sleeve_a', 'waist_a',
-                                         'hip_a', 'crotch_a', 'length_a', 'thigh_a', 'hem_a')[0]  # queryset
-        # 키는 1770 이런 형식으로 되어있으므로 10 곱해야함
-        user_sex = person_info_dict['sex']
-        user_height, user_weight = person_info_dict['height'] * 10, person_info_dict['weight']
-
-        # ['shoulder', 'chest', 'arm', 'waist'
-        # 'bottom_waist', 'crotch', 'thigh', 'length', 'hem', 'hip',
-        # 'crotch_height', 'middle_thigh', 'knee', 'calf', 'nipple'] 순서 질문지
-        question = []
-        for answer in ['shoulder_a', 'chest_a', 'sleeve_a', 'waist_a',
-                       'waist_a', 'crotch_a', 'thigh_a', 'length_a', 'hem_a', 'hip_a',
-                       'length_a', 'thigh_a', '', '', 'chest_a']:
-            if len(answer) == 0:
-                question.append(1)
-            else:
-                question.append(person_info_dict[answer])
-
-        """DB 에서 데이터 찾기"""
-        suggested_size_filter = \
-            SizeInfo.objects.filter(sex=user_sex).filter(height=user_height).filter(weight=user_weight)
-
-        """예상 사이즈 추천하고 실측 데이터로 바꾸기"""
-        parameter_list = ['shoulder', 'chest', 'arm', 'waist',
-                          'bottom_waist', 'crotch', 'thigh', 'length', 'hem', 'hip',
-                          'crotch_height', 'middle_thigh', 'knee', 'calf', 'nipple']
-
-        suggested_size = []
-        for parameter, q in zip(parameter_list, question):
-            # size info 에서 신체 부위별로 데이터 얻어오기
-            parameter_dict = suggested_size_filter.values(parameter).first()[parameter]
-            # 데이터가 dict 형식이므로 dict로 바꾸기
-            parameter_dict = json.loads(parameter_dict.replace("'", '"'))
-            suggested_size.append(parameter_dict[str(q)])
-
-        suggested_size = size_list_to_dict(suggested_size)
+        suggested_size = anticipate_size(request.user)
 
         if kinds == 'top':
             clothes = TopClothes.objects.filter(pk=tag_num)  # POST 한 정보만 보게?(일단 그냥 하나만 보게 하자)

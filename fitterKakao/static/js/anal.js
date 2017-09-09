@@ -55,7 +55,7 @@ function fitCal(calData){
     }else if(countWithExcept('big')>0){
        conclusion = "넉넉해요";
     }else{
-       conclusion = "몸에 딱 붙어요.";
+       conclusion = "잘 맞아요.";
     }
 
     info['conclusion'] = conclusion; // add conclusion
