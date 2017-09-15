@@ -100,9 +100,9 @@ shape.selectAll(".line")
 
 var bottomSideClo = [
                   //바지 허리 0
-                  {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_waist']*2+botCal['bot_waist']),
+                  {x: myBottomSide['invisible_line'] - realBroadToRatio(myBottomSide['visual_waist']*2+myBottomSide['visual_remaining_waist']),
                   y: realTallToRatio(my['total_leg'])},
-                  {x : myBottomSide['invisible_line'] + realBroadToRatio(botCal['bot_waist']),
+                  {x : myBottomSide['invisible_line'] + realBroadToRatio(myBottomSide['visual_remaining_waist']),
                   y : realTallToRatio(my['total_leg'])},
                   //// 엉덩이 2
 

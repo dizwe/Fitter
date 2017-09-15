@@ -15,18 +15,20 @@ function realBroadToRatio(real_value){
   return broad * real_value/real_broad;
 }
 
-
+pant['waist_curve'] = (pant['waist']/45*100)/2 // 바지는 둘레는 둥근데 잴때 지름처럼만 재므로 값 변경
 
 // 옷이 얼마나 남는가
-var myBottomSide = {'visual_waist':my['bottom_waist']/3*2, // thigh랑 길이가 비슷해지면 되는데 thigh랑 비슷하게 만들면 됨
+var myBottomSide = {'visual_waist':my['bottom_waist']/3*2, // thigh랑 비슷하게 만든 계산식
                     'visual_hip':my['hip']/17*11,
-                    'visual_pant_waist':pant['waist']/3*2,
+                    'visual_pant_waist':pant['waist_curve']/3*2, // thigh랑 비슷하게 만든 계산식
                     'visual_pant_hip':pant['hip']/17*11,
                     'above_knee_x':my['knee']/5,
                     'invisible_line' : broad/4*3,
+                    'visual_remaining_waist' : pant['waist_curve']/3*2-my['bottom_waist']/3*2, // 남는 부분  visual하게 따로 저장
                     };
 
-var botCal = {'bot_waist':(myBottomSide['visual_pant_waist']-myBottomSide['visual_waist'])/2,
+
+var botCal = {'bot_waist':pant['waist_curve']-my['bottom_waist'],
 //              'bot_length':pant['bot_length-suggest_body['length'],
               'crotch':pant['crotch']-suggest_body['crotch'],
               'thigh':(pant['thigh']-my['thigh'])/2,
@@ -134,7 +136,7 @@ shape.selectAll(".line")
 
 
 
-myBottom = {'bottom_waist' : suggest_body};
+
 
 var bottomClothesDot = [
               //기장 0

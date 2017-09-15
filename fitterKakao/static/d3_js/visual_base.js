@@ -70,7 +70,7 @@ var my = {
   'foot_len' : suggest_body['chest']/3.14/1.8, // 발 길이
 };
 
-myTop = {'remain_shoulder' : shirt['shoulder']-my['shoulder']};
+
 
 // 바지길이가 달라질때마다 달라지는 hem 길이 반영
 var hem_criteria =[[my['hem'],my['total_leg']/11],

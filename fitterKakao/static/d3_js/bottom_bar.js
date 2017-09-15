@@ -11,7 +11,7 @@ var data = {
     },
     {
       label: '옷 길이',
-      values: [pant['bot_length'], pant['waist'], pant['thigh'], pant['hem'], pant['crotch'], pant['hip']].map(mmToCm),
+      values: [pant['bot_length'], pant['waist_curve'], pant['thigh'], pant['hem'], pant['crotch'], pant['hip']].map(mmToCm),
     },
     {
       label: '두번째 몸 길이',
