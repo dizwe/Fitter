@@ -176,7 +176,7 @@ shape.selectAll(".line")
 
 
 
-myTop = {'remain_shoulder' : shirt['shoulder']-my['shoulder']};
+
 //어깨는 상황에 따라 위치가 달라져야함
 if (myTop['remain_shoulder']<=0){
     var shoulder_data = [{x: broad/2-realBroadToRatio(my['shoulder']/2+myTop['remain_shoulder']/2),
