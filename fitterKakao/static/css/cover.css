@@ -161,16 +161,14 @@ svg{
 /*
  * Footer
  */
-
-.foot {
-   text-align: center;
+.footer{
+    background-color: white;
+    color:#f79256;
+    font-weight:bold;
 }
 
-.foot a{
-  color:#f2dede;
-}
 /*
- * Affix and center
+ * 더 큰 화면
  */
 
 @media screen and (min-width: 768px) {
@@ -227,6 +225,7 @@ svg{
   margin-top : 50px;
   margin-bottom: 30px;
   }
+
 
 }
 
