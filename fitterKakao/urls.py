@@ -15,8 +15,9 @@ urlpatterns = [
     url(r'^clothes/new/(?P<kinds>[a-z]+)/$', views.add_clothes, name='add_clothes'),
     url(r'^clothes/del/(?P<kinds>[a-z]+)/(?P<tag_num>[0-9]+)/$', views.delete_clothes, name='delete_clothes'),
     url(r'^clothes/edit/(?P<kinds>[a-z]+)/(?P<tag_num>[0-9]+)/$', views.edit_clothes, name='edit_clothes'),
-    url(r'^singleUse/type/$', views.single_type, name='single_type'),
-    url(r'^singleUse/(?P<kinds>[a-z]+)/$', views.single_post, name='single_post'),
+    url(r'^single/$', views.single_mode, name='single_mode'),
+    url(r'^single/body/(?P<kinds>[a-z]+)/$', views.single_post_body, name='single_post_body'),
+    url(r'^single/between/(?P<kinds>[a-z]+)/$', views.single_post_between, name='single_post_between'),
     url(r'^queer/$', views.data_add, name='data_add'),
     url(r'^gaaay/$', views.data_del, name='data_del'),
     # url(r'^keyboard/', views.keyboard), # 카톡

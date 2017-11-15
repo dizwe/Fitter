@@ -319,11 +319,11 @@ def delete_clothes(request, kinds, tag_num):
     return redirect(reverse('fitterKakao:choose_clothes')+hashTag)
 
 
-def single_type(request):
-    return render(request, 'fitterKakao/single_type.html')
+def single_mode(request):
+    return render(request, 'fitterKakao/single/single_mode.html')
 
 
-def single_post(request, kinds):
+def single_post_body(request, kinds):
     if request.method == "POST": #이미 보낸거라면
         person_form = PersonForm(request.POST)
         same_clothes_form = SameClothesForm(request.POST)
@@ -402,9 +402,93 @@ def single_post(request, kinds):
         elif kinds == 'bot':
             clothes_form = BottomClothesForm()
 
-    return render(request, 'fitterKakao/single/single_body.html', {'types': kinds,
+    return render(request, 'fitterKakao/single/single_post_body.html', {'types': kinds,
                                                             'person_form': person_form,
                                                             'clothes_form': clothes_form,
                                                             'same_clothes_form': same_clothes_form, })
 
+
+def single_post_between(request, kinds):
+    if request.method == "POST": #이미 보낸거라면
+        person_form = PersonForm(request.POST)
+        same_clothes_form = SameClothesForm(request.POST)
+        if kinds == 'top':
+            clothes_form = TopClothesForm(request.POST)
+        elif kinds == 'bot':
+            clothes_form = BottomClothesForm(request.POST)
+
+        if person_form.is_valid() and clothes_form.is_valid() and same_clothes_form.is_valid(): # 저장된 form 형식이 잘 맞는지
+            single_person_dict = person_form.cleaned_data
+            single_clothes_dict = clothes_form.cleaned_data
+            same_clothes_dict = same_clothes_form.cleaned_data
+            clothes_nick = same_clothes_dict['same_nick']
+            clothes_link = same_clothes_dict['same_url']
+
+            if not check_data(single_person_dict): # 없는 데이터라면,
+                sex_filtered = SizeInfo.objects.filter(sex=person_form.cleaned_data['sex'])
+                return render(request, 'fitterKakao/no_data.html', {'sex_filtered':sex_filtered,})
+
+            # ['shoulder', 'chest', 'arm', 'waist'
+            # 'bottom_waist', 'crotch', 'thigh', 'length', 'hem', 'hip',
+            # 'crotch_height', 'middle_thigh', 'knee', 'calf', 'nipple'] 순서
+            question = []
+            for answer in ['shoulder_a', 'chest_a', 'sleeve_a', 'waist_a',
+                           'waist_a', 'crotch_a', 'thigh_a', 'length_a', 'hem_a', 'hip_a',
+                           'length_a', 'thigh_a', '', '', 'chest_a']:
+                if len(answer) == 0:
+                    question.append(1)
+                else:
+                    question.append(single_person_dict[answer])
+
+            user_sex = single_person_dict['sex']
+            user_height = single_person_dict['height']*10
+            user_weight = single_person_dict['weight']
+            """데이터 찾기"""
+            suggested_size_filter = \
+                SizeInfo.objects.filter(sex=user_sex).filter(height=user_height).filter(weight=user_weight)
+
+            """개인의 데이터"""
+            parameter_list = ['shoulder', 'chest', 'arm', 'waist',
+                              'bottom_waist', 'crotch', 'thigh', 'length', 'hem', 'hip',
+                              'crotch_height', 'middle_thigh', 'knee', 'calf', 'nipple']
+
+            """예상 사이즈 추천하고 실측 데이터로 바꾸기"""
+
+            suggested_size = []
+            for parameter, q in zip(parameter_list, question):
+                parameter_dict = suggested_size_filter.values(parameter).first()[parameter]
+                parameter_dict = json.loads(parameter_dict.replace("'", '"'))
+                suggested_size.append(parameter_dict[str(q)])
+
+            suggested_size = size_list_to_dict(suggested_size)
+
+            # 데이터 따로 저장하기
+            clothes_dict = single_clothes_dict.copy()
+            clothes_dict.update(same_clothes_dict)
+            clothes_dict.pop('same_photo', None)
+            SingleDataList.objects.create(suggested_size=suggested_size,
+                                          clothes_dict=clothes_dict,
+                                          single_person_dict=single_person_dict,)
+
+            return render(request, 'fitterKakao/single/single_result.html', {'types': kinds,
+                                                                      'single_clothes_dict': single_clothes_dict,
+                                                                      'clothes_link' : clothes_link,
+                                                                      'clothes_nick': clothes_nick,
+                                                                      'sex': user_sex,
+                                                                      'height': user_height/10,
+                                                                      'suggest_size': suggested_size, })
+
+    else:
+        person_form = PersonForm()
+        same_clothes_form = SameClothesForm()
+
+        if kinds == 'top':
+            clothes_form = TopClothesForm()
+        elif kinds == 'bot':
+            clothes_form = BottomClothesForm()
+
+    return render(request, 'fitterKakao/single/single_post_between.html', {'types': kinds,
+                                                            'person_form': person_form,
+                                                            'clothes_form': clothes_form,
+                                                            'same_clothes_form': same_clothes_form, })
 

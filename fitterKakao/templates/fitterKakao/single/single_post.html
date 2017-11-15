@@ -8,20 +8,7 @@
 <div class ="row">
 <div class="col-md-offset-1 col-md-5">
   <div class="body-part">
-    <h1 class="bodyCategory"> [옷 종류] </h1>
-    <div class = "clothes_type">
-        <div id = "radioBtn" class="btn-group">
-            {% if types == 'top' %}
-            <a href="#" class="btn btn-outline-secondary btn-lg active" >상의</a>
-            <a href="{% url 'fitterKakao:single_post' kinds='bot' %}" class="btn btn-outline-secondary btn-lg notActive">하의</a>
-            {% elif types == 'bot' %}
-            <a href="{% url 'fitterKakao:single_post' kinds='top' %}" class="btn btn-outline-secondary btn-lg notActive">상의</a>
-            <a href="#" class="btn btn-outline-secondary btn-lg active">하의</a>
-            {% endif %}
 
-        </div>
-
-    </div>
     {%block inside%}
     {% endblock %}
 

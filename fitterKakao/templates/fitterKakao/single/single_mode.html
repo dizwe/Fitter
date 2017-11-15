@@ -1,0 +1,21 @@
+{% extends "fitterKakao/layout.html"%}
+{% block title %}
+일회용 추정 | FittingCal
+{% endblock %}
+{%block content%}
+<div class="col-md-offset-1 col-md-5">
+  <div class="body-part">
+    <h1 class="bodyCategory"> 어떤 방식으로 추정할거에요? </h1>
+    <div class = "clothes_type">
+        <div id = "radioBtn" class="btn-group">
+            <a href="{% url 'fitterKakao:single_post_between' kinds='bot' %}" class="btn btn-outline-secondary btn-lg active" >내가 가지고 있는 옷과 비교하기</a>
+            <a href="{% url 'fitterKakao:single_post_body' kinds='bot' %}" class="btn btn-outline-secondary btn-lg notActive">내 몸 정보로 추측하기</a>
+        </div>
+    </div>
+
+    {%block inside%}
+    {% endblock %}
+
+    </div>
+</div>
+{% endblock %}
