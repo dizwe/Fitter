@@ -385,7 +385,7 @@ def single_post(request, kinds):
                                           clothes_dict=clothes_dict,
                                           single_person_dict=single_person_dict,)
 
-            return render(request, 'fitterKakao/single_result.html', {'types': kinds,
+            return render(request, 'fitterKakao/single/single_result.html', {'types': kinds,
                                                                       'single_clothes_dict': single_clothes_dict,
                                                                       'clothes_link' : clothes_link,
                                                                       'clothes_nick': clothes_nick,
@@ -402,7 +402,7 @@ def single_post(request, kinds):
         elif kinds == 'bot':
             clothes_form = BottomClothesForm()
 
-    return render(request, 'fitterKakao/single_post.html', {'types': kinds,
+    return render(request, 'fitterKakao/single/single_body.html', {'types': kinds,
                                                             'person_form': person_form,
                                                             'clothes_form': clothes_form,
                                                             'same_clothes_form': same_clothes_form, })
