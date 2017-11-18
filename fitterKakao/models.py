@@ -55,6 +55,22 @@ class Person(models.Model):
         return self.name.username
 
 
+class CriteriaTop(models.Model):
+    cri_top_length = models.FloatField(default=0)
+    cri_shoulder = models.FloatField(default=0)
+    cri_chest = models.FloatField(default=0)
+    cri_sleeve = models.FloatField(default=0)
+
+
+class CriteriaBottom(models.Model):
+    cri_bot_length = models.FloatField(default=0)
+    cri_waist = models.FloatField(default=0)
+    cri_hip = models.FloatField(default=0)
+    cri_crotch = models.FloatField(default=0)
+    cri_thigh = models.FloatField(default=0)
+    cri_hem = models.FloatField(default=0)
+
+
 class SameClothes(models.Model):
     same_nick = models.CharField(max_length=80, default='Untitled')
     same_photo = ResizedImageField(blank=True, size=[300, 300], upload_to="%Y/%m/%d")

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Person, TopClothes, BottomClothes, SameClothes
+from .models import Person, TopClothes, BottomClothes, SameClothes, CriteriaTop, CriteriaBottom
 
 
 class PersonForm(forms.ModelForm):
@@ -13,6 +13,18 @@ class SameClothesForm(forms.ModelForm):
     class Meta:
         model = SameClothes
         fields = ('same_nick', 'same_photo', 'same_url')
+
+
+class CriteriaTopForm(forms.ModelForm):
+    class Meta:
+        model = CriteriaTop
+        fields = ('cri_top_length', 'cri_shoulder', 'cri_chest', 'cri_sleeve')
+
+
+class CriteriaBottomForm(forms.ModelForm):
+    class Meta:
+        model = CriteriaBottom
+        fields = ('cri_waist', 'cri_bot_length', 'cri_hip', 'cri_crotch', 'cri_thigh', 'cri_hem')
 
 
 class TopClothesForm(forms.ModelForm):

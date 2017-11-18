@@ -21,3 +21,4 @@ error.log
 
 !.elasticbeanstalk/*.global.yml
 
+fitterKakao/migrations/0003_criteriabottom_criteriatop.py
