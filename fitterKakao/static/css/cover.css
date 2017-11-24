@@ -167,6 +167,10 @@ svg{
     font-weight:bold;
 }
 
+.footer-content{
+  padding-left: 30px;
+}
+
 /*
  * 더 큰 화면
  */

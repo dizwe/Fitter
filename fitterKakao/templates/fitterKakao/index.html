@@ -83,6 +83,7 @@
   </nav>
 
   <!-- MAIN -->
+  <div class ="row">
   <div class="cover col-md-offset-1 col-md-10 col-xs-12">
     <div class="col-md-12 cover-heading">
     <p class="display">기본적인 정보와 몇가지 질문으로 옷 사이즈를 추정해 보세요!</p>
@@ -115,8 +116,7 @@
           <p class = "description"><span class="block">예상 신체 사이즈를</span> 알려드려요</p>
       </div>
       <div class ="col-md-4">
-        <svg version="1.1" id="clothes" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-viewBox="0 0 425.336 425.336" style="enable-background:new 0 0 425.336 425.336;" xml:space="preserve">
+        <svg version="1.1" id="clothes" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 425.336 425.336" style="enable-background:new 0 0 425.336 425.336;" xml:space="preserve">
         <g>
             <path fill="#444444" d="M182.79,221.346h-45.872V15h28.342c3.613,22.915,23.495,40.496,47.409,40.496S256.465,37.915,260.079,15h28.339v114.851
                 c0,4.142,3.358,7.5,7.5,7.5s7.5-3.358,7.5-7.5v-20.217l16.141,8.07c1.071,0.536,2.217,0.792,3.35,0.792
@@ -146,15 +146,16 @@ viewBox="0 0 425.336 425.336" style="enable-background:new 0 0 425.336 425.336;"
       <a href="{% url 'fitterKakao:single_mode'%}" class="without-login"> + <span class="display">또는</span> 로그인 없이 한번만 추정하기 </a>
       </div>
     </div>
-
-
   </div>
+ </div>
+  <div class="row footer ">
   <!--FOOTER-->
-  <div class="footer col-md-12">
+  <div class="footer-content col-md-12">
       <h4>Contact</h4>
       <a href="mailto:dizwe2716@gmail.com?Subject=[fittingcal-Email]" target="_top">
           <h5>Email : dizwe2716@gmail.com</h5>
       </a>
+  </div>
   </div>
 </body>
 <script src="{% static 'js/scripts.js' %}"></script>
