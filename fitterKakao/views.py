@@ -283,6 +283,7 @@ def edit_clothes(request, kinds, tag_num):
             clothes_form = TopClothesForm(instance=existing_clothes)
         elif kinds == 'bot':
             existing_clothes = BottomClothes.objects.get(pk=tag_num)
+            print(type(existing_clothes))
             clothes_form = BottomClothesForm(instance=existing_clothes)
         # 이미 있는 데이터의 foreignkey pk 구하기
         existing_same = SameClothes.objects.get(pk=existing_clothes.nick.pk)
@@ -322,6 +323,22 @@ def delete_clothes(request, kinds, tag_num):
 
 def single_mode(request):
     return render(request, 'fitterKakao/single/single_mode.html')
+
+
+def is_from_other(dict_data, kinds, past_url):
+    top_param = ['size', 'top_length', 'shoulder', 'chest', 'sleeve']
+    bottom_param = ['size', 'waist', 'bot_length', 'hip', 'crotch', 'thigh', 'hem']
+    clothes_param = top_param if kinds == "top" else bottom_param
+
+    same = {}
+    same['same_nick'] = dict_data.get('same_nick', 'Untitled')
+    # 타사이트에서 왔다면 url 값이 저장될거다
+    same['same_url'] = past_url
+    clothes = {key: dict_data.get(key, 0) for key in clothes_param}
+    if clothes['size'] == 0:
+        clothes['size'] = 'FREE'
+
+    return same, clothes
 
 
 def single_post_body(request, kinds):
@@ -387,7 +404,7 @@ def single_post_body(request, kinds):
                                           single_person_dict=single_person_dict,)
 
             return render(request, 'fitterKakao/single/single_result.html', {'types': kinds,
-                                                                      'single_clothes_dict': single_clothes_dict,
+                                                                             'single_clothes_dict': single_clothes_dict,
                                                                       'clothes_link' : clothes_link,
                                                                       'clothes_nick': clothes_nick,
                                                                       'sex': user_sex,
@@ -395,13 +412,18 @@ def single_post_body(request, kinds):
                                                                       'suggest_size': suggested_size, })
 
     else:
+        # 이전에 들어온 쇼핑몰 같은게 있으면 url 설정하기
+        referer = request.META['HTTP_REFERER'] if 'HTTP_REFERER' in request.META else ''
+
+        same_initial, clothes_initial = is_from_other(request.GET.dict(), kinds, referer)
+
         person_form = PersonForm()
-        same_clothes_form = SameClothesForm()
+        same_clothes_form = SameClothesForm(initial=same_initial)
 
         if kinds == 'top':
-            clothes_form = TopClothesForm()
+            clothes_form = TopClothesForm(initial=clothes_initial)
         elif kinds == 'bot':
-            clothes_form = BottomClothesForm()
+            clothes_form = BottomClothesForm(initial=clothes_initial)
 
     return render(request, 'fitterKakao/single/single_post_body.html', {'types': kinds,
                                                             'person_form': person_form,
@@ -437,7 +459,6 @@ def single_post_between(request, kinds):
 
     else:
         same_clothes_form = SameClothesForm()
-
         if kinds == 'top':
             clothes_form = TopClothesForm()
             criteria_form = CriteriaTopForm()

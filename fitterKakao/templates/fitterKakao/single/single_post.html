@@ -24,7 +24,7 @@
        <input id="id_same_nick" maxlength="80" name="same_nick" type="text" value="{{same_clothes_form.same_nick.value}}" required /></p>
         <p><label for="id_same_url">링크(선택):</label>
         {{same_clothes_form.same_url.errors}}
-        <input id="id_same_url" maxlength="200" name="same_url" type="url" /></p>
+        <input id="id_same_url" maxlength="200" name="same_url" type="url" value="{{same_clothes_form.same_url.value}}"/></p>
         <label for="id_size">사이즈:</label>
         {{ clothes_form.size.errors }}
         <p><input id="id_size" maxlength="4" name="size" type="text" value="{{ clothes_form.size.value }}" /></p>

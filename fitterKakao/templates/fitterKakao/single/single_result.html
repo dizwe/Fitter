@@ -77,6 +77,9 @@
     <div class="wanna-signin">
         <p class = "text-center">분석 결과가 어땠나요?</p>
         <p class = "text-center">가입해서  더 편하게 <span class="block">데이터를 입력, 관리해보세요. </span></p>
+        {% if clothes_link != "" %}
+        <p class = "text-center"><a href ="{{clothes_link}}">쇼핑했던 사이트로 돌아가기</a></p>
+        {% endif %}
         <p class = "text-center"><a href="/accounts/signup">회원가입 하기</a></p>
     </div>
     </div>
