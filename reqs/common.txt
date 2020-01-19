@@ -1,4 +1,4 @@
-django
+django==1.11
 raven
 django_resized
 pillow
