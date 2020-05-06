@@ -114,9 +114,9 @@ class BottomClothes(models.Model):
 
 
 class SingleDataList(models.Model):
-    suggested_size = models.CharField(max_length=250, default='{}')
-    single_person_dict = models.CharField(max_length=250, default='{}')
-    clothes_dict = models.CharField(max_length=300, default='{}')
+    suggested_size = models.CharField(max_length=800, default='{}')
+    single_person_dict = models.CharField(max_length=800, default='{}')
+    clothes_dict = models.CharField(max_length=800, default='{}')
     created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):  # Change title as name(메소드처럼)

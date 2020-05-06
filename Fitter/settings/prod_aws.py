@@ -5,7 +5,7 @@ import pymysql
 DEBUG = False
 
 ALLOWED_HOSTS += ['fitter.ap-northeast-2.elasticbeanstalk.com',
-                  '52.78.12.85',
+                  '34.70.46.65',
                   'fittingcal.com',
                   'www.fittingcal.com',]
 

@@ -10,8 +10,6 @@ from django.forms.formsets import formset_factory, BaseFormSet
 import json
 from .forms import PersonForm, TopClothesForm, BottomClothesForm, SameClothesForm,\
                    CriteriaBottomForm,  CriteriaTopForm
-import logging
-
 
 def index(request):
     # reverse 는 url 하드코딩 피할수 있도록 해줌

@@ -12,7 +12,7 @@ site.log
 file_name.log
 error.log
 .idea/
-
+.gcp/
 # Elastic Beanstalk Files
 
 .elasticbeanstalk/*
